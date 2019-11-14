@@ -73,7 +73,7 @@ import java_cup.runtime.*;
 LineTerminator	= \r|\n|\r\n
 WhiteSpace		= {LineTerminator} | [ \t\f]
 INTEGER			= 0 | [1-9][0-9]*
-ID				= [a-z]+
+ID				= [a-zA-Z][a-zA-Z0-9]*
 
 /******************************/
 /* DOLAR DOLAR - DON'T TOUCH! */
@@ -93,6 +93,14 @@ ID				= [a-z]+
 
 <YYINITIAL> {
 
+"class"             { return symbol(TokenNames.CLASS);}
+"nil"               { return symbol(TokenNames.NIL);}
+"array"             { return symbol(TokenNames.ARRAY);}
+"while"             { return symbol(TokenNames.WHILE);}
+"extends"           { return symbol(TokenNames.EXTENDS);}
+"return"            { return symbol(TokenNames.RETURN);}
+"new"               { return symbol(TokenNames.NEW);}
+"if"                { return symbol(TokenNames.IF);}
 "+"					{ return symbol(TokenNames.PLUS);}
 "-"					{ return symbol(TokenNames.MINUS);}
 "PPP"				{ return symbol(TokenNames.TIMES);}

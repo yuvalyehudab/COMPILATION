@@ -5,7 +5,7 @@
 **/*.class
 **/Lexer.java
 **/Parser.java
-**/TokenNames.java
+# **/TokenNames.java
 
 **/FOLDER_5_OUTPUT/*
 **/Lexer.c
