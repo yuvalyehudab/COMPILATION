@@ -78,7 +78,7 @@ CHARS           = [a-zA-Z0-9]|\(|\)|\[|\]|\{|\}|\?|\!|\+|-|\.|;
 MCOMMENTCHARS   = {CHARS}|{WhiteSpace}
 MCOMMENT        = \/\*(\/|{MCOMMENTCHARS}|((\*+){MCOMMENTCHARS}))*(\*+)\/
 COMMENTCHARS    = {CHARS} | [ \t\f] | \/ | \*
-COMMENT			= \/\/ {COMMENTCHARS}* | {MCOMMENT}
+COMMENT			= \/\/ {COMMENTCHARS}* {LineTerminator} | {MCOMMENT}
 STRING			= \" [a-zA-Z]* \"
 ERROR			= .|\n
 
