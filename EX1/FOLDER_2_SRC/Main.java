@@ -67,7 +67,7 @@ public class Main
 				}
 				token_string.append("[");
 				token_string.append(l.getLine());
-				token_string.append(", ");
+				token_string.append(",");
 				token_string.append(l.getTokenStartPosition());
 				token_string.append("]");
 				token_string.append("\n");
