@@ -26,7 +26,7 @@ public class Main
 			/********************************/
 			/* [2] Initialize a file writer */
 			/********************************/
-			file_writer = new PrintWriter(outputFilename);
+			
 			
 			/******************************/
 			/* [3] Initialize a new lexer */
@@ -61,11 +61,6 @@ public class Main
 				token_string.append(": ");
 				token_string.append(s.value);
 				token_string.append("\n");
-				/*********************/
-				file_writer.print(l.getLine());
-				file_writer.print(": ");
-				file_writer.print(s.value);
-				file_writer.print("\n");
 				
 				/***********************/
 				/* [8] Read next token */
@@ -81,6 +76,7 @@ public class Main
 			/**************************/
 			/* [10] Close output file */
 			/**************************/
+			file_writer = new PrintWriter(outputFilename);
 			if (s.sym == TokenNames.error)
 			{
 				file_writer.print("ERROR");
