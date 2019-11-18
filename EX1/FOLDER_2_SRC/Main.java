@@ -12,6 +12,7 @@ public class Main
 		Symbol s;
 		FileReader file_reader;
 		PrintWriter file_writer;
+		StringBuffer token_string = new StringBuffer("");
 		String inputFilename = argv[0];
 		String outputFilename = argv[1];
 		
@@ -40,7 +41,7 @@ public class Main
 			/********************************/
 			/* [5] Main reading tokens loop */
 			/********************************/
-			while (s.sym != TokenNames.EOF)
+			while (s.sym != TokenNames.EOF && s.sym != TokenNames.error)
 			{
 				/************************/
 				/* [6] Print to console */
@@ -55,6 +56,11 @@ public class Main
 				
 				/*********************/
 				/* [7] Print to file */
+				/*********************/
+				token_string.append(l.getLine());
+				token_string.append(": ");
+				token_string.append(s.value);
+				token_string.append("\n");
 				/*********************/
 				file_writer.print(l.getLine());
 				file_writer.print(": ");
@@ -75,6 +81,14 @@ public class Main
 			/**************************/
 			/* [10] Close output file */
 			/**************************/
+			if (s.sym == TokenNames.error)
+			{
+				file_writer.print("ERROR");
+			}
+			else
+			{
+				file_writer.print(token_string);
+			}
 			file_writer.close();
     	}
 			     

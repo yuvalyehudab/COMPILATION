@@ -72,8 +72,11 @@ import java_cup.runtime.*;
 /***********************/
 LineTerminator	= \r|\n|\r\n
 WhiteSpace		= {LineTerminator} | [ \t\f]
-INTEGER			= 0 | [1-9][0-9]*
+INT				= 0 | [1-9][0-9]*
 ID				= [a-zA-Z][a-zA-Z0-9]*
+COMMENT			= \/\/[a-zA-Z]*{LineTerminator}
+STRING			= \" [a-zA-Z]* \"
+ERROR			= .|\n
 
 /******************************/
 /* DOLAR DOLAR - DON'T TOUCH! */
@@ -103,12 +106,41 @@ ID				= [a-zA-Z][a-zA-Z0-9]*
 "if"                { return symbol(TokenNames.IF);}
 "+"					{ return symbol(TokenNames.PLUS);}
 "-"					{ return symbol(TokenNames.MINUS);}
-"PPP"				{ return symbol(TokenNames.TIMES);}
+"*"					{ return symbol(TokenNames.TIMES);}
 "/"					{ return symbol(TokenNames.DIVIDE);}
 "("					{ return symbol(TokenNames.LPAREN);}
 ")"					{ return symbol(TokenNames.RPAREN);}
-{INTEGER}			{ return symbol(TokenNames.NUMBER, new Integer(yytext()));}
-{ID}				{ return symbol(TokenNames.ID,     new String( yytext()));}   
+"["					{ return symbol(TokenNames.LBRACK);}
+"]"					{ return symbol(TokenNames.RBRACK);}
+"{"					{ return symbol(TokenNames.LBRACE);}
+"}"					{ return symbol(TokenNames.RBRACE);}
+","					{ return symbol(TokenNames.COMMA);}
+"."					{ return symbol(TokenNames.DOT);}
+";"					{ return symbol(TokenNames.SEMICOLON);}
+"..."				{ return symbol(TokenNames.ELLIPSIS);}
+":="				{ return symbol(TokenNames.ASSIGN);}
+"="					{ return symbol(TokenNames.EQ);}
+"<"					{ return symbol(TokenNames.LT);}
+">"					{ return symbol(TokenNames.GT);}
+{INT}				{ 
+						int result;
+						try
+						{
+							result = Integer.parseInt(yytext());
+						}
+						catch (Exception e)
+						{
+							return symbol(TokenNames.error);
+						}
+						if (result > ((1 << 15) - 1) || result < (-(1 << 15)))
+						{
+							return symbol(TokenNames.error);
+						}
+						return symbol(TokenNames.INT, new Integer(yytext()));
+					}
+{ID}				{ return symbol(TokenNames.ID,     new String( yytext()));}
+{STRING}			{ return symbol(TokenNames.STRING, new String( yytext()));}
 {WhiteSpace}		{ /* just skip what was found, do nothing */ }
+{ERROR}				{ return symbol(TokenNames.error);}
 <<EOF>>				{ return symbol(TokenNames.EOF);}
 }
