@@ -71,17 +71,17 @@ import java_cup.runtime.*;
 /* MACRO DECALARATIONS */
 /***********************/
 LineTerminator	= \r|\n|\r\n
-WhiteSpace		= {LineTerminator} | [ \t\f]
+WhiteSpace	= {LineTerminator} | [ \t\f]
 BADINT          = -?0[0-9]+
-INT				= 0 | -?[1-9][0-9]*
-ID				= [a-zA-Z][a-zA-Z0-9]*
+INT		= 0 | -?[1-9][0-9]*
+ID		= [a-zA-Z][a-zA-Z0-9]*
 CHARS           = [a-zA-Z0-9]|\(|\)|\[|\]|\{|\}|\?|\!|\+|-|\.|;
 MCOMMENTCHARS   = {CHARS}|{WhiteSpace}
 MCOMMENT        = \/\*(\/|{MCOMMENTCHARS}|((\*+){MCOMMENTCHARS}))*(\*+)\/
 COMMENTCHARS    = {CHARS} | [ \t\f] | \/ | \*
-COMMENT			= \/\/ {COMMENTCHARS}* {LineTerminator} | {MCOMMENT}
-STRING			= \" [a-zA-Z]* \"
-ERROR			= .|\n
+COMMENT		= \/\/ {COMMENTCHARS}* {LineTerminator} | {MCOMMENT}
+STRING		= \" [a-zA-Z]* \"
+ERROR		= .|\n
 
 /******************************/
 /* DOLAR DOLAR - DON'T TOUCH! */
@@ -103,12 +103,12 @@ ERROR			= .|\n
 
 "class"             { return symbol(TokenNames.CLASS);}
 "nil"               { return symbol(TokenNames.NIL);}
-"array"             { return symbol(TokenNames.ARRAY);}
-"while"             { return symbol(TokenNames.WHILE);}
-"extends"           { return symbol(TokenNames.EXTENDS);}
-"return"            { return symbol(TokenNames.RETURN);}
-"new"               { return symbol(TokenNames.NEW);}
-"if"                { return symbol(TokenNames.IF);}
+"array"             			{ return symbol(TokenNames.ARRAY);}
+"while"             			{ return symbol(TokenNames.WHILE);}
+"extends"           			{ return symbol(TokenNames.EXTENDS);}
+"return"            			{ return symbol(TokenNames.RETURN);}
+"new"               			{ return symbol(TokenNames.NEW);}
+"if"                			{ return symbol(TokenNames.IF);}
 "+"					{ return symbol(TokenNames.PLUS);}
 "-"					{ return symbol(TokenNames.MINUS);}
 "*"					{ return symbol(TokenNames.TIMES);}
@@ -122,12 +122,13 @@ ERROR			= .|\n
 ","					{ return symbol(TokenNames.COMMA);}
 "."					{ return symbol(TokenNames.DOT);}
 ";"					{ return symbol(TokenNames.SEMICOLON);}
-"..."				{ return symbol(TokenNames.ELLIPSIS);}
-":="				{ return symbol(TokenNames.ASSIGN);}
+"..."					{ return symbol(TokenNames.ELLIPSIS);}
+":="					{ return symbol(TokenNames.ASSIGN);}
 "="					{ return symbol(TokenNames.EQ);}
 "<"					{ return symbol(TokenNames.LT);}
 ">"					{ return symbol(TokenNames.GT);}
-{INT}				{ 
+{BADINT}            			{ return symbol(TokenNames.error); }
+{INT}					{ 
 						int result;
 						try
 						{
@@ -143,11 +144,10 @@ ERROR			= .|\n
 						}
 						return symbol(TokenNames.INT, new Integer(yytext()));
 					}
-{BADINT}            { return symbol(TokenNames.error); }
-{ID}				{ return symbol(TokenNames.ID,     new String( yytext()));}
-{STRING}			{ return symbol(TokenNames.STRING, new String( yytext()));}
-{WhiteSpace}		{ /* just skip what was found, do nothing */ }
-{COMMENT}           { /* just skip what was found, do nothing */ }
-{ERROR}				{ return symbol(TokenNames.error);}
-<<EOF>>				{ return symbol(TokenNames.EOF);}
+{ID}					{ return symbol(TokenNames.ID,     new String( yytext()));}
+{STRING}				{ return symbol(TokenNames.STRING, new String( yytext()));}
+{WhiteSpace}				{ /* just skip what was found, do nothing */ }
+{COMMENT}           			{ /* just skip what was found, do nothing */ }
+{ERROR}					{ return symbol(TokenNames.error);}
+<<EOF>>					{ return symbol(TokenNames.EOF);}
 }
