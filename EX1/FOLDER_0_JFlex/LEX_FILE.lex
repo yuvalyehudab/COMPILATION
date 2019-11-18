@@ -72,13 +72,14 @@ import java_cup.runtime.*;
 /***********************/
 LineTerminator	= \r|\n|\r\n
 WhiteSpace		= {LineTerminator} | [ \t\f]
+BADINT          = -?0[0-9]+
 INT				= 0 | -?[1-9][0-9]*
 ID				= [a-zA-Z][a-zA-Z0-9]*
 CHARS           = [a-zA-Z0-9]|\(|\)|\[|\]|\{|\}|\?|\!|\+|-|\.|;
 MCOMMENTCHARS   = {CHARS}|{WhiteSpace}
 MCOMMENT        = \/\*(\/|{MCOMMENTCHARS}|((\*+){MCOMMENTCHARS}))*(\*+)\/
 COMMENTCHARS    = {CHARS} | [ \t\f] | \/ | \*
-COMMENT			= \/\/ {COMMENTCHARS}* | {MCOMMENT}
+COMMENT			= \/\/ {COMMENTCHARS}* {LineTerminator} | {MCOMMENT}
 STRING			= \" [a-zA-Z]* \"
 ERROR			= .|\n
 
@@ -142,6 +143,7 @@ ERROR			= .|\n
 						}
 						return symbol(TokenNames.INT, new Integer(yytext()));
 					}
+{BADINT}            { return symbol(TokenNames.error); }
 {ID}				{ return symbol(TokenNames.ID,     new String( yytext()));}
 {STRING}			{ return symbol(TokenNames.STRING, new String( yytext()));}
 {WhiteSpace}		{ /* just skip what was found, do nothing */ }
