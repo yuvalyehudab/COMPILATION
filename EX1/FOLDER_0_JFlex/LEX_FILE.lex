@@ -72,13 +72,13 @@ import java_cup.runtime.*;
 /***********************/
 LineTerminator	= \r|\n|\r\n
 WhiteSpace		= {LineTerminator} | [ \t\f]
-INT				= 0 | [1-9][0-9]*
+INT				= 0 | -?[1-9][0-9]*
 ID				= [a-zA-Z][a-zA-Z0-9]*
 CHARS           = [a-zA-Z0-9]|\(|\)|\[|\]|\{|\}|\?|\!|\+|-|\.|;
 MCOMMENTCHARS   = CHARS|{WhiteSpace}
 MCOMMENT        = \/\*(\/|{MCOMMENTCHARS}|((\*+){MCOMMENTCHARS}))*(\*+)\/
 COMMENTCHARS    = CHARS | [ \t\f] | \/ | \*
-COMMENT			= \/\/ {COMMENTCHARS}
+COMMENT			= \/\/ {COMMENTCHARS}*
 STRING			= \" [a-zA-Z]* \"
 ERROR			= .|\n
 
