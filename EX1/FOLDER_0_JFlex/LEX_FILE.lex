@@ -78,7 +78,7 @@ CHARS           = [a-zA-Z0-9]|\(|\)|\[|\]|\{|\}|\?|\!|\+|-|\.|;
 MCOMMENTCHARS   = CHARS|{WhiteSpace}
 MCOMMENT        = \/\*(\/|{MCOMMENTCHARS}|((\*+){MCOMMENTCHARS}))*(\*+)\/
 COMMENTCHARS    = CHARS | [ \t\f] | \/ | \*
-COMMENT			= \/\/ {COMMENTCHARS}*
+COMMENT			= \/\/ {COMMENTCHARS}* | {MCOMMENT}
 STRING			= \" [a-zA-Z]* \"
 ERROR			= .|\n
 
@@ -145,7 +145,6 @@ ERROR			= .|\n
 {ID}				{ return symbol(TokenNames.ID,     new String( yytext()));}
 {STRING}			{ return symbol(TokenNames.STRING, new String( yytext()));}
 {WhiteSpace}		{ /* just skip what was found, do nothing */ }
-{MCOMMENT}          { /* just skip what was found, do nothing */ }
 {COMMENT}           { /* just skip what was found, do nothing */ }
 {ERROR}				{ return symbol(TokenNames.error);}
 <<EOF>>				{ return symbol(TokenNames.EOF);}
