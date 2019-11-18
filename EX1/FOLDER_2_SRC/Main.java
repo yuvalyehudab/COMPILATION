@@ -15,11 +15,7 @@ public class Main
 		StringBuffer token_string = new StringBuffer("");
 		String inputFilename = argv[0];
 		String outputFilename = argv[1];
-		String[] TokenNamesArr = new String {"EOF", "error", "PLUS", "MINUS",\
-			"TIMES", "DIVIDE", "LPAREN", "RPAREN", "SEMICOLON",\
-			"INT", "ID", "CLASS", "NIL", "ARRAY", "WHILE", "EXTENDS", "RETURN", "NEW", "IF", \
-			"RBRACK", "LBRACK", "RBRACE", "LBRACE", "COMMA", "DOT", "ELLIPSIS", "ASSIGN", "EQ", \
-			"LT", "GT", "STRING"};
+		String[] TokenNamesArr = new String {"EOF", "error", "PLUS", "MINUS", "TIMES", "DIVIDE", "LPAREN", "RPAREN", "SEMICOLON", "INT", "ID", "CLASS", "NIL", "ARRAY", "WHILE", "EXTENDS", "RETURN", "NEW", "IF", "RBRACK", "LBRACK", "RBRACE", "LBRACE", "COMMA", "DOT", "ELLIPSIS", "ASSIGN", "EQ", "LT", "GT", "STRING"};
 		
 		try
 		{
