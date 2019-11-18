@@ -74,9 +74,11 @@ LineTerminator	= \r|\n|\r\n
 WhiteSpace		= {LineTerminator} | [ \t\f]
 INT				= 0 | [1-9][0-9]*
 ID				= [a-zA-Z][a-zA-Z0-9]*
-CommentChars    = [a-zA-Z0-9]|\(|\)|\[|\]|\{|\}|\?|\!|\+|-|\.|;|{WhiteSpace}
-MCOMMENT        = \/\*(\/|{COMMENTCHARS}|((\*+){COMMENTCHARS}))*(\*+)\/
-COMMENT			= \/\/[a-zA-Z]*{LineTerminator}
+CHARS           = [a-zA-Z0-9]|\(|\)|\[|\]|\{|\}|\?|\!|\+|-|\.|;
+MCOMMENTCHARS   = CHARS|{WhiteSpace}
+MCOMMENT        = \/\*(\/|{MCOMMENTCHARS}|((\*+){MCOMMENTCHARS}))*(\*+)\/
+COMMENTCHARS    = CHARS | [ \t\f] | \/ | \*
+COMMENT			= \/\/ {COMMENTCHARS}
 STRING			= \" [a-zA-Z]* \"
 ERROR			= .|\n
 
@@ -143,6 +145,8 @@ ERROR			= .|\n
 {ID}				{ return symbol(TokenNames.ID,     new String( yytext()));}
 {STRING}			{ return symbol(TokenNames.STRING, new String( yytext()));}
 {WhiteSpace}		{ /* just skip what was found, do nothing */ }
+{MCOMMENT}          { /* just skip what was found, do nothing */ }
+{COMMENT}           { /* just skip what was found, do nothing */ }
 {ERROR}				{ return symbol(TokenNames.error);}
 <<EOF>>				{ return symbol(TokenNames.EOF);}
 }
