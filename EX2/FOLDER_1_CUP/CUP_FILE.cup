@@ -139,3 +139,7 @@ exp			::=		INT:i								{: RESULT = new AST_EXP_INT(i);          :}
 					| exp:e1 LT     exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 5);:}
 					| exp:e1 GT     exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 6);:}
 					;
+
+newExp      ::=     NEW ID:name                         {: RESULT = new AST_EXP_NEW_SIMPLE(name);:}
+                    | NEW ID:name LBRACK exp:e RBRACK   {: RESULT = new AST_EXP_NEW_EXP(name, e);:}
+                    ;
