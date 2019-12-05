@@ -129,6 +129,10 @@ stmt		::=		var:v ASSIGN exp:e SEMICOLON								{: RESULT = new AST_STMT_ASSIGN(v
 					| WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_WHILE(cond,body); :}
 					;
 
+expList 	::=	    exp:e COMMA expList:l               {: RESULT = new AST_EXP_LIST(e,l);    :}
+					| exp:e 				            {: RESULT = new AST_EXP_LIST(e,null); :}
+					;
+
 exp			::=		INT:i								{: RESULT = new AST_EXP_INT(i,false);    :}
                     | MINUS INT:i                       {: RESULT = new AST_EXP_INT(i,true);     :}
                     | NIL                               {: RESULT = new AST_NIL()                :}
