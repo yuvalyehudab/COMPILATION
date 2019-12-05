@@ -97,10 +97,14 @@ non terminal AST_STMT_LIST stmtList;
 /***********************/
 /* OPERATOR PRECEDENCE */
 /***********************/
+precedence left DOT;
 precedence left PLUS;
 precedence left MINUS;
 precedence left TIMES;
 precedence left DIVIDE;
+precedence left EQ;
+precedence left LT;
+precedence left GT;
 
 /************************/
 /* START WITH: stmtList */
@@ -127,6 +131,11 @@ stmt		::=		var:v ASSIGN exp:e SEMICOLON								{: RESULT = new AST_STMT_ASSIGN(v
 
 exp			::=		INT:i								{: RESULT = new AST_EXP_INT(i);          :}
 					| var:v								{: RESULT = new AST_EXP_VAR(v);          :}
-					| exp:e1 PLUS  exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 0);:}
-					| exp:e1 MINUS exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 1);:}
+					| exp:e1 PLUS   exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 0);:}
+					| exp:e1 MINUS  exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 1);:}
+					| exp:e1 TIMES  exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 2);:}
+					| exp:e1 DIVIDE exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 3);:}
+					| exp:e1 EQ     exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 4);:}
+					| exp:e1 LT     exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 5);:}
+					| exp:e1 GT     exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 6);:}
 					;
