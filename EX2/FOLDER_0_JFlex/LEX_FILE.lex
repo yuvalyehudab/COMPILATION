@@ -64,7 +64,7 @@ import java_cup.runtime.*;
 	/**********************************************/
 	/* Enable token position extraction from main */
 	/**********************************************/
-	public int getTokenStartPosition() { return yycolumn + 1; } 
+	public int getCharPos() { return yycolumn + 1; } 
 %}
 
 /***********************/

@@ -37,7 +37,7 @@ public class Main
 			/*******************************/
 			/* [4] Initialize a new parser */
 			/*******************************/
-			p = new Parser(l);
+			p = new Parser(l, file_writer);
 
 			/***********************************/
 			/* [5] 3 ... 2 ... 1 ... Parse !!! */
@@ -50,12 +50,17 @@ public class Main
 			AST.PrintMe();
 			
 			/*************************/
-			/* [7] Close output file */
+			/* [7] Write output file (if valid!) */
+			/*************************/
+			file_writer.write("OK");
+
+			/*************************/
+			/* [8] Close output file */
 			/*************************/
 			file_writer.close();
 			
 			/*************************************/
-			/* [8] Finalize AST GRAPHIZ DOT file */
+			/* [9] Finalize AST GRAPHIZ DOT file */
 			/*************************************/
 			AST_GRAPHVIZ.getInstance().finalizeFile();
     	}
