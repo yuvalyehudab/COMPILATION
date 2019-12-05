@@ -138,7 +138,8 @@ stmt		::=		var:v ASSIGN exp:e SEMICOLON								{: RESULT = new AST_STMT_ASSIGN(v
 					| WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_WHILE(cond,body); :}
 					;
 
-exp			::=		INT:i								{: RESULT = new AST_EXP_INT(i);          :}
+exp			::=		INT:i								{: RESULT = new AST_EXP_INT(i,false);    :}
+                    | MINUS INT:i                       {: RESULT = new AST_EXP_INT(i,true);     :}
 					| var:v								{: RESULT = new AST_EXP_VAR(v);          :}
 					| exp:e1 PLUS   exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 0);:}
 					| exp:e1 MINUS  exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 1);:}
