@@ -68,12 +68,23 @@ terminal LBRACE;
 terminal RBRACE;
 terminal SEMICOLON;
 terminal ASSIGN;
+terminal CLASS;
+terminal NIL;
+terminal ARRAY;
+terminal EXTENDS;
+terminal RETURN;
+terminal NEW;
+terminal COMMA;
+terminal ELLIPSIS;
+terminal LT;
+terminal GT;
 
 /*************/
 /* TERMINALS */
 /*************/
 terminal Integer INT;
 terminal String ID;
+terminal String STRING;
 
 /*****************/
 /* NON TERMINALS */
