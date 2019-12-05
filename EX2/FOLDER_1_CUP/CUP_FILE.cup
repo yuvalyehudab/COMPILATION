@@ -134,6 +134,7 @@ exp			::=		INT:i								{: RESULT = new AST_EXP_INT(i,false);    :}
                     | NIL                               {: RESULT = new AST_NIL()                :}
                     | STRING:s                          {: RESULT = new AST_STRING(s)            :}
 					| var:v								{: RESULT = new AST_EXP_VAR(v);          :}
+					| LPAREN exp:e RPAREN               {: RESULT = new AST_EXP_PAREN(e);        :}
 					| exp:e1 PLUS   exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 0);:}
 					| exp:e1 MINUS  exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 1);:}
 					| exp:e1 TIMES  exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 2);:}
