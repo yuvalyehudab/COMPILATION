@@ -2,16 +2,19 @@
 /* IMPORT(S) */
 /*************/
 import java_cup.runtime.*;
+import java.io.PrintWriter;
 import AST.*;
 
 parser code 
 {:
 	public Lexer lexer;
+	private PrintWriter writer;
 
-	public Parser(Lexer lexer)
+	public Parser(Lexer lexer, PrintWriter writer)
 	{
 		super(lexer);
 		this.lexer = lexer;
+		this.writer = writer;
 	}
 	public void report_error(String message, Object info)
 	{
@@ -20,7 +23,13 @@ parser code
 		System.out.print(lexer.getLine());
 		System.out.print(":");
 		System.out.print(lexer.getCharPos());
-		System.out.print("] ");		
+		System.out.print("] ");
+		
+		writer.print("ERROR(");
+		writer.print(lexer.getLine());
+		writer.print(")");
+		writer.close();
+		
 		System.exit(0);
 	}
 :}
