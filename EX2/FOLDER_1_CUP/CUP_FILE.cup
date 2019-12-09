@@ -107,47 +107,81 @@ precedence left LT;
 precedence left GT;
 
 /************************/
-/* START WITH: stmtList */
+/* START WITH: program  */
 /************************/
-start with stmtList;
+start with program;
 
 /********************/
 /* DERIVATION RULES */
 /********************/
 
-stmtList	::=		stmt:s	stmtList:l		{: RESULT = new AST_STMT_LIST(s,l);    :}
-					| stmt:s				{: RESULT = new AST_STMT_LIST(s,null); :}
+program     ::=         varDec
+                    |   funcDec
+                    |   classDec
+                    |   arrayDec
+                    ;
+
+varDec      ::=         ID:type ID:name                  SEMICOLON
+                    |   ID:type ID:name ASSIGN exp:e     SEMICOLON
+                    |   ID:type ID:name ASSIGN newExp:ne SEMICOLON
+                    ;
+
+funcDec     ::=         ID:type ID:name LPAREN            RPAREN LBRACE stmtList:stmts RBRACE
+                    |   ID:type ID:name LPAREN idList:ids RPAREN LBRACE stmtList:stmts RBRACE
+                    ;
+
+classDec    ::=         CLASS ID:name                   LBRACE cFieldList:l RBRACE
+                    |   CLASS ID:name EXTENDS ID:parent LBRACE cFieldList:l RBRACE
+                    ;
+
+arrayDec    ::=         ARRAY ID:name EQUALS ID:def LBRACK RBRACK
+                    ;
+
+stmtList	::=		    stmt:s	stmtList:l	{: RESULT = new AST_STMT_LIST(s,l);    :}
+					|   stmt:s				{: RESULT = new AST_STMT_LIST(s,null); :}
 					;
 
-var			::=		ID:name								{: RESULT = new AST_VAR_SIMPLE(name);       :}
-					| var:v DOT ID:fieldName			{: RESULT = new AST_VAR_FIELD(v,fieldName); :} 
-					| var:v LBRACK exp:e RBRACK			{: RESULT = new AST_VAR_SUBSCRIPT(v,e);     :} 
+varNoExp    ::=		    ID:name					{: RESULT = new AST_VAR_SIMPLE(name);       :}
+					|   var:v DOT ID:fieldName	{: RESULT = new AST_VAR_FIELD(v,fieldName); :}
+					;
+
+var			::=		    ID:name					    {: RESULT = new AST_VAR_SIMPLE(name);       :}
+					|   var:v DOT ID:fieldName		{: RESULT = new AST_VAR_FIELD(v,fieldName); :}
+					|   var:v LBRACK exp:e RBRACK	{: RESULT = new AST_VAR_SUBSCRIPT(v,e);     :}
 					;
 					
-stmt		::=		var:v ASSIGN exp:e SEMICOLON								{: RESULT = new AST_STMT_ASSIGN(v,e); :}
-					| IF    LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_IF(   cond,body); :}
-					| WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_WHILE(cond,body); :}
+stmt		::=		    varDec:vd
+                    |   var:v ASSIGN exp:e SEMICOLON								{: RESULT = new AST_STMT_ASSIGN(v,e); :}
+                    |   var:v ASSIGN newExp:ne SEMICOLON
+					|   RETURN SEMICOLON
+					|   RETURN exp:e SEMICOLON
+					|   IF    LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_IF(   cond,body); :}
+					|   WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_WHILE(cond,body); :}
+					|   varNoExp:v     ID:name LPAREN              RPAREN SEMICOLON
+					|   varNoExp:v DOT ID:name LPAREN expList:args RPAREN SEMICOLON
 					;
 
-expList 	::=	    exp:e COMMA expList:l               {: RESULT = new AST_EXP_LIST(e,l);    :}
-					| exp:e 				            {: RESULT = new AST_EXP_LIST(e,null); :}
+expList 	::=	        exp:e COMMA expList:l   {: RESULT = new AST_EXP_LIST(e,l);    :}
+					|   exp:e 				    {: RESULT = new AST_EXP_LIST(e,null); :}
 					;
 
-exp			::=		INT:i								{: RESULT = new AST_EXP_INT(i,false);    :}
-                    | MINUS INT:i                       {: RESULT = new AST_EXP_INT(i,true);     :}
-                    | NIL                               {: RESULT = new AST_NIL()                :}
-                    | STRING:s                          {: RESULT = new AST_STRING(s)            :}
-					| var:v								{: RESULT = new AST_EXP_VAR(v);          :}
-					| LPAREN exp:e RPAREN               {: RESULT = new AST_EXP_PAREN(e);        :}
-					| exp:e1 PLUS   exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 0);:}
-					| exp:e1 MINUS  exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 1);:}
-					| exp:e1 TIMES  exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 2);:}
-					| exp:e1 DIVIDE exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 3);:}
-					| exp:e1 EQ     exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 4);:}
-					| exp:e1 LT     exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 5);:}
-					| exp:e1 GT     exp:e2				{: RESULT = new AST_EXP_BINOP(e1, e2, 6);:}
+exp			::=		    var:v					                {: RESULT = new AST_EXP_VAR(v);          :}
+					|   LPAREN exp:e RPAREN                     {: RESULT = new AST_EXP_PAREN(e);        :}
+					|   exp:e1 PLUS   exp:e2		    		{: RESULT = new AST_EXP_BINOP(e1, e2, 0);:}
+					|   exp:e1 MINUS  exp:e2		    		{: RESULT = new AST_EXP_BINOP(e1, e2, 1);:}
+					|   exp:e1 TIMES  exp:e2			    	{: RESULT = new AST_EXP_BINOP(e1, e2, 2);:}
+					|   exp:e1 DIVIDE exp:e2				    {: RESULT = new AST_EXP_BINOP(e1, e2, 3);:}
+					|   exp:e1 EQ     exp:e2	    			{: RESULT = new AST_EXP_BINOP(e1, e2, 4);:}
+					|   exp:e1 LT     exp:e2		    		{: RESULT = new AST_EXP_BINOP(e1, e2, 5);:}
+					|   exp:e1 GT     exp:e2			    	{: RESULT = new AST_EXP_BINOP(e1, e2, 6);:}
+					|   varNoExp:v LPAREN              RPAREN
+					|   varNoExp:v LPAREN expList:args RPAREN
+                    |   INT:i								    {: RESULT = new AST_EXP_INT(i,false);    :}
+                    |   MINUS INT:i                             {: RESULT = new AST_EXP_INT(i,true);     :}
+                    |   NIL                                     {: RESULT = new AST_NIL();               :}
+                    |   STRING:s                                {: RESULT = new AST_STRING(s);           :}
 					;
 
-newExp      ::=     NEW ID:name                         {: RESULT = new AST_EXP_NEW_SIMPLE(name);:}
-                    | NEW ID:name LBRACK exp:e RBRACK   {: RESULT = new AST_EXP_NEW_EXP(name, e);:}
+newExp      ::=         NEW ID:name                     {: RESULT = new AST_EXP_NEW_SIMPLE(name);:}
+                    |   NEW ID:name LBRACK exp:e RBRACK {: RESULT = new AST_EXP_NEW_EXP(name, e);:}
                     ;
