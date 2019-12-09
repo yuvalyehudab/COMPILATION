@@ -147,36 +147,8 @@ classDec    ::=         CLASS ID:name                   LBRACE cFieldList:l RBRA
                     |   CLASS ID:name EXTENDS ID:parent LBRACE cFieldList:l RBRACE
                     ;
 
-arrayDec    ::=         ARRAY ID:name EQUALS ID:def LBRACK RBRACK
+arrayDec    ::=         ARRAY ID:name EQUALS ID:thing LBRACK RBRACK
                     ;
-
-stmtList	::=		    stmt:s	stmtList:l	{: RESULT = new AST_STMT_LIST(s,l);    :}
-					|   stmt:s				{: RESULT = new AST_STMT_LIST(s,null); :}
-					;
-
-varNoExp    ::=		    ID:name					{: RESULT = new AST_VAR_SIMPLE(name);       :}
-					|   var:v DOT ID:fieldName	{: RESULT = new AST_VAR_FIELD(v,fieldName); :}
-					;
-
-var			::=		    ID:name					    {: RESULT = new AST_VAR_SIMPLE(name);       :}
-					|   var:v DOT ID:fieldName		{: RESULT = new AST_VAR_FIELD(v,fieldName); :}
-					|   var:v LBRACK exp:e RBRACK	{: RESULT = new AST_VAR_SUBSCRIPT(v,e);     :}
-					;
-					
-stmt		::=		    varDec:vd
-                    |   var:v ASSIGN exp:e SEMICOLON								{: RESULT = new AST_STMT_ASSIGN(v,e); :}
-                    |   var:v ASSIGN newExp:ne SEMICOLON
-					|   RETURN SEMICOLON
-					|   RETURN exp:e SEMICOLON
-					|   IF    LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_IF(   cond,body); :}
-					|   WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_WHILE(cond,body); :}
-					|   varNoExp:v     ID:name LPAREN              RPAREN SEMICOLON
-					|   varNoExp:v DOT ID:name LPAREN expList:args RPAREN SEMICOLON
-					;
-
-expList 	::=	        exp:e COMMA expList:l   {: RESULT = new AST_EXP_LIST(e,l);    :}
-					|   exp:e 				    {: RESULT = new AST_EXP_LIST(e,null); :}
-					;
 
 exp			::=		    var:v					                {: RESULT = new AST_EXP_VAR(v);          :}
 					|   LPAREN exp:e RPAREN                     {: RESULT = new AST_EXP_PAREN(e);        :}
@@ -189,12 +161,54 @@ exp			::=		    var:v					                {: RESULT = new AST_EXP_VAR(v);        
 					|   exp:e1 GT     exp:e2			    	{: RESULT = new AST_EXP_BINOP(e1, e2, 6);:}
 					|   varNoExp:v LPAREN              RPAREN
 					|   varNoExp:v LPAREN expList:args RPAREN
-                    |   INT:i								    {: RESULT = new AST_EXP_INT(i,false);    :}
+                    |         INT:i							    {: RESULT = new AST_EXP_INT(i,false);    :}
                     |   MINUS INT:i                             {: RESULT = new AST_EXP_INT(i,true);     :}
                     |   NIL                                     {: RESULT = new AST_NIL();               :}
                     |   STRING:s                                {: RESULT = new AST_STRING(s);           :}
 					;
 
+var			::=		    ID:name					    {: RESULT = new AST_VAR_SIMPLE(name);       :}
+					|   var:v DOT ID:fieldName		{: RESULT = new AST_VAR_FIELD(v,fieldName); :}
+					|   var:v LBRACK exp:e RBRACK	{: RESULT = new AST_VAR_SUBSCRIPT(v,e);     :}
+					;
+
+stmt		::=		    varDec:d
+                    |   var:v ASSIGN exp:e     SEMICOLON							{: RESULT = new AST_STMT_ASSIGN(v,e); :}
+                    |   var:v ASSIGN newExp:ne SEMICOLON
+					|   RETURN       SEMICOLON
+					|   RETURN exp:e SEMICOLON
+					|   IF    LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_IF(   cond,body); :}
+					|   WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_WHILE(cond,body); :}
+					|   varNoExp:v     ID:name LPAREN              RPAREN SEMICOLON
+					|   varNoExp:v DOT ID:name LPAREN expList:args RPAREN SEMICOLON
+					;
+
 newExp      ::=         NEW ID:name                     {: RESULT = new AST_EXP_NEW_SIMPLE(name);:}
                     |   NEW ID:name LBRACK exp:e RBRACK {: RESULT = new AST_EXP_NEW_EXP(name, e);:}
+                    ;
+
+cField      ::=         varDec:d
+                    |   funcDec:d
+                    ;
+
+/** Helpers **/
+
+varNoExp    ::=		    ID:name					{: RESULT = new AST_VAR_SIMPLE(name);       :}
+					|   var:v DOT ID:fieldName	{: RESULT = new AST_VAR_FIELD(v,fieldName); :}
+					;
+
+idList      ::=         ID:type ID:name COMMA idList:l
+                    |   ID:type ID:name
+                    ;
+
+expList 	::=	        exp:e COMMA expList:l   {: RESULT = new AST_EXP_LIST(e,l);    :}
+					|   exp:e 				    {: RESULT = new AST_EXP_LIST(e,null); :}
+					;
+
+stmtList	::=		    stmt:s	stmtList:l	{: RESULT = new AST_STMT_LIST(s,l);    :}
+					|   stmt:s				{: RESULT = new AST_STMT_LIST(s,null); :}
+					;
+
+cFieldList  ::=         cField:f cFieldList:l
+                    |   cField:f
                     ;
