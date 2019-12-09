@@ -116,18 +116,22 @@ precedence left LT;
 precedence left GT;
 
 /************************/
-/* START WITH: program  */
+/* START WITH: decList  */
 /************************/
-start with program;
+start with decList;
 
 /********************/
 /* DERIVATION RULES */
 /********************/
 
-program     ::=         varDec
-                    |   funcDec
-                    |   classDec
-                    |   arrayDec
+decList     ::=         dec:d decList:l
+                    |   dec:d
+                    ;
+
+dec         ::=         varDec:d
+                    |   funcDec:d
+                    |   classDec:d
+                    |   arrayDec:d
                     ;
 
 varDec      ::=         ID:type ID:name                  SEMICOLON
