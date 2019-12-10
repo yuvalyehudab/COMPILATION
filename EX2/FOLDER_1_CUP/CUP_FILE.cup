@@ -102,6 +102,15 @@ non terminal AST_EXP exp;
 non terminal AST_VAR var;
 non terminal AST_STMT stmt;
 non terminal AST_STMT_LIST stmtList;
+non terminal AST_FUNC_DEC funcDec;
+non terminal AST_CLASS_DEC classDec;
+non terminal AST_ARRAY_DEC arrayDec;
+non terminal AST_EXP_NEW newExp;
+non terminal AST_VAR varNoExp;
+non terminal AST_DEC cField;
+non terminal AST_CFIELD_LIST cFieldList;
+non terminal AST_EXP_LIST expList;
+non terminal AST_ID_LIST idList;
 
 /***********************/
 /* OPERATOR PRECEDENCE */
@@ -143,8 +152,8 @@ funcDec     ::=         ID:type ID:name LPAREN            RPAREN LBRACE stmtList
                     |   ID:type ID:name LPAREN idList:ids RPAREN LBRACE stmtList:stmts RBRACE   {: RESULT = new AST_FUNC_DEC(ids,stmts); :}
                     ;
 
-classDec    ::=         CLASS ID:name                   LBRACE cFieldList:l RBRACE      {: RESULT = new AST_CLASS_DEC(null,cFieldList);     :}
-                    |   CLASS ID:name EXTENDS ID:parent LBRACE cFieldList:l RBRACE      {: RESULT = new AST_CLASS_DEC(parent,cFieldList);   :}
+classDec    ::=         CLASS ID:name                   LBRACE cFieldList:l RBRACE      {: RESULT = new AST_CLASS_DEC(name,null,l);     :}
+                    |   CLASS ID:name EXTENDS ID:parent LBRACE cFieldList:l RBRACE      {: RESULT = new AST_CLASS_DEC(name,parent,l);   :}
                     ;
 
 arrayDec    ::=         ARRAY ID:name EQUALS ID:thing LBRACK RBRACK     {: RESULT = new AST_ARRAY_DEC(name,thing);:}
@@ -159,8 +168,8 @@ exp			::=		    var:v					                {: RESULT = new AST_EXP_VAR(v);        
 					|   exp:e1 EQ     exp:e2	    			{: RESULT = new AST_EXP_BINOP(e1, e2, 4);:}
 					|   exp:e1 LT     exp:e2		    		{: RESULT = new AST_EXP_BINOP(e1, e2, 5);:}
 					|   exp:e1 GT     exp:e2			    	{: RESULT = new AST_EXP_BINOP(e1, e2, 6);:}
-					|   varNoExp:v LPAREN              RPAREN   {: RESULT = new AST_EXP_VAR_APP(null);   :}
-					|   varNoExp:v LPAREN expList:args RPAREN   {: RESULT = new AST_EXP_VAR_APP(args);   :}
+					|   varNoExp:v LPAREN              RPAREN   {: RESULT = new AST_EXP_VAR_APP(v,null); :}
+					|   varNoExp:v LPAREN expList:args RPAREN   {: RESULT = new AST_EXP_VAR_APP(v,args); :}
                     |         INT:i							    {: RESULT = new AST_EXP_INT(i,false);    :}
                     |   MINUS INT:i                             {: RESULT = new AST_EXP_INT(i,true);     :}
                     |   NIL                                     {: RESULT = new AST_EXP_NIL();           :}
@@ -187,8 +196,8 @@ newExp      ::=         NEW ID:name                     {: RESULT = new AST_EXP_
                     |   NEW ID:name LBRACK exp:e RBRACK {: RESULT = new AST_EXP_NEW_EXP(name, e);:}
                     ;
 
-cField      ::=         varDec:d    {: RESULT = new AST_CFIELD_VAR_DEC(d);  :}
-                    |   funcDec:d   {: RESULT = new AST_CFIELD_FUNC_DEC(d); :}
+cField      ::=         varDec:d    {: RESULT = new AST_DEC_VAR(d);  :}
+                    |   funcDec:d   {: RESULT = new AST_DEC_FUNC(d); :}
                     ;
 
 /** Helpers **/
