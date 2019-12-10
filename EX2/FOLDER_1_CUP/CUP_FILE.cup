@@ -163,8 +163,8 @@ exp			::=		    var:v					                {: RESULT = new AST_EXP_VAR(v);        
 					|   varNoExp:v LPAREN expList:args RPAREN   {: RESULT = new AST_EXP_VAR_APP(args);   :}
                     |         INT:i							    {: RESULT = new AST_EXP_INT(i,false);    :}
                     |   MINUS INT:i                             {: RESULT = new AST_EXP_INT(i,true);     :}
-                    |   NIL                                     {: RESULT = new AST_NIL();               :}
-                    |   STRING:s                                {: RESULT = new AST_STRING(s);           :}
+                    |   NIL                                     {: RESULT = new AST_EXP_NIL();           :}
+                    |   STRING:s                                {: RESULT = new AST_EXP_STRING(s);       :}
 					;
 
 var			::=		    ID:name					    {: RESULT = new AST_VAR_SIMPLE(name);       :}
@@ -209,6 +209,6 @@ stmtList	::=		    stmt:s	stmtList:l	{: RESULT = new AST_STMT_LIST(s,l);    :}
 					|   stmt:s				{: RESULT = new AST_STMT_LIST(s,null); :}
 					;
 
-cFieldList  ::=         cField:f cFieldList:l   {: RESULT = new AST_CFIELD_LIST(s,l);   :}
-                    |   cField:f                {: RESULT = new AST_CFIELD_LIST(s,null);:}
+cFieldList  ::=         cField:f cFieldList:l   {: RESULT = new AST_CFIELD_LIST(f,l);   :}
+                    |   cField:f                {: RESULT = new AST_CFIELD_LIST(f,null);:}
                     ;
