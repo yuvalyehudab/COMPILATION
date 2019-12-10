@@ -124,30 +124,30 @@ start with decList;
 /* DERIVATION RULES */
 /********************/
 
-decList     ::=         dec:d decList:l
-                    |   dec:d
+decList     ::=         dec:d decList:l     {: RESULT = new AST_DEC_LIST(d,l);    :}
+                    |   dec:d               {: RESULT = new AST_DEC_LIST(d,null); :}
                     ;
 
-dec         ::=         varDec:d
-                    |   funcDec:d
-                    |   classDec:d
-                    |   arrayDec:d
+dec         ::=         varDec:d        {: RESULT = new AST_DEC_VAR(d);    :}
+                    |   funcDec:d       {: RESULT = new AST_DEC_FUNC(d);   :}
+                    |   classDec:d      {: RESULT = new AST_DEC_CLASS(d);  :}
+                    |   arrayDec:d      {: RESULT = new AST_DEC_ARRAY(d);  :}
                     ;
 
-varDec      ::=         ID:type ID:name                  SEMICOLON
-                    |   ID:type ID:name ASSIGN exp:e     SEMICOLON
-                    |   ID:type ID:name ASSIGN newExp:ne SEMICOLON
+varDec      ::=         ID:type ID:name                  SEMICOLON      {: RESULT = new AST_VAR_DEC_SIMPLE();    :}
+                    |   ID:type ID:name ASSIGN exp:e     SEMICOLON      {: RESULT = new AST_VAR_DEC_EXP(e);      :}
+                    |   ID:type ID:name ASSIGN newExp:ne SEMICOLON      {: RESULT = new AST_VAR_DEC_NEWEXP(ne);  :}
                     ;
 
-funcDec     ::=         ID:type ID:name LPAREN            RPAREN LBRACE stmtList:stmts RBRACE
-                    |   ID:type ID:name LPAREN idList:ids RPAREN LBRACE stmtList:stmts RBRACE
+funcDec     ::=         ID:type ID:name LPAREN            RPAREN LBRACE stmtList:stmts RBRACE   {: RESULT = new AST_FUNC_DEC(null,stmts);:}
+                    |   ID:type ID:name LPAREN idList:ids RPAREN LBRACE stmtList:stmts RBRACE   {: RESULT = new AST_FUNC_DEC(ids,stmts); :}
                     ;
 
-classDec    ::=         CLASS ID:name                   LBRACE cFieldList:l RBRACE
-                    |   CLASS ID:name EXTENDS ID:parent LBRACE cFieldList:l RBRACE
+classDec    ::=         CLASS ID:name                   LBRACE cFieldList:l RBRACE      {: RESULT = new AST_CLASS_DEC(null,cFieldList);     :}
+                    |   CLASS ID:name EXTENDS ID:parent LBRACE cFieldList:l RBRACE      {: RESULT = new AST_CLASS_DEC(parent,cFieldList);   :}
                     ;
 
-arrayDec    ::=         ARRAY ID:name EQUALS ID:thing LBRACK RBRACK
+arrayDec    ::=         ARRAY ID:name EQUALS ID:thing LBRACK RBRACK     {: RESULT = new AST_ARRAY_DEC(name,thing);:}
                     ;
 
 exp			::=		    var:v					                {: RESULT = new AST_EXP_VAR(v);          :}
@@ -159,8 +159,8 @@ exp			::=		    var:v					                {: RESULT = new AST_EXP_VAR(v);        
 					|   exp:e1 EQ     exp:e2	    			{: RESULT = new AST_EXP_BINOP(e1, e2, 4);:}
 					|   exp:e1 LT     exp:e2		    		{: RESULT = new AST_EXP_BINOP(e1, e2, 5);:}
 					|   exp:e1 GT     exp:e2			    	{: RESULT = new AST_EXP_BINOP(e1, e2, 6);:}
-					|   varNoExp:v LPAREN              RPAREN
-					|   varNoExp:v LPAREN expList:args RPAREN
+					|   varNoExp:v LPAREN              RPAREN   {: RESULT = new AST_EXP_VAR_APP(null);   :}
+					|   varNoExp:v LPAREN expList:args RPAREN   {: RESULT = new AST_EXP_VAR_APP(args);   :}
                     |         INT:i							    {: RESULT = new AST_EXP_INT(i,false);    :}
                     |   MINUS INT:i                             {: RESULT = new AST_EXP_INT(i,true);     :}
                     |   NIL                                     {: RESULT = new AST_NIL();               :}
@@ -172,23 +172,23 @@ var			::=		    ID:name					    {: RESULT = new AST_VAR_SIMPLE(name);       :}
 					|   var:v LBRACK exp:e RBRACK	{: RESULT = new AST_VAR_SUBSCRIPT(v,e);     :}
 					;
 
-stmt		::=		    varDec:d
-                    |   var:v ASSIGN exp:e     SEMICOLON							{: RESULT = new AST_STMT_ASSIGN(v,e); :}
-                    |   var:v ASSIGN newExp:ne SEMICOLON
-					|   RETURN       SEMICOLON
-					|   RETURN exp:e SEMICOLON
-					|   IF    LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_IF(   cond,body); :}
-					|   WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_WHILE(cond,body); :}
-					|   varNoExp:v     ID:name LPAREN              RPAREN SEMICOLON
-					|   varNoExp:v DOT ID:name LPAREN expList:args RPAREN SEMICOLON
+stmt		::=		    varDec:d                                                    {: RESULT = new AST_STMT_VAR_DEC(d);            :}
+                    |   var:v ASSIGN exp:e     SEMICOLON							{: RESULT = new AST_STMT_ASSIGN_EXP(v,e);       :}
+                    |   var:v ASSIGN newExp:ne SEMICOLON                            {: RESULT = new AST_STMT_ASSIGN_NEW_EXP(v,ne);  :}
+					|   RETURN       SEMICOLON                                      {: RESULT = new AST_STMT_RETURN(null);          :}
+					|   RETURN exp:e SEMICOLON                                      {: RESULT = new AST_STMT_RETURN(e);             :}
+					|   IF    LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_IF(   cond,body);      :}
+					|   WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_WHILE(cond,body);      :}
+					|   varNoExp:v     ID:name LPAREN              RPAREN SEMICOLON {: RESULT = new AST_STMT_VAR_APP(v,name,null);  :}
+					|   varNoExp:v DOT ID:name LPAREN expList:args RPAREN SEMICOLON {: RESULT = new AST_STMT_VAR_APP(v,name,args);  :}
 					;
 
 newExp      ::=         NEW ID:name                     {: RESULT = new AST_EXP_NEW_SIMPLE(name);:}
                     |   NEW ID:name LBRACK exp:e RBRACK {: RESULT = new AST_EXP_NEW_EXP(name, e);:}
                     ;
 
-cField      ::=         varDec:d
-                    |   funcDec:d
+cField      ::=         varDec:d    {: RESULT = new AST_CFIELD_VAR_DEC(d);  :}
+                    |   funcDec:d   {: RESULT = new AST_CFIELD_FUNC_DEC(d); :}
                     ;
 
 /** Helpers **/
@@ -197,8 +197,8 @@ varNoExp    ::=		    ID:name					{: RESULT = new AST_VAR_SIMPLE(name);       :}
 					|   var:v DOT ID:fieldName	{: RESULT = new AST_VAR_FIELD(v,fieldName); :}
 					;
 
-idList      ::=         ID:type ID:name COMMA idList:l
-                    |   ID:type ID:name
+idList      ::=         ID:type ID:name COMMA idList:l  {: RESULT = new AST_ID_LIST(type,name,l);   :}
+                    |   ID:type ID:name                 {: RESULT = new AST_ID_LIST(type,name,null);:}
                     ;
 
 expList 	::=	        exp:e COMMA expList:l   {: RESULT = new AST_EXP_LIST(e,l);    :}
@@ -209,6 +209,6 @@ stmtList	::=		    stmt:s	stmtList:l	{: RESULT = new AST_STMT_LIST(s,l);    :}
 					|   stmt:s				{: RESULT = new AST_STMT_LIST(s,null); :}
 					;
 
-cFieldList  ::=         cField:f cFieldList:l
-                    |   cField:f
+cFieldList  ::=         cField:f cFieldList:l   {: RESULT = new AST_CFIELD_LIST(s,l);   :}
+                    |   cField:f                {: RESULT = new AST_CFIELD_LIST(s,null);:}
                     ;
