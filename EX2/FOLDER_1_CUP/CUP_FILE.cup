@@ -102,6 +102,8 @@ non terminal AST_EXP exp;
 non terminal AST_VAR var;
 non terminal AST_STMT stmt;
 non terminal AST_STMT_LIST stmtList;
+non terminal AST_FUNC_DEC funcDec;
+non terminal AST_CLASS_DEC classDec;
 non terminal AST_ARRAY_DEC arrayDec;
 non terminal AST_EXP_NEW newExp;
 non terminal AST_VAR varNoExp;
@@ -150,8 +152,8 @@ funcDec     ::=         ID:type ID:name LPAREN            RPAREN LBRACE stmtList
                     |   ID:type ID:name LPAREN idList:ids RPAREN LBRACE stmtList:stmts RBRACE   {: RESULT = new AST_FUNC_DEC(ids,stmts); :}
                     ;
 
-classDec    ::=         CLASS ID:name                   LBRACE cFieldList:l RBRACE      {: RESULT = new AST_CLASS_DEC(null,cFieldList);     :}
-                    |   CLASS ID:name EXTENDS ID:parent LBRACE cFieldList:l RBRACE      {: RESULT = new AST_CLASS_DEC(parent,cFieldList);   :}
+classDec    ::=         CLASS ID:name                   LBRACE cFieldList:l RBRACE      {: RESULT = new AST_CLASS_DEC(name,null,l);     :}
+                    |   CLASS ID:name EXTENDS ID:parent LBRACE cFieldList:l RBRACE      {: RESULT = new AST_CLASS_DEC(name,parent,l);   :}
                     ;
 
 arrayDec    ::=         ARRAY ID:name EQUALS ID:thing LBRACK RBRACK     {: RESULT = new AST_ARRAY_DEC(name,thing);:}

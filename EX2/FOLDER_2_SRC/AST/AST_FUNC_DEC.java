@@ -1,18 +1,19 @@
 package AST;
 
-public class AST_ID_LIST extends AST_Node
+public class AST_FUNC_DEC extends AST_Node
 {
 	/****************/
 	/* DATA MEMBERS */
 	/****************/
-	public STRING type;
-	public STRING name;
-	public AST_ID_LIST tail;
+	public String type;
+	public String name;
+	public AST_ID_LIST ids;
+	public AST_STMT_LIST stmts;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_ID_LIST(STRING type,STRING name,AST_ID_LIST tail)
+	public AST_CFIELD_LIST(String type,String name,AST_ID_LIST ids,AST_STMT_LIST stmts)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
@@ -22,15 +23,17 @@ public class AST_ID_LIST extends AST_Node
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		if (tail != null) System.out.print("====================== ids -> id ids\n");
-		if (tail == null) System.out.print("====================== ids -> id      \n");
+		System.out.print("====================== funcDec -> ID( %s )",type);
+		System.out.print(" ID( %s ) LPAREN",name);
+		if (ids != null) System.out.print(" ids ");
+		System.out.print("RPAREN stmts");
 
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
 		this.type = type;
 		this.name = name;
-		this.tail = tail;
+		this.stmts = stmts;
 	}
 
 	/******************************************************/
@@ -41,28 +44,30 @@ public class AST_ID_LIST extends AST_Node
 		/**************************************/
 		/* AST NODE TYPE = AST STATEMENT LIST */
 		/**************************************/
-		System.out.print("AST NODE ID LIST\n");
+		System.out.print("AST NODE CLASS DEC\n");
 
 		/*************************************/
-		/* RECURSIVELY PRINT HEAD + TAIL ... */
+		/* RECURSIVELY PRINT NAME + STMTS ... */
 		/*************************************/
 		if (type != null) type.PrintMe();
 		if (name != null) name.PrintMe();
-		if (tail != null) tail.PrintMe();
+		if (ids != null) ids.PrintMe();
+		if (stmts != null) stmts.PrintMe();
 
 		/**********************************/
 		/* PRINT to AST GRAPHVIZ DOT file */
 		/**********************************/
 		AST_GRAPHVIZ.getInstance().logNode(
 			SerialNumber,
-			"ID\nLIST\n");
+			"FUNC\nDEC\n");
 		
 		/****************************************/
 		/* PRINT Edges to AST GRAPHVIZ DOT file */
 		/****************************************/
 		if (type != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,type.SerialNumber);
 		if (name != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,name.SerialNumber);
-		if (tail != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,tail.SerialNumber);
+		if (ids != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,ids.SerialNumber);
+		if (stmts != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,stmts.SerialNumber);
 	}
 	
 }

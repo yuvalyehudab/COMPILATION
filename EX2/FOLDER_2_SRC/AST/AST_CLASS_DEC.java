@@ -1,18 +1,18 @@
 package AST;
 
-public class AST_ID_LIST extends AST_Node
+public class AST_CLASS_DEC extends AST_Node
 {
 	/****************/
 	/* DATA MEMBERS */
 	/****************/
-	public STRING type;
-	public STRING name;
-	public AST_ID_LIST tail;
+	public String name;
+	public String parent;
+	public AST_CFIELD_LIST cfields;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_ID_LIST(STRING type,STRING name,AST_ID_LIST tail)
+	public AST_CFIELD_LIST(String name,String parent,AST_CFIELD_LIST cfields)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
@@ -22,15 +22,21 @@ public class AST_ID_LIST extends AST_Node
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		if (tail != null) System.out.print("====================== ids -> id ids\n");
-		if (tail == null) System.out.print("====================== ids -> id      \n");
+		if (parent != null) {
+			System.out.print("====================== classDec -> CLASS ID( %s )",name);
+			System.out.print("EXTENDS ID( %s ) LBRACE cfields RBRACE\n",parent);
+		}
+		if (parent == null) {
+			System.out.print("====================== classDec -> CLASS ID( %s )",name);
+			System.out.print("LBRACE cfields RBRACE\n");
+		}
 
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.type = type;
 		this.name = name;
-		this.tail = tail;
+		this.parent = parent;
+		this.cfields = cfields;
 	}
 
 	/******************************************************/
@@ -41,28 +47,28 @@ public class AST_ID_LIST extends AST_Node
 		/**************************************/
 		/* AST NODE TYPE = AST STATEMENT LIST */
 		/**************************************/
-		System.out.print("AST NODE ID LIST\n");
+		System.out.print("AST NODE CLASS DEC\n");
 
 		/*************************************/
-		/* RECURSIVELY PRINT HEAD + TAIL ... */
+		/* RECURSIVELY PRINT PARENT + CFIELDS ... */
 		/*************************************/
-		if (type != null) type.PrintMe();
 		if (name != null) name.PrintMe();
-		if (tail != null) tail.PrintMe();
+		if (parent != null) parent.PrintMe();
+		if (cfields != null) cfields.PrintMe();
 
 		/**********************************/
 		/* PRINT to AST GRAPHVIZ DOT file */
 		/**********************************/
 		AST_GRAPHVIZ.getInstance().logNode(
 			SerialNumber,
-			"ID\nLIST\n");
+			"CLASS\nDEC\n");
 		
 		/****************************************/
 		/* PRINT Edges to AST GRAPHVIZ DOT file */
 		/****************************************/
-		if (type != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,type.SerialNumber);
 		if (name != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,name.SerialNumber);
-		if (tail != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,tail.SerialNumber);
+		if (parent != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,parent.SerialNumber);
+		if (cfields != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,cfields.SerialNumber);
 	}
 	
 }
