@@ -3,6 +3,7 @@ package AST;
 public class AST_EXP_INT extends AST_EXP
 {
 	public int value;
+	public boolean hasMinus;
 	
 	/******************/
 	/* CONSTRUCTOR(S) */
@@ -28,6 +29,7 @@ public class AST_EXP_INT extends AST_EXP
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
 		this.value = value;
+		this.hasMinus = hasMinus;
 	}
 
 	/************************************************/

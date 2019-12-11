@@ -114,10 +114,10 @@ non terminal AST_EXP_LIST expList;
 non terminal AST_ID_LIST idList;
 non terminal AST_DEC_LIST decList;
 
-non terminal AST_DEC_VAR varDec;
-non terminal AST_DEC_FUNC funcDec;
-non terminal AST_DEC_CLASS classDec;
-non terminal AST_DEC_ARRAY arrayDec;
+non terminal AST_VAR_DEC varDec;
+non terminal AST_FUNC_DEC funcDec;
+non terminal AST_CLASS_DEC classDec;
+non terminal AST_ARRAY_DEC arrayDec;
 
 /***********************/
 /* OPERATOR PRECEDENCE */
@@ -150,9 +150,9 @@ dec         ::=         varDec:d        {: RESULT = new AST_DEC_VAR(d);    :}
                     |   arrayDec:d      {: RESULT = new AST_DEC_ARRAY(d);  :}
                     ;
 
-varDec      ::=         ID:type ID:name                  SEMICOLON      {: RESULT = new AST_VAR_DEC_SIMPLE();    :}
-                    |   ID:type ID:name ASSIGN exp:e     SEMICOLON      {: RESULT = new AST_VAR_DEC_EXP(e);      :}
-                    |   ID:type ID:name ASSIGN newExp:ne SEMICOLON      {: RESULT = new AST_VAR_DEC_NEWEXP(ne);  :}
+varDec      ::=         ID:type ID:name                  SEMICOLON      {: RESULT = new AST_VAR_DEC_SIMPLE(type,name);    :}
+                    |   ID:type ID:name ASSIGN exp:e     SEMICOLON      {: RESULT = new AST_VAR_DEC_EXP(type,name,e);      :}
+                    |   ID:type ID:name ASSIGN newExp:ne SEMICOLON      {: RESULT = new AST_VAR_DEC_NEWEXP(type,name,ne);  :}
                     ;
 
 funcDec     ::=         ID:type ID:name LPAREN            RPAREN LBRACE stmtList:stmts RBRACE   {: RESULT = new AST_FUNC_DEC(type, name, null,stmts);:}
@@ -191,7 +191,7 @@ var			::=		    ID:name					    {: RESULT = new AST_VAR_SIMPLE(name);       :}
 					;
 
 stmt		::=		    varDec:d                                                    {: RESULT = new AST_STMT_VAR_DEC(d);            :}
-                    |   var:v ASSIGN exp:e     SEMICOLON							{: RESULT = new AST_STMT_ASSIGN_EXP(v,e);       :}
+                    |   var:v ASSIGN exp:e     SEMICOLON							{: RESULT = new AST_STMT_ASSIGN(v,e);           :}
                     |   var:v ASSIGN newExp:ne SEMICOLON                            {: RESULT = new AST_STMT_ASSIGN_NEW_EXP(v,ne);  :}
 					|   RETURN       SEMICOLON                                      {: RESULT = new AST_STMT_RETURN(null);          :}
 					|   RETURN exp:e SEMICOLON                                      {: RESULT = new AST_STMT_RETURN(e);             :}

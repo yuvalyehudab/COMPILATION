@@ -23,10 +23,10 @@ public class AST_FUNC_DEC extends AST_Node
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.print("====================== funcDec -> ID( %s )",type);
-		System.out.print(" ID( %s ) LPAREN",name);
-		if (ids != null) System.out.print(" ids ");
-		System.out.print("RPAREN stmts");
+		System.out.format("====================== funcDec -> ID( %s )",type);
+		System.out.format(" ID( %s ) LPAREN",name);
+		if (ids != null) System.out.format(" ids ");
+		System.out.format("RPAREN stmts");
 
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
@@ -44,13 +44,13 @@ public class AST_FUNC_DEC extends AST_Node
 		/**************************************/
 		/* AST NODE TYPE = AST STATEMENT LIST */
 		/**************************************/
-		System.out.print("AST NODE CLASS DEC\n");
+		System.out.format("AST NODE FUNC DEC\n");
 
 		/*************************************/
 		/* RECURSIVELY PRINT NAME + STMTS ... */
 		/*************************************/
-		if (type != null) type.PrintMe();
-		if (name != null) name.PrintMe();
+//		if (type != null) type.PrintMe();
+//		if (name != null) name.PrintMe();
 		if (ids != null) ids.PrintMe();
 		if (stmts != null) stmts.PrintMe();
 
@@ -64,8 +64,8 @@ public class AST_FUNC_DEC extends AST_Node
 		/****************************************/
 		/* PRINT Edges to AST GRAPHVIZ DOT file */
 		/****************************************/
-		if (type != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,type.SerialNumber);
-		if (name != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,name.SerialNumber);
+//		if (type != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,type.SerialNumber);
+//		if (name != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,name.SerialNumber);
 		if (ids != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,ids.SerialNumber);
 		if (stmts != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,stmts.SerialNumber);
 	}

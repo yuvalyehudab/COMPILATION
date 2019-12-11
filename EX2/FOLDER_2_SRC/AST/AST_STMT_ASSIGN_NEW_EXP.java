@@ -6,12 +6,12 @@ public class AST_STMT_ASSIGN_NEW_EXP extends AST_STMT
 	/*  var := NEW exp */
 	/*******************/
 	public AST_VAR var;
-	public AST_EXP_NEW_EXP newExp;
+	public AST_EXP_NEW newExp;
 
 	/*******************/
 	/*  CONSTRUCTOR(S) */
 	/*******************/
-	public AST_STMT_ASSIGN_NEW_EXP(AST_VAR var,AST_EXP_NEW_EXP newExp)
+	public AST_STMT_ASSIGN_NEW_EXP(AST_VAR var,AST_EXP_NEW newExp)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */

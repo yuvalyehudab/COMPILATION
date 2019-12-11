@@ -1,18 +1,16 @@
 package AST;
 
-public class AST_VAR_DEC_NEWEXP extends AST_VAR_DEC
+public class AST_STMT_VAR_DEC extends AST_STMT
 {
-	/*********************/
-	/*  type name := ne */
-	/*********************/
-	public String type;
-	public String name;
-	public AST_EXP_NEW ne;
+	/***************/
+	/*  type id */
+	/***************/
+	public AST_VAR_DEC varDec;
 
 	/*******************/
 	/*  CONSTRUCTOR(S) */
 	/*******************/
-	public AST_VAR_DEC_NEWEXP(String type, String name, AST_EXP_NEW ne)
+	public AST_STMT_VAR_DEC(AST_VAR_DEC varDec)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
@@ -22,43 +20,39 @@ public class AST_VAR_DEC_NEWEXP extends AST_VAR_DEC
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.format("====================== varDec -> type var ASSIGN ne SEMICOLON\n");
+		System.out.print("====================== stmt -> varDec SEMICOLON\n");
 
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.type = type;
-		this.name = name;
-		this.ne = ne;
+		this.varDec = varDec;
 	}
 
 	/*********************************************************/
-	/* The printing message for an assign statement AST node */
+	/* The printing message for a declaration statement AST node */
 	/*********************************************************/
 	public void PrintMe()
 	{
 		/********************************************/
-		/* AST NODE TYPE = AST ASSIGNMENT STATEMENT */
+		/* AST NODE TYPE = AST DECLARATION STATEMENT */
 		/********************************************/
-		System.out.print("AST NODE decl ASSIGN STMT\n");
+		System.out.print("AST NODE DEC VAR STMT\n");
 
 		/***********************************/
-		/* RECURSIVELY PRINT EXP ...	   */
+		/* RECURSIVELY PRINT VAR_DEC ... */
 		/***********************************/
-		
-		if (ne != null) ne.PrintMe();
+		if (varDec != null) varDec.PrintMe();
 
 		/***************************************/
 		/* PRINT Node to AST GRAPHVIZ DOT file */
 		/***************************************/
 		AST_GRAPHVIZ.getInstance().logNode(
 			SerialNumber,
-			"ASSIGN\nleft := right\n");
+			"STMT\nvarDec;\n");
 		
 		/****************************************/
 		/* PRINT Edges to AST GRAPHVIZ DOT file */
 		/****************************************/
-		
-		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,ne.SerialNumber);
+		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,varDec.SerialNumber);
 	}
 }

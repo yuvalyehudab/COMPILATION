@@ -1,6 +1,6 @@
 package AST;
 
-public class AST_VAR_DEC_EXP extends AST_DEC_VAR
+public class AST_VAR_DEC_EXP extends AST_VAR_DEC
 {
 	/*********************/
 	/*  type name := exp */

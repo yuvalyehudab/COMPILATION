@@ -23,12 +23,12 @@ public class AST_CLASS_DEC extends AST_Node
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
 		if (parent != null) {
-			System.out.print("====================== classDec -> CLASS ID( %s )",name);
-			System.out.print("EXTENDS ID( %s ) LBRACE cfields RBRACE\n",parent);
+			System.out.format("====================== classDec -> CLASS ID( %s )",name);
+			System.out.format("EXTENDS ID( %s ) LBRACE cfields RBRACE\n",parent);
 		}
 		if (parent == null) {
-			System.out.print("====================== classDec -> CLASS ID( %s )",name);
-			System.out.print("LBRACE cfields RBRACE\n");
+			System.out.format("====================== classDec -> CLASS ID( %s )",name);
+			System.out.format("LBRACE cfields RBRACE\n");
 		}
 
 		/*******************************/
@@ -47,13 +47,13 @@ public class AST_CLASS_DEC extends AST_Node
 		/**************************************/
 		/* AST NODE TYPE = AST STATEMENT LIST */
 		/**************************************/
-		System.out.print("AST NODE CLASS DEC\n");
+		System.out.format("AST NODE CLASS DEC\n");
 
 		/*************************************/
 		/* RECURSIVELY PRINT PARENT + CFIELDS ... */
 		/*************************************/
-		if (name != null) name.PrintMe();
-		if (parent != null) parent.PrintMe();
+//		if (name != null) name.PrintMe();
+//		if (parent != null) parent.PrintMe();
 		if (cfields != null) cfields.PrintMe();
 
 		/**********************************/
@@ -66,8 +66,8 @@ public class AST_CLASS_DEC extends AST_Node
 		/****************************************/
 		/* PRINT Edges to AST GRAPHVIZ DOT file */
 		/****************************************/
-		if (name != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,name.SerialNumber);
-		if (parent != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,parent.SerialNumber);
+//		if (name != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,name.SerialNumber);
+//		if (parent != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,parent.SerialNumber);
 		if (cfields != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,cfields.SerialNumber);
 	}
 	

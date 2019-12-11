@@ -1,6 +1,6 @@
 package AST;
 
-public class AST_EXP_NEW_SIMPLE extends AST_Node
+public class AST_EXP_NEW_SIMPLE extends AST_EXP_NEW
 {
 	/************************/
 	/* simple variable name */

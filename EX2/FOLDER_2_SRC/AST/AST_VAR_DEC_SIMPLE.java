@@ -1,6 +1,6 @@
 package AST;
 
-public class AST_VAR_DEC_SIMPLE extends AST_DEC_VAR
+public class AST_VAR_DEC_SIMPLE extends AST_VAR_DEC
 {
 	/************************/
 	/* simple variable decl */

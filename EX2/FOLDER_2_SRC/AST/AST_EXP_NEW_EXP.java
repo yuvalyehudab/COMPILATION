@@ -1,14 +1,14 @@
 package AST;
 
-public class AST_EXP_NEW_EXP extends AST_Node
+public class AST_EXP_NEW_EXP extends AST_EXP_NEW
 {
-	public AST_EXP e;
-	public String fieldName;
-	
+	public String name;
+	public AST_EXP exp;
+
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_NEW_EXP(String name, AST_EXP e)
+	public AST_EXP_NEW_EXP(String name, AST_EXP exp)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
@@ -23,8 +23,8 @@ public class AST_EXP_NEW_EXP extends AST_Node
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.var = var;
-		this.fieldName = fieldName;
+		this.name = name;
+		this.exp = exp;
 	}
 
 	/*************************************************/
@@ -40,7 +40,7 @@ public class AST_EXP_NEW_EXP extends AST_Node
 		/**********************************************/
 		/* RECURSIVELY PRINT VAR, then FIELD NAME ... */
 		/**********************************************/
-		e.PrintMe();
+		exp.PrintMe();
 		System.out.format("ID( %s )\n",name);
 
 		/***************************************/
@@ -53,6 +53,6 @@ public class AST_EXP_NEW_EXP extends AST_Node
 		/****************************************/
 		/* PRINT Edges to AST GRAPHVIZ DOT file */
 		/****************************************/
-		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,e.SerialNumber);
+		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,exp.SerialNumber);
 	}
 }

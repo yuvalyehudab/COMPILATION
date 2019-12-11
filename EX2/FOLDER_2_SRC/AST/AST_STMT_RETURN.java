@@ -1,19 +1,16 @@
 package AST;
 
-public class AST_VAR_DEC_NEWEXP extends AST_VAR_DEC
+public class AST_STMT_RETURN extends AST_STMT
 {
-	/*********************/
-	/*  type name := ne */
-	/*********************/
-	public String type;
-	public String name;
-	public AST_EXP_NEW ne;
+	/******************************/
+	/*       exp                  */
+	/******************************/
+	public AST_EXP exp;
 
 	/*******************/
 	/*  CONSTRUCTOR(S) */
 	/*******************/
-	public AST_VAR_DEC_NEWEXP(String type, String name, AST_EXP_NEW ne)
-	{
+	public AST_STMT_RETURN(AST_EXP exp) {
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
@@ -22,43 +19,40 @@ public class AST_VAR_DEC_NEWEXP extends AST_VAR_DEC
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.format("====================== varDec -> type var ASSIGN ne SEMICOLON\n");
+		System.out.print("====================== stmt -> exp\n");
 
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.type = type;
-		this.name = name;
-		this.ne = ne;
+		this.exp = exp;
 	}
 
 	/*********************************************************/
-	/* The printing message for an assign statement AST node */
+	/* The printing message for a function statement AST node */
 	/*********************************************************/
 	public void PrintMe()
 	{
-		/********************************************/
-		/* AST NODE TYPE = AST ASSIGNMENT STATEMENT */
-		/********************************************/
-		System.out.print("AST NODE decl ASSIGN STMT\n");
+		/**********************************************/
+		/* AST NODE TYPE = AST FUNCTION USE STATEMENT */
+		/**********************************************/
+		System.out.print("AST NODE EXP STMT\n");
 
 		/***********************************/
-		/* RECURSIVELY PRINT EXP ...	   */
+		/* RECURSIVELY PRINT       EXP ... */
 		/***********************************/
-		
-		if (ne != null) ne.PrintMe();
+		if (exp != null) exp.PrintMe();
 
 		/***************************************/
 		/* PRINT Node to AST GRAPHVIZ DOT file */
 		/***************************************/
 		AST_GRAPHVIZ.getInstance().logNode(
 			SerialNumber,
-			"ASSIGN\nleft := right\n");
+			"EXP\n\n");
 		
 		/****************************************/
 		/* PRINT Edges to AST GRAPHVIZ DOT file */
 		/****************************************/
-		
-		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,ne.SerialNumber);
+
+		if (exp != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,exp.SerialNumber);
 	}
 }

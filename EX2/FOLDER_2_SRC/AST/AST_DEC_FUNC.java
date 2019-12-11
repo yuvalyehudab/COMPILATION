@@ -5,7 +5,7 @@ public class AST_DEC_FUNC extends AST_DEC
 	/***************/
 	/*  type id(){} */
 	/***************/
-	public AST_FUNC_DEC varDec;
+	public AST_FUNC_DEC funcDec;
 
 	/*******************/
 	/*  CONSTRUCTOR(S) */
