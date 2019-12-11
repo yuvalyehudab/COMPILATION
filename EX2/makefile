@@ -48,7 +48,7 @@ CUP_FLAGS =                                \
 #########################
 # DEFINITIONS :: PARSER #
 #########################
-INPUT    = ${INPUT_DIR}/Input.txt
+INPUT    = ${INPUT_DIR}/*10*.txt
 OUTPUT   = ${OUTPUT_DIR}/ParseStatus.txt
 
 ##########
@@ -121,22 +121,22 @@ all:
 	@echo "*                           *"
 	@echo "*****************************"
 	java -jar PARSER ${INPUT} ${OUTPUT}
-	@echo "\n"
-	@echo "***************************************"
-	@echo "*                                     *"
-	@echo "*                                     *"
-	@echo "* [7] Create a jpeg AST visualization *"
-	@echo "*                                     *"
-	@echo "*                                     *"
-	@echo "***************************************"
-	dot -Tjpeg -o${OUTPUT_DIR}/AST.jpeg ${OUTPUT_DIR}/AST_IN_GRAPHVIZ_DOT_FORMAT.txt
-	@echo "\n"
-	@echo "************************************************"
-	@echo "*                                              *"
-	@echo "*                                              *"
-	@echo "* [8] Open the jpeg AST visualization with eog *"
-	@echo "*                                              *"
-	@echo "*                                              *"
-	@echo "************************************************"
-	eog ${OUTPUT_DIR}/AST.jpeg &
+# 	@echo "\n"
+# 	@echo "***************************************"
+# 	@echo "*                                     *"
+# 	@echo "*                                     *"
+# 	@echo "* [7] Create a jpeg AST visualization *"
+# 	@echo "*                                     *"
+# 	@echo "*                                     *"
+# 	@echo "***************************************"
+# 	dot -Tjpeg -o${OUTPUT_DIR}/AST.jpeg ${OUTPUT_DIR}/AST_IN_GRAPHVIZ_DOT_FORMAT.txt
+# 	@echo "\n"
+# 	@echo "************************************************"
+# 	@echo "*                                              *"
+# 	@echo "*                                              *"
+# 	@echo "* [8] Open the jpeg AST visualization with eog *"
+# 	@echo "*                                              *"
+# 	@echo "*                                              *"
+# 	@echo "************************************************"
+# 	eog ${OUTPUT_DIR}/AST.jpeg &
 
