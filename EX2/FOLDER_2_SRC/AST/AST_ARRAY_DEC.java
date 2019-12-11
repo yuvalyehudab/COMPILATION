@@ -1,6 +1,6 @@
 package AST;
 
-public class AST_ARRAY_DEC extends AST_NODE
+public class AST_ARRAY_DEC extends AST_Node
 {
 	/************************/
 	/* simple variable name */
@@ -11,7 +11,7 @@ public class AST_ARRAY_DEC extends AST_NODE
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_VAR_SIMPLE(String name,String thing)
+	public AST_ARRAY_DEC(String name,String thing)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
@@ -47,7 +47,6 @@ public class AST_ARRAY_DEC extends AST_NODE
 		/*********************************/
 		AST_GRAPHVIZ.getInstance().logNode(
 			SerialNumber,
-			String.format("ARRAY\nDEC\n(%s)",name));
-			String.format("\n(%s)",thing));
+			String.format("ARRAY\nDEC\n(%s\n%s)",name, thing));
 	}
 }

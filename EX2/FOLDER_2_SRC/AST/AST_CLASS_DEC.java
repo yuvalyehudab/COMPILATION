@@ -12,7 +12,7 @@ public class AST_CLASS_DEC extends AST_Node
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_CFIELD_LIST(String name,String parent,AST_CFIELD_LIST cfields)
+	public AST_CLASS_DEC(String name,String parent,AST_CFIELD_LIST cfields)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */

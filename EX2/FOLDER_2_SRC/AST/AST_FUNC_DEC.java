@@ -13,7 +13,7 @@ public class AST_FUNC_DEC extends AST_Node
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_CFIELD_LIST(String type,String name,AST_ID_LIST ids,AST_STMT_LIST stmts)
+	public AST_FUNC_DEC(String type,String name,AST_ID_LIST ids,AST_STMT_LIST stmts)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */

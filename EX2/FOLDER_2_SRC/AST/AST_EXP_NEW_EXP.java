@@ -1,6 +1,6 @@
 package AST;
 
-public class AST_EXP_NEW_EXP extends AST_NODE
+public class AST_EXP_NEW_EXP extends AST_Node
 {
 	public AST_EXP e;
 	public String fieldName;

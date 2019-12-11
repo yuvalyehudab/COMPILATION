@@ -5,14 +5,14 @@ public class AST_ID_LIST extends AST_Node
 	/****************/
 	/* DATA MEMBERS */
 	/****************/
-	public STRING type;
-	public STRING name;
+	public String type;
+	public String name;
 	public AST_ID_LIST tail;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_ID_LIST(STRING type,STRING name,AST_ID_LIST tail)
+	public AST_ID_LIST(String type, String name,AST_ID_LIST tail)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
@@ -46,8 +46,7 @@ public class AST_ID_LIST extends AST_Node
 		/*************************************/
 		/* RECURSIVELY PRINT HEAD + TAIL ... */
 		/*************************************/
-		if (type != null) type.PrintMe();
-		if (name != null) name.PrintMe();
+		
 		if (tail != null) tail.PrintMe();
 
 		/**********************************/
@@ -60,8 +59,6 @@ public class AST_ID_LIST extends AST_Node
 		/****************************************/
 		/* PRINT Edges to AST GRAPHVIZ DOT file */
 		/****************************************/
-		if (type != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,type.SerialNumber);
-		if (name != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,name.SerialNumber);
 		if (tail != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,tail.SerialNumber);
 	}
 	

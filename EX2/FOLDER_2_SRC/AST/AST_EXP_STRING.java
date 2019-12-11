@@ -10,7 +10,7 @@ public class AST_EXP_STRING extends AST_EXP
     /******************/
     /* CONSTRUCTOR(S) */
     /******************/
-    public AST_STRING(String str)
+    public AST_EXP_STRING(String str)
     {
         /******************************/
         /* SET A UNIQUE SERIAL NUMBER */

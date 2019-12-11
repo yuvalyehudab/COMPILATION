@@ -5,7 +5,7 @@ public class AST_EXP_NIL extends AST_EXP
     /******************/
     /* CONSTRUCTOR(S) */
     /******************/
-    public AST_NIL()
+    public AST_EXP_NIL()
     {
         /******************************/
         /* SET A UNIQUE SERIAL NUMBER */
