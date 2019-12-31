@@ -256,6 +256,7 @@ public class SYMBOL_TABLE
 			/*************************************/
 			/* [2] How should we handle void ??? */
 			/*************************************/
+			/** Nothing, nothing has this type.  */
 
 			/***************************************/
 			/* [3] Enter library functions  */
