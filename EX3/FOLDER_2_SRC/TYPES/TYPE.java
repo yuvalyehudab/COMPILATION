@@ -16,4 +16,11 @@ public abstract class TYPE
 	/* isArray() */
 	/*************/
 	public boolean isArray(){ return false;}
+
+	/***/
+	/* EQUALITY */
+	/***/
+	public boolean equals(TYPE that) {
+		return this.name == that.name;
+	}
 }
