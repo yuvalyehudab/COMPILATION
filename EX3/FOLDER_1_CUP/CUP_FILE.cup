@@ -91,7 +91,7 @@ terminal UMINUS;
 /*****************/
 non terminal AST_DEC		dec;
 non terminal AST_DEC_VAR	varDec;
-non terminal AST_DEC_ARRAY	arrayDec; /**/dfssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+non terminal AST_DEC_ARRAY	arrayDec;
 non terminal AST_DEC_FUNC	funcDec;
 non terminal AST_DEC_CLASS	classDec;
 non terminal AST_DEC_LIST	decList;
