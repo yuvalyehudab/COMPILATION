@@ -49,4 +49,26 @@ public class AST_EXP_CALL extends AST_EXP
 		/****************************************/
 		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,params.SerialNumber);		
 	}
+	/***/
+	/* SEMANTICS */
+	/***/
+	public TYPE SemantMe() {
+		// Find type of this function
+		funcType = SYMBOL_TABLE.getInstance().find(funcName);
+		if (funcType == null) {
+			return null; // TODO: Or crash in some other way?
+		}
+
+		// Compute types of the arguments that were fed
+		TYPE_LIST paramTypes = params.SemantMe();
+
+		// Then check that they have the expected type
+		expectedTypes = funcType.params;
+		if (!expectedTypes.equals(paramTypes)) {
+			return null; // TODO: Or crash in some other way?
+		}
+
+		/* Return expected type */
+		return funcType.returnType;
+	}
 }
