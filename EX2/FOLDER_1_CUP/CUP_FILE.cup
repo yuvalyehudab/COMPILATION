@@ -18,12 +18,12 @@ parser code
 	}
 	public void report_error(String message, Object info)
 	{
-		System.out.print("ERROR >> ");		
+		/*System.out.print("ERROR >> ");		
 		System.out.print("[");
 		System.out.print(lexer.getLine());
 		System.out.print(":");
 		System.out.print(lexer.getCharPos());
-		System.out.print("] ");
+		System.out.print("] ");*/
 		
 		writer.print("ERROR(");
 		writer.print(lexer.getLine());
