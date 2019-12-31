@@ -258,7 +258,7 @@ public class SYMBOL_TABLE
 			/*************************************/
 
 			/***************************************/
-			/* [3] Enter library function PrintInt */
+			/* [3] Enter library functions  */
 			/***************************************/
 			instance.enter(
 				"PrintInt",
@@ -268,6 +268,22 @@ public class SYMBOL_TABLE
 					new TYPE_LIST(
 						TYPE_INT.getInstance(),
 						null)));
+
+			instance.enter(
+					"PrintString",
+					new TYPE_FUNCTION(
+							TYPE_VOID.getInstance(),
+							"PrintString",
+							new TYPE_LIST(
+									TYPE_STRING.getInstance(),
+									null)));
+
+			instance.enter(
+					"PrintTrace",
+					new TYPE_FUNCTION(
+							TYPE_VOID.getInstance(),
+							"PrintTrace",
+							null));
 			
 		}
 		return instance;
