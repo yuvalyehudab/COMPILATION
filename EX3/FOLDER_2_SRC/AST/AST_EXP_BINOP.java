@@ -82,6 +82,7 @@ public class AST_EXP_BINOP extends AST_EXP
 		{
 			return TYPE_INT.getInstance();
 		}
+		// TODO: Handle strings too in case of + (ie op==0)
 		System.exit(0);
 		return null;
 	}
