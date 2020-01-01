@@ -78,6 +78,8 @@ public class AST_DEC_FUNC extends AST_DEC
 		{
 			System.out.format(">> ERROR [%d:%d] non existing return type %s\n",6,6,returnType);				
 		}
+
+		// TODO: Check that the current scope is the global scope
 	
 		/****************************/
 		/* [1] Begin Function Scope */

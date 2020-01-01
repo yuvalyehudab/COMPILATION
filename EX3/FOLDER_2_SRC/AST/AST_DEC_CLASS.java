@@ -61,7 +61,9 @@ public class AST_DEC_CLASS extends AST_DEC
 	}
 	
 	public TYPE SemantMe()
-	{	
+	{
+		// TODO: Check that the current scope is the global scope
+
 		/*************************/
 		/* [1] Begin Class Scope */
 		/*************************/
