@@ -66,8 +66,12 @@ public class AST_STMT_LIST extends AST_Node
 	
 	public TYPE SemantMe()
 	{
+		System.out.format("::semant AST_STMT_LIST::\nenter head\n");
+		System.out.format("\nstmt list line:%d\n", lineNumber);
 		if (head != null) head.SemantMe();
+		System.out.format("leave head\n ++enter tail++\n");
 		if (tail != null) tail.SemantMe();
+		System.out.format("leave ast stmt list semant\n");
 		
 		return null;
 	}

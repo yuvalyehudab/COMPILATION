@@ -55,6 +55,7 @@ public class AST_STMT_IF extends AST_STMT
 
 	public TYPE SemantMe()
 	{
+		System.out.format("\n in ast stmt if in line %d\n", lineNumber);
 		/****************************/
 		/* [0] Semant the Condition */
 		/****************************/

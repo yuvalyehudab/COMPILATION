@@ -63,7 +63,7 @@ public class AST_DEC_CLASS extends AST_DEC
 	public TYPE SemantMe()
 	{
 		// TODO: Check that the current scope is the global scope
-
+		System.out.println("enter semant AST_DEC_CLASS");
 		/*************************/
 		/* [1] Begin Class Scope */
 		/*************************/

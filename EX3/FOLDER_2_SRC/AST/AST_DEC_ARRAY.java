@@ -48,7 +48,7 @@ public class AST_DEC_ARRAY extends AST_DEC
 	public TYPE SemantMe()
 	{
 		TYPE t;
-	
+		System.out.println("enter semant AST_DEC_ARRAY");
 		/****************************/
 		/* [1] Check If Type exists */
 		/****************************/

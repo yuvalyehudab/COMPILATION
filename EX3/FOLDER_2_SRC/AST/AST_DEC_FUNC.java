@@ -69,10 +69,14 @@ public class AST_DEC_FUNC extends AST_DEC
 		TYPE t;
 		TYPE returnType = null;
 		TYPE_LIST type_list = null;
+		
+		System.out.println("enter semant AST_DEC_FUNC");
 
 		/*******************/
 		/* [0] return type */
 		/*******************/
+		System.out.println(name);
+		System.out.format("line: %d\nretType:%s\n", lineNumber, returnTypeName);
 		returnType = SYMBOL_TABLE.getInstance().find(returnTypeName);
 		if (returnType == null)
 		{
@@ -91,6 +95,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		/***************************/
 		for (AST_TYPE_NAME_LIST it = params; it  != null; it = it.tail)
 		{
+			System.out.format("::enter for loop::\n");
 			t = SYMBOL_TABLE.getInstance().find(it.head.type);
 			if (t == null)
 			{
@@ -101,12 +106,15 @@ public class AST_DEC_FUNC extends AST_DEC
 				type_list = new TYPE_LIST(t,type_list);
 				SYMBOL_TABLE.getInstance().enter(it.head.name,t);
 			}
+			System.out.format("::end loop::\n");
 		}
 
 		/*******************/
 		/* [3] Semant Body */
 		/*******************/
+		System.out.format("enter body semant:\n");
 		body.SemantMe();
+		System.out.format("leave body semant:\n");
 
 		/*****************/
 		/* [4] End Scope */
@@ -121,6 +129,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		/*********************************************************/
 		/* [6] Return value is irrelevant for class declarations */
 		/*********************************************************/
+		System.out.println("out of ast_dec_fumc semant " + name);
 		return null;		
 	}
 	

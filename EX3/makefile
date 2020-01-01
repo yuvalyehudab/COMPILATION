@@ -51,7 +51,7 @@ CUP_FLAGS =                                \
 #########################
 # DEFINITIONS :: PARSER #
 #########################
-INPUT    = ${INPUT_DIR}/Input.txt
+INPUT    = ${INPUT_DIR}/*01*
 OUTPUT   = ${OUTPUT_DIR}/SemanticStatus.txt
 
 ##########
@@ -182,7 +182,7 @@ everything:
 	@echo "*                           *"
 	@echo "*                           *"
 	@echo "*****************************"
-	java -jar COMPILER ${INPUT} ${OUTPUT} > /dev/null
+	java -jar COMPILER ${INPUT} ${OUTPUT}
 	@echo "\n"
 	@echo "***************************************"
 	@echo "*                                     *"
@@ -200,7 +200,7 @@ everything:
 	@echo "*                                              *"
 	@echo "*                                              *"
 	@echo "************************************************"
-	eog ${OUTPUT_DIR}/AST.jpeg &
+	#eog ${OUTPUT_DIR}/AST.jpeg &
 	@echo "*********************************************************"
 	@echo "*                                                       *"
 	@echo "*                                                       *"
@@ -246,5 +246,5 @@ everything:
 	@echo "*                                                                *"
 	@echo "*                                                                *"
 	@echo "******************************************************************"
-	eog ${OUTPUT_DIR}/SYMBOL_TABLE_0.jpeg &
+	#eog ${OUTPUT_DIR}/SYMBOL_TABLE_0.jpeg &
 	

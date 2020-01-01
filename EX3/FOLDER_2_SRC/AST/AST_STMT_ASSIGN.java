@@ -66,7 +66,7 @@ public class AST_STMT_ASSIGN extends AST_STMT
 	{
 		TYPE t1 = null;
 		TYPE t2 = null;
-		
+		System.out.format("\n\nenter AST_STMT\nassign var := exp\nline:%d\n", lineNumber);
 		if (var != null) t1 = var.SemantMe();
 		if (exp != null) t2 = exp.SemantMe();
 		

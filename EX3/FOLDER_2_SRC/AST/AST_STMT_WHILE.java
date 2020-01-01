@@ -66,6 +66,7 @@ public class AST_STMT_WHILE extends AST_STMT
 		/* [1] Begin Class Scope */
 		/*************************/
 		SYMBOL_TABLE.getInstance().beginScope();
+		System.out.format("\n ast stmt while, line %d\n", lineNumber);
 
 		/***************************/
 		/* [2] Semant Data Members */

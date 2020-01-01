@@ -87,7 +87,7 @@ public class SYMBOL_TABLE
 	{
 		SYMBOL_TABLE_ENTRY e;
 				
-		for (e = table[hash(name)]; e != null; e = e.next)
+		for (e = table[hash(name)]; e != null; e = e.prevtop)
 		{
 			if (name.equals(e.name))
 			{
@@ -257,6 +257,8 @@ public class SYMBOL_TABLE
 			/* [2] How should we handle void ??? */
 			/*************************************/
 			/** Nothing, nothing has this type.  */
+			/*are u sure?*/
+			instance.enter("void",TYPE_VOID.getInstance());
 
 			/***************************************/
 			/* [3] Enter library functions  */
