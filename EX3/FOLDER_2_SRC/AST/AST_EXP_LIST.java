@@ -1,5 +1,7 @@
 package AST;
 
+import TYPES.*;
+
 public class AST_EXP_LIST extends AST_Node
 {
 	/****************/
@@ -30,7 +32,7 @@ public class AST_EXP_LIST extends AST_Node
 		/********************************/
 		/* AST NODE TYPE = AST EXP LIST */
 		/********************************/
-		/*System.out.print("AST NODE EXP LIST\n");*/
+		System.out.print("AST NODE EXP LIST\n");
 
 		/*************************************/
 		/* RECURSIVELY PRINT HEAD + TAIL ... */
@@ -55,6 +57,6 @@ public class AST_EXP_LIST extends AST_Node
 	/* SEMANTICS */
 	/***/
 	public TYPE_LIST SemantMe() {
-		return TYPE_LIST(head.SemantMe(),tail.SemantMe())
+		return new TYPE_LIST(head.SemantMe(),tail.SemantMe());
 	}
 }

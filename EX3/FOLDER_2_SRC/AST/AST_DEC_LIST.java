@@ -25,15 +25,21 @@ public class AST_DEC_LIST extends AST_Node
 		this.tail = tail;
 	}
 
-	public TYPE SemantMe()
+	public TYPE_LIST SemantMe()
 	{		
 		/*************************************/
 		/* RECURSIVELY PRINT HEAD + TAIL ... */
 		/*************************************/
-		if (head != null) head.SemantMe();
-		if (tail != null) tail.SemantMe();
-		
-		return null;	
+		if (tail == null)
+		{
+			return new TYPE_LIST(
+				head.SemantMe(),
+				null);
+		}
+		return new TYPE_LIST(
+			head.SemantMe(),
+			tail.SemantMe());
+
 	}
 
 	/********************************************************/

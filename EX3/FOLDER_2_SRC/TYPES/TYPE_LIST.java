@@ -33,6 +33,6 @@ public class TYPE_LIST
 			return false;
 		}
 		// Check tail non-null case
-		this.tail.equals(that.tail);
+		return this.tail.equals(that.tail);
 	}
 }
