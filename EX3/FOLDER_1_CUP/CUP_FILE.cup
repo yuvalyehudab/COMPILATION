@@ -2,28 +2,30 @@
 /* IMPORT(S) */
 /*************/
 import java_cup.runtime.*;
-import java.io.PrintWriter
+import java.io.PrintWriter;
 import AST.*;
 
 parser code 
 {:
 	public Lexer lexer;
-	private PrintWriter file_writer
+	private PrintWriter file_writer;
 
 	public Parser(Lexer lexer, PrintWriter file_writer)
 	{
 		super(lexer);
 		this.lexer = lexer;
-		this.file_writer = file_writer
+		this.file_writer = file_writer;
+		AST_Node_Serial_Number.setWriter(file_writer);
 	}
 	public void report_error(String message, Object info)
 	{
-		/*System.out.print("ERROR >> ");		
+		System.out.print("ERROR >> ");		
 		System.out.print("[");
 		System.out.print(lexer.getLine());
 		System.out.print(":");
 		System.out.print(lexer.getCharPos());
-		System.out.print("] ");*/
+		System.out.print("] ");
+		
 		file_writer.format("ERROR(%d)", lexer.getLine());
 		file_writer.close();
 		System.exit(0);
@@ -37,14 +39,15 @@ scan with
 {:
 	Symbol s;
 	s = lexer.next_token();
-	/*System.out.print(s.sym);
+	System.out.print(s.sym);
 	if (s.value != null)
 	{
 		System.out.print("(");
 		System.out.print(s.value);
 		System.out.print(")");
 	}
-	System.out.print("\n");*/
+	System.out.print("\n");
+	AST_Node_Serial_Number.setLine(lexer.getLine());
 	return s; 
 :};
 
@@ -90,11 +93,13 @@ terminal UMINUS;
 /* NON TERMINALS */
 /*****************/
 non terminal AST_DEC		dec;
+non terminal AST_DEC		cField;
 non terminal AST_DEC_VAR	varDec;
 non terminal AST_DEC_ARRAY	arrayDec;
 non terminal AST_DEC_FUNC	funcDec;
 non terminal AST_DEC_CLASS	classDec;
 non terminal AST_DEC_LIST	decList;
+non terminal AST_DEC_LIST	cFieldList;
 
 /*****************/
 /* NON TERMINALS */
@@ -176,7 +181,7 @@ stmt		::=		varDec:v                                                    {: RESULT
 					| WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_WHILE(cond,body);	:};
 
 exp			::=		INT:i			{: RESULT = new AST_EXP_INT(i);		:}
-					| MINUS INT:i		{: RESULT = new AST_EXP_INT(-i);	:}
+					| MINUS INT:i	{: RESULT = new AST_EXP_INT(-i);	:}
 					| NIL			{: RESULT = new AST_EXP_NIL(); 		:}
 					| STRING:s		{: RESULT = new AST_EXP_STRING(s);	:}
 					| varExp:v		{: RESULT = v; :}
@@ -199,10 +204,10 @@ binopExp	::=		exp:e1 PLUS exp:e2		{: RESULT = new AST_EXP_BINOP(e1,e2,0); :}
 callExp		::=		ID:funcName LPAREN expListComma:el	RPAREN	{: RESULT = new AST_EXP_CALL(null,	funcName,el);	:}
 					| ID:funcName LPAREN				RPAREN	{: RESULT = new AST_EXP_CALL(null,	funcName,null);:}
 					| varExp:v DOT ID:funcName LPAREN	RPAREN	{: RESULT = new AST_EXP_CALL(v,		funcName,null);:}
-					| varExp:v DOT ID:funcName LPAREN expListComma:el	RPAREN	{: RESULT = new AST_EXP_CALL(v,	funcName,null);:};
+					| varExp:v DOT ID:funcName LPAREN expListComma:el	RPAREN	{: RESULT = new AST_EXP_CALL(v,	funcName,el);:};
 					
-newExp		::=			NEW ID:name	LBRACK exp:e	RBRACK	{:	RETURN AST_EXP_NEW(name, e)		:}
-					|	NEW ID:name	LBRACK 			RBRACK	{:	RETURN AST_EXP_NEW(name, null)	:};
+newExp		::=			NEW ID:name	LBRACK exp:e	RBRACK	{:	RESULT = new AST_EXP_NEW(name, e);	:}
+					|	NEW ID:name	LBRACK 			RBRACK	{:	RESULT = new AST_EXP_NEW(name, null);	:};
 					
 expListComma	::=		exp:e COMMA expListComma:el	{: RESULT = new AST_EXP_LIST(e,el);   :}
 						| exp:e						{: RESULT = new AST_EXP_LIST(e,null); :};
@@ -213,8 +218,8 @@ typeNameListComma		::=		typeName:tn COMMA typeNameListComma:tnl			{: RESULT = ne
 
 cField      ::=         varDec:d    {: RESULT = d;	:}
                     |   funcDec:d   {: RESULT = d;	:};
-cFieldList  ::=         cField:f cFieldList:l   {: RESULT = new AST_CFIELD_LIST(f,l);   :}
-                    |   cField:f                {: RESULT = new AST_CFIELD_LIST(f,null);:};
+cFieldList  ::=         cField:f cFieldList:l   {: RESULT = new AST_DEC_LIST(f,l);   :}
+                    |   cField:f                {: RESULT = new AST_DEC_LIST(f,null);:};
 /*typeNameListSemicolon	::=		typeName:tn SEMICOLON typeNameListSemicolon:tnl	{: RESULT = new AST_TYPE_NAME_LIST(tn,tnl);  :}
 								| typeName:tn SEMICOLON                         {: RESULT = new AST_TYPE_NAME_LIST(tn,null); :};*/
 

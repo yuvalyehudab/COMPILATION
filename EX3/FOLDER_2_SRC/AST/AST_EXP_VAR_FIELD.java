@@ -17,8 +17,9 @@ public class AST_EXP_VAR_FIELD extends AST_EXP_VAR
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
+		lineNumber = AST_Node_Serial_Number.getLine();
 
-		System.out.format("====================== var -> var DOT ID( %s )\n",fieldName);
+		/*System.out.format("====================== var -> var DOT ID( %s )\n",fieldName);*/
 		this.var = var;
 		this.fieldName = fieldName;
 	}
@@ -31,7 +32,7 @@ public class AST_EXP_VAR_FIELD extends AST_EXP_VAR
 		/*********************************/
 		/* AST NODE TYPE = AST FIELD VAR */
 		/*********************************/
-		System.out.format("FIELD\nNAME\n(___.%s)\n",fieldName);
+		/*System.out.format("FIELD\nNAME\n(___.%s)\n",fieldName);*/
 
 		/**********************************************/
 		/* RECURSIVELY PRINT VAR, then FIELD NAME ... */

@@ -15,8 +15,9 @@ public class AST_EXP_STRING extends AST_EXP
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
+		lineNumber = AST_Node_Serial_Number.getLine();
 
-		System.out.format("====================== exp -> STRING( %s )\n", value);
+		/*System.out.format("====================== exp -> STRING( %s )\n", value);*/
 		this.value = value;
 	}
 
@@ -28,7 +29,7 @@ public class AST_EXP_STRING extends AST_EXP
 		/*******************************/
 		/* AST NODE TYPE = AST STRING EXP */
 		/*******************************/
-		System.out.format("AST NODE STRING( %s )\n",value);
+		/*System.out.format("AST NODE STRING( %s )\n",value);*/
 
 		/***************************************/
 		/* PRINT Node to AST GRAPHVIZ DOT file */

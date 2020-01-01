@@ -17,6 +17,7 @@ public class AST_STMT_IF extends AST_STMT
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
+		lineNumber = AST_Node_Serial_Number.getLine();
 
 		this.cond = cond;
 		this.body = body;

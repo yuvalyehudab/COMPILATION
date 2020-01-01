@@ -26,7 +26,8 @@ public class AST_TYPE_NAME extends AST_Node
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-	
+		lineNumber = AST_Node_Serial_Number.getLine();
+
 		this.type = type;
 		this.name = name;
 	}

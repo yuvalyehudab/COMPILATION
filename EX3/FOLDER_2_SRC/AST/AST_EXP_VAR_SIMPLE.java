@@ -19,8 +19,9 @@ public class AST_EXP_VAR_SIMPLE extends AST_EXP_VAR
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
+		lineNumber = AST_Node_Serial_Number.getLine();
 
-		System.out.format("====================== var -> ID( %s )\n",name);
+		/*System.out.format("====================== var -> ID( %s )\n",name);*/
 		this.name = name;
 	}
 

@@ -1,5 +1,7 @@
 package AST;
 
+import java.io.PrintWriter;
+
 public class AST_Node_Serial_Number
 {
 	/*******************************************/
@@ -8,6 +10,8 @@ public class AST_Node_Serial_Number
 	/* a graphviz dot format of the AST ...    */
 	/*******************************************/
 	public int SerialNumber;
+	private static int line;
+	private static PrintWriter writer;
 	
 	/**************************************/
 	/* USUAL SINGLETON IMPLEMENTATION ... */
@@ -47,5 +51,26 @@ public class AST_Node_Serial_Number
 	public static int getFresh()
 	{
 		return AST_Node_Serial_Number.getInstance().get();
+	}
+	
+	/**/
+	public static void setLine(int line)
+	{
+		AST_Node_Serial_Number.line = line;
+	}
+	public static void setWriter(PrintWriter writer)
+	{
+		AST_Node_Serial_Number.writer = writer;
+	}
+	
+	public static int getLine()
+	{
+		return AST_Node_Serial_Number.line;
+	}
+	public static void exit_on_error(int line)
+	{
+		writer.format("ERROR(%d)", line);
+		writer.close();
+		System.exit(0);
 	}
 }

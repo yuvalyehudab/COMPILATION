@@ -20,6 +20,7 @@ public class AST_DEC_ARRAY extends AST_DEC
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
+		lineNumber = AST_Node_Serial_Number.getLine();
 
 		this.type = type;
 		this.name = name;

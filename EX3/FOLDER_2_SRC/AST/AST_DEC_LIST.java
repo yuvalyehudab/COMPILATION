@@ -19,6 +19,7 @@ public class AST_DEC_LIST extends AST_Node
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
+		lineNumber = AST_Node_Serial_Number.getLine();
 
 		this.head = head;
 		this.tail = tail;
@@ -43,7 +44,7 @@ public class AST_DEC_LIST extends AST_Node
 		/********************************/
 		/* AST NODE TYPE = AST DEC LIST */
 		/********************************/
-		System.out.print("AST NODE DEC LIST\n");
+		/*System.out.print("AST NODE DEC LIST\n");*/
 
 		/*************************************/
 		/* RECURSIVELY PRINT HEAD + TAIL ... */

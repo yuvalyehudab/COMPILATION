@@ -26,6 +26,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
+		lineNumber = AST_Node_Serial_Number.getLine();
 
 		this.returnTypeName = returnTypeName;
 		this.name = name;
@@ -41,7 +42,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		/*************************************************/
 		/* AST NODE TYPE = AST NODE FUNCTION DECLARATION */
 		/*************************************************/
-		System.out.format("FUNC(%s):%s\n",name,returnTypeName);
+		/*System.out.format("FUNC(%s):%s\n",name,returnTypeName);*/
 
 		/***************************************/
 		/* RECURSIVELY PRINT params + body ... */

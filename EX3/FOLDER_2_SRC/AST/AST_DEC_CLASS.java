@@ -9,24 +9,31 @@ public class AST_DEC_CLASS extends AST_DEC
 	/* NAME */
 	/********/
 	public String name;
-
+	
+	/**********/
+	/* FATHER */
+	/**********/
+	public String father;
+	
 	/****************/
 	/* DATA MEMBERS */
 	/****************/
-	public AST_TYPE_NAME_LIST data_members;
+	public AST_DEC_LIST data_members;
 	
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_DEC_CLASS(String name,AST_TYPE_NAME_LIST data_members)
+	public AST_DEC_CLASS(String name, AST_DEC_LIST data_members, String father)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
+		lineNumber = AST_Node_Serial_Number.getLine();
 	
 		this.name = name;
 		this.data_members = data_members;
+		this.father = father;
 	}
 
 	/*********************************************************/
@@ -37,7 +44,7 @@ public class AST_DEC_CLASS extends AST_DEC
 		/*************************************/
 		/* RECURSIVELY PRINT HEAD + TAIL ... */
 		/*************************************/
-		System.out.format("CLASS DEC = %s\n",name);
+		/*System.out.format("CLASS DEC = %s\n",name);*/
 		if (data_members != null) data_members.PrintMe();
 		
 		/***************************************/

@@ -7,17 +7,20 @@ public class AST_EXP_CALL extends AST_EXP
 	/****************/
 	public String funcName;
 	public AST_EXP_LIST params;
+	public AST_EXP_VAR var;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_CALL(String funcName,AST_EXP_LIST params)
+	public AST_EXP_CALL(AST_EXP_VAR var, String funcName,AST_EXP_LIST params)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
+		lineNumber = AST_Node_Serial_Number.getLine();
 
+		this.var = var;
 		this.funcName = funcName;
 		this.params = params;
 	}
@@ -30,7 +33,7 @@ public class AST_EXP_CALL extends AST_EXP
 		/*************************************************/
 		/* AST NODE TYPE = AST NODE FUNCTION DECLARATION */
 		/*************************************************/
-		System.out.format("CALL(%s)\nWITH:\n",funcName);
+		/*System.out.format("CALL(%s)\nWITH:\n",funcName);*/
 
 		/***************************************/
 		/* RECURSIVELY PRINT params + body ... */

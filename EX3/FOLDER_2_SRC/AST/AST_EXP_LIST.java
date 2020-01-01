@@ -17,6 +17,7 @@ public class AST_EXP_LIST extends AST_Node
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
+		lineNumber = AST_Node_Serial_Number.getLine();
 
 		this.head = head;
 		this.tail = tail;
@@ -29,7 +30,7 @@ public class AST_EXP_LIST extends AST_Node
 		/********************************/
 		/* AST NODE TYPE = AST EXP LIST */
 		/********************************/
-		System.out.print("AST NODE EXP LIST\n");
+		/*System.out.print("AST NODE EXP LIST\n");*/
 
 		/*************************************/
 		/* RECURSIVELY PRINT HEAD + TAIL ... */

@@ -16,6 +16,7 @@ public class AST_STMT_RETURN extends AST_STMT
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
+		lineNumber = AST_Node_Serial_Number.getLine();
 
 		this.exp = exp;
 	}

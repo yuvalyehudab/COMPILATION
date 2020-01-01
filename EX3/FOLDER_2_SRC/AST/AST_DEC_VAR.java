@@ -21,6 +21,7 @@ public class AST_DEC_VAR extends AST_DEC
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
+		lineNumber = AST_Node_Serial_Number.getLine();
 
 		this.type = type;
 		this.name = name;
@@ -35,8 +36,8 @@ public class AST_DEC_VAR extends AST_DEC
 		/********************************/
 		/* AST NODE TYPE = AST DEC LIST */
 		/********************************/
-		if (initialValue != null) System.out.format("VAR-DEC(%s):%s := initialValue\n",name,type);
-		if (initialValue == null) System.out.format("VAR-DEC(%s):%s                \n",name,type);
+		/*if (initialValue != null) System.out.format("VAR-DEC(%s):%s := initialValue\n",name,type);
+		if (initialValue == null) System.out.format("VAR-DEC(%s):%s                \n",name,type);*/
 
 		/**************************************/
 		/* RECURSIVELY PRINT initialValue ... */
