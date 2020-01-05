@@ -82,12 +82,32 @@ public class AST_EXP_BINOP extends AST_EXP
 		
 		if (left  != null) t1 = left.SemantMe();
 		if (right != null) t2 = right.SemantMe();
-		
-		if ((t1 == TYPE_INT.getInstance()) && (t2 == TYPE_INT.getInstance()))
-		{
-			return TYPE_INT.getInstance();
+
+		// TODO: What if one of them is null?
+		// 		 Behavior depends on what failing means...
+
+		boolean areEqual  =  t1.equals(t2);
+		boolean areInt    = (t1 ==    TYPE_INT.getInstance());
+		boolean areString = (t1 == TYPE_String.getInstance());
+
+		if (OP == 3 && areEqual) { // =
+			return TYPE_INT;
 		}
-		// TODO: Handle strings too in case of + (ie op==0)
+
+		if ((OP == 2 || OP == 6) && areInt) { // ><
+			return TYPE_INT;
+		}
+
+		if ((OP == 1 || OP == 4 || OP == 5) && areInt) { // *-/
+			return TYPE_INT;
+		}
+
+		if (OP == 0) { // +
+			if (areInt)		{ return TYPE_INT; 		}
+			if (areString) 	{ return TYPE_STRING; 	}
+		}
+
+		// TODO: Failing should return null or throw exception?
 		System.exit(0);
 		return null;
 	}
