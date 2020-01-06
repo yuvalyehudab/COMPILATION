@@ -1,0 +1,180 @@
+//classDec
+//class id {cField}
+//class id {varDec}
+
+class id
+{
+	//vardec
+
+	// id id
+	int x;
+	int y;
+	int s := 1;
+	string st;
+
+	//id := exp
+	int xx := 1;
+	int yy := 2;
+	string str := "hi hello bye";
+
+	//id := exp
+
+	int z := 1;
+	int w := 2 + z + x;
+	int a := w + w * w - 1;
+
+	//id := var
+	int zz := x;
+	string strstr = str;
+
+	//id := (exp)
+	int br := (2 + 2);
+	int aa := (2);
+	int k := (a - aa);
+	int i := (k / a + z - w * xx);
+	int n := (i > k + k < aa);
+	int g := (2/2);
+
+	//id := exp binop exp
+	string concat := strstr + strstr;
+	int bibi : k + i + n + g;
+	int b := (8 / 2) > (g - (k * n));
+
+	//id := nil
+	int benny := nil;
+	int blueWhite := benny;
+
+	string opinion := nil;
+	string sorry := opinion + "Just being silly";
+}
+
+class ud
+{
+	//vardec
+
+	// id id
+	int x;
+	int y;
+	int s := 1;
+	string st;
+
+	//id := exp
+	int xx := 1;
+	int yy := 2;
+	string str := "hi hello bye";
+
+	//id := exp
+
+	int z := 1;
+	int w := 2 + z + x;
+	int a := w + w * w - 1;
+
+	//id := var
+	int zz := x;
+	string strstr = str;
+
+	//id := (exp)
+	int br := (2 + 2);
+	int aa := (2);
+	int k := (a - aa);
+	int i := (k / a + z - w * xx);
+	int n := (i > k + k < aa);
+	int g := (2/2);
+
+	//id := exp binop exp
+	string concat := strstr + strstr;
+	int bibi : k + i + n + g;
+	int b := (8 / 2) > (g - (k * n));
+
+	//id := nil
+	int benny := nil;
+	int blueWhite := benny;
+
+	string opinion := nil;
+	string sorry := opinion + "Just being silly";
+}
+
+//class id {funcDec}
+class foo
+{
+	//funcDec
+	//id id (){stmt}
+	//id id (){varDec}
+	int func ()
+	{
+		//vardec
+
+		// id id
+		int x;
+		int y;
+		int s := 1;
+		string st;
+
+		//id := exp
+		int xx := 1;
+		int yy := 2;
+		string str := "hi hello bye";
+
+		//id := exp
+
+		int z := 1;
+		int w := 2 + z + x;
+		int a := w + w * w - 1;
+
+		//id := var
+		int zz := x;
+		string strstr = str;
+
+		//id := (exp)
+		int br := (2 + 2);
+		int aa := (2);
+		int k := (a - aa);
+		int i := (k / a + z - w * xx);
+		int n := (i > k + k < aa);
+		int g := (2/2);
+
+		//id := exp binop exp
+		string concat := strstr + strstr;
+		int bibi : k + i + n + g;
+		int b := (8 / 2) > (g - (k * n));
+
+		//id := nil
+		int benny := nil;
+		int blueWhite := benny;
+
+		string opinion := nil;
+		string sorry := opinion + "Just being silly";
+		return bibi;
+	}
+	int elecion(int round)
+	{
+		int a := func();
+		return a;
+	}
+
+	//id id (){stmt}
+	//id id (){var = exp; var = newExp; if, while, func(), return; }
+	int b := 5 - 1;
+	int i := b * b;
+
+	string party := nil;
+
+	string foo ()
+	{
+		b := -100;
+		i := -1;
+		int king := b*i*b*i;
+		party := "fullmoon";
+		int dance;
+		dance := new int;
+		int stop := new int[dance + (b - (i + ((b*b)/(i/i)))];
+		
+		return "party";
+		
+	}
+}
+
+class bar extends foo
+{
+	int newVar := 42;
+}

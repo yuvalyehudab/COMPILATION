@@ -1,0 +1,9 @@
+//arrayDec
+// array id = id[]
+array intarray = int[];
+array stringArray = string[];
+
+array aArray = int [];
+array bArray = int [];
+
+array sarray = string[];
