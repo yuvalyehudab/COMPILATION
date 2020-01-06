@@ -1,0 +1,30 @@
+//var.id, var[exp]
+int x;
+int foo(int spam, int eggs)
+{
+	if (x > 0)
+	{
+		while (x > 0)
+		{
+			x = x - 1;
+		}
+	}
+	return (spam + eggs);
+}
+
+class T
+{
+	int y := 1;
+	int y_not := 0;
+	
+	int get_y(int num)
+	{
+		return y + num;
+	}
+}
+T t;
+int bar(T inner_t)
+{
+	int hi := inner_t.y_not;
+	return inner_t.get_y(hi);
+}
