@@ -6,6 +6,10 @@ public class SYM_TABLE {
     private TYPE_CLASS extending = null; // If currently defining a class that extends, this should point to father
     private SYM_TABLE_SCOPE_LIST scopes = SYM_TABLE_SCOPE_LIST(null, null); // never null
 
+    public TYPE_LIST getConstructedTypeList () {
+        return scopes.head.types;
+    }
+
     public SCOPE_KIND getKind () {
         if (scopes.head == null) {
             return GLOBAL;
@@ -18,28 +22,25 @@ public class SYM_TABLE {
     }
 
     public TYPE find(String name) {
-        if (current != null) {
+        if (scopes.head != null) {
             // Look here in the current scope
-            TYPE here = current.find(name);
+            TYPE here = scopes.head.find(name);
             if (here != null) {
                 // Found here in the current scope
                 return here;
             }
         }
-        if (previous != null) {
+        if (scopes.tail != null) {
             // Look recursively in previous scopes
-            return previous.find(name);
+            return scopes.tail.find(name);
         }
         // Look in the defaults, if not there then nowhere
         return defaults.find(name);
     }
 
     public void enter(TYPE t) {
-        if (previous != null && t.isGlobal()) {
+        if (scopes.tail != null && t.isGlobal()) {
             // COMPILER BUG
-        }
-        if (current.find(name) != null) {
-            // TODO: Code bug -- name already declared in current scope
         }
         // Check that there is no shadowing different types
         if (extending != null) {
@@ -52,8 +53,6 @@ public class SYM_TABLE {
                 }
                 // Override case, no need to enter this symbol again
             }
-            // Is not already defined, business as usual
-            current.add(t);
         }
         current.add(t);
     }
@@ -71,6 +70,7 @@ public class SYM_TABLE {
         }
         current = previous.head;
         previous = previous.tail;
+        extending = null;
     }
     
     public SYM_TABLE ()

@@ -5,7 +5,6 @@ public class TYPE_CLASS extends TYPE
 	/*********************************************************************/
 	/* If this class does not extend a father class this should be null  */
 	/*********************************************************************/
-	public String fatherName;
 	public TYPE_CLASS fatherClass;
 
 	/**************************************************/
@@ -18,23 +17,21 @@ public class TYPE_CLASS extends TYPE
 	/****************/
 	/* CTROR(S) ... */
 	/****************/
-	public TYPE_CLASS(String fatherName,String name,TYPE_LIST data_members)
+	public TYPE_CLASS(String name,TYPE_LIST data_members, TYPE_CLASS father)
 	{
 		this.kind = CLASS;
-		TYPE fatherClass = SYM_TABLE.getInstance().find(fatherName);
-		if (fatherClass == null || fatherClass.kind != CLASS) {
-
-		}
+		this.name = name;
 		this.fatherClass = fatherClass;
 		this.data_members = data_members;
 	}
 
-	public void SemantMe () {
-		// Initialize pointer to symbol table
-		SYM_TABLE sym_table = SYM_TABLE.getInstance();
-
-		// TODO: Check that scope is global
-
-		// TODO: Rest
+	public TYPE find (String name) {
+		TYPE here = this.data_members.find(name);
+		if (here != null) {
+			return here;
+		}
+		if (this.fatherClass != null) {
+			return this.fatherClass.find(name);
+		}
 	}
 }

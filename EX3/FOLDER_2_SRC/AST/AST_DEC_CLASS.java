@@ -65,7 +65,12 @@ public class AST_DEC_CLASS extends AST_DEC
 		// Point at the table
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
-		// TODO: Check that the current scope is the global scope
+		// Check that name does not already exist in scope
+		if (sym_table.find(name) != null) {
+			// TODO: Code bug -- name not available
+		}
+
+		// Check that the current scope is the global scope
 		if (!sym_table.isGlobal()) {
 			// TODO: Code bug -- declaring class in non-global scope
 		}
@@ -77,38 +82,36 @@ public class AST_DEC_CLASS extends AST_DEC
 			if (fatherClass == null) {
 				// TODO: Code bug -- class to be extended does not exist
 			}
-			if (fatherClass.kind != CLASS) {
+			if (fatherClass.getKind() != CLASS) {
 				// TODO: Code bug -- extending a non-class
 			}
 		}
-		// At this point fatherClass is a class or nothing
+		// At this point fatherClass is a class or null
 
 		System.out.println("enter semant AST_DEC_CLASS");
 		/*************************/
 		/* [1] Begin Class Scope */
 		/*************************/
-		// Initialize with father members if needed
-		TYPE_SCOPE initialScope;
-		if (fatherClass != null) {
-			initialScope = fatherClass.data_members;
-		}
-		SYM_TABLE.getInstance().beginScope(initialScope);
+		SYM_TABLE.getInstance().open(null, fatherClass);
 
 		/***************************/
 		/* [2] Semant Data Members */
 		/***************************/
 		// Semant the data members
-		TYPE_CLASS t = new TYPE_CLASS(null,name,data_members.SemantMe());
+		data_members.SemantMe();
+
+		// Construct the class
+		TYPE_CLASS result = new TYPE_CLASS(name, sym_table.getConstructedTypeList(), fatherClass);
 
 		/*****************/
 		/* [3] End Scope */
 		/*****************/
-		SYMBOL_TABLE.getInstance().endScope();
+		SYM_TABLE.getInstance().close();
 
 		/************************************************/
 		/* [4] Enter the Class Type to the Symbol Table */
 		/************************************************/
-		SYMBOL_TABLE.getInstance().enter(name,t);
+		SYMBOL_TABLE.getInstance().enter(result);
 
 		/*********************************************************/
 		/* [5] Return value is irrelevant for class declarations */

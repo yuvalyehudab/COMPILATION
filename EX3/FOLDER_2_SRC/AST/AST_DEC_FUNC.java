@@ -94,7 +94,15 @@ public class AST_DEC_FUNC extends AST_DEC
 		// Initialize pointer to symbol table
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
-		// TODO: Check that scope is global
+		// Check that name does not already exist in scope
+		if (sym_table.find(name) != null) {
+			// TODO: Code bug -- name not available
+		}
+
+		// Check that the current scope is the global scope
+		if (!sym_table.isGlobal()) {
+			// TODO: Code bug -- declaring class in non-global scope
+		}
 
 		// Check return type
 		TYPE returnType = sym_table.find(returnTypeName);
