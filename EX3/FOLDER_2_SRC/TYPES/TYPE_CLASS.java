@@ -5,7 +5,8 @@ public class TYPE_CLASS extends TYPE
 	/*********************************************************************/
 	/* If this class does not extend a father class this should be null  */
 	/*********************************************************************/
-	public TYPE_CLASS father;
+	public String fatherName;
+	public TYPE_CLASS fatherClass;
 
 	/**************************************************/
 	/* Gather up all data members in one place        */
@@ -17,10 +18,14 @@ public class TYPE_CLASS extends TYPE
 	/****************/
 	/* CTROR(S) ... */
 	/****************/
-	public TYPE_CLASS(TYPE_CLASS father,String name,TYPE_LIST data_members)
+	public TYPE_CLASS(String fatherName,String name,TYPE_LIST data_members)
 	{
-		this.name = name;
-		this.father = father;
+		this.kind = CLASS;
+		TYPE fatherClass = SYM_TABLE.getInstance().find(fatherName);
+		if (fatherClass == null || fatherClass.kind != CLASS) {
+
+		}
+		this.fatherClass = fatherClass;
 		this.data_members = data_members;
 	}
 }

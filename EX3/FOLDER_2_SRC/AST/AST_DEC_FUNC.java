@@ -64,11 +64,61 @@ public class AST_DEC_FUNC extends AST_DEC
 		if (body   != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,body.SerialNumber);		
 	}
 
+	// Returns a type list from the parameters
+	private TYPE_LIST params_processor() {
+		// Initialize pointer to symbol table
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+
+		// Initialize gathering list
+		TYPE_LIST type_list;
+
+		// Process parameter list
+		for (AST_TYPE_NAME_LIST it = params; it  != null; it = it.tail)
+		{
+			// Lookup the name given to the currently processed parameter
+			t = sym_table.find(it.head.type);
+			// Check it
+			if (t == null || !t.isTypeName())
+			{
+				// TODO: Code bug -- type given to param does not exist in table or just is not a name a of a type
+			}
+			// Its fine so add to list
+			type_list = new TYPE_LIST(t,type_list);
+		}
+		// Done
+		return type_list;
+	}
+
 	public TYPE SemantMe()
 	{
-		TYPE t;
-		TYPE returnType = null;
-		TYPE_LIST type_list = null;
+		// Initialize pointer to symbol table
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+
+		// Check return type
+		TYPE returnType = sym_table.find(returnTypeName);
+		if (t == null || (!t.isTypeName() && !t.isVoid()))
+		{
+			// TODO: Code bug -- type to return does not exist in table or just is not a name a of a type or void
+		}
+
+		// Process parameters
+		TYPE_LIST type_list = this.params_processor();
+
+		// Type of the function
+		TYPE t = TYPE_FUNCTION(name, returnType, type_list);
+
+		// Make sure name is not taken (unless overriding in class)
+		TYPE type_with_this_name = sym_table.find(name);
+		if (type_with_this_name != null) {
+			// Name is taken
+			if (sym_table.getKind() == CLASS && sym_table.getHead().find(name) != null) {
+				// It may be fine if it just overrides in a class, this depends on its type
+			}
+			// Name it not taken, so it should be entered
+		}
+
+
+
 		
 		System.out.println("enter semant AST_DEC_FUNC");
 

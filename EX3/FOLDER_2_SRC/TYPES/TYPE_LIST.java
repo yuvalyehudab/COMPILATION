@@ -35,4 +35,13 @@ public class TYPE_LIST
 		// Check tail non-null case
 		return this.tail.equals(that.tail);
 	}
+
+	/***/
+	/* FIND */
+	/***/
+	public TYPE find(String name) {
+		if (this.head.name.equals(name)) {
+			return this.head.type;
+		}
+	}
 }

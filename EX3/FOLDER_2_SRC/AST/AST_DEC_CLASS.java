@@ -62,16 +62,42 @@ public class AST_DEC_CLASS extends AST_DEC
 	
 	public TYPE SemantMe()
 	{
+		// Point at the table
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+
 		// TODO: Check that the current scope is the global scope
+		if (!sym_table.isGlobal()) {
+			// TODO: Code bug -- declaring class in non-global scope
+		}
+
+		TYPE fatherClass;
+		// Find father if needed
+		if (this.father != null) {
+			fatherClass = SYM_TABLE.getInstance().find(fatherName);
+			if (fatherClass == null) {
+				// TODO: Code bug -- class to be extended does not exist
+			}
+			if (fatherClass.kind != CLASS) {
+				// TODO: Code bug -- extending a non-class
+			}
+		}
+		// At this point fatherClass is a class or nothing
+
 		System.out.println("enter semant AST_DEC_CLASS");
 		/*************************/
 		/* [1] Begin Class Scope */
 		/*************************/
-		SYMBOL_TABLE.getInstance().beginScope();
+		// Initialize with father members if needed
+		TYPE_SCOPE initialScope;
+		if (fatherClass != null) {
+			initialScope = fatherClass.data_members;
+		}
+		SYM_TABLE.getInstance().beginScope(initialScope);
 
 		/***************************/
 		/* [2] Semant Data Members */
 		/***************************/
+		// Semant the data members
 		TYPE_CLASS t = new TYPE_CLASS(null,name,data_members.SemantMe());
 
 		/*****************/
