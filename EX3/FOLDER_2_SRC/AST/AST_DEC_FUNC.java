@@ -89,75 +89,33 @@ public class AST_DEC_FUNC extends AST_DEC
 		return type_list;
 	}
 
-	public TYPE SemantMe()
+	public void SemantMe()
 	{
 		// Initialize pointer to symbol table
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+
+		// TODO: Check that scope is global
 
 		// Check return type
 		TYPE returnType = sym_table.find(returnTypeName);
 		if (t == null || (!t.isTypeName() && !t.isVoid()))
 		{
-			// TODO: Code bug -- type to return does not exist in table or just is not a name a of a type or void
+			// TODO: Code bug -- type to return does not exist in table or just is not a name a of a type nor void
 		}
 
 		// Process parameters
 		TYPE_LIST type_list = this.params_processor();
 
 		// Type of the function
-		TYPE t = TYPE_FUNCTION(name, returnType, type_list);
+		TYPE t = new TYPE_FUNCTION(name, returnType, type_list);
 
-		// Make sure name is not taken (unless overriding in class)
-		TYPE type_with_this_name = sym_table.find(name);
-		if (type_with_this_name != null) {
-			// Name is taken
-			if (sym_table.getKind() == CLASS && sym_table.getHead().find(name) != null) {
-				// It may be fine if it just overrides in a class, this depends on its type
-			}
-			// Name it not taken, so it should be entered
-		}
+		// Enter into symbol table
+		sym_table.enter(t);
 
-
-
-		
-		System.out.println("enter semant AST_DEC_FUNC");
-
-		/*******************/
-		/* [0] return type */
-		/*******************/
-		System.out.println(name);
-		System.out.format("line: %d\nretType:%s\n", lineNumber, returnTypeName);
-		returnType = SYMBOL_TABLE.getInstance().find(returnTypeName);
-		if (returnType == null)
-		{
-			System.out.format(">> ERROR [%d:%d] non existing return type %s\n",6,6,returnType);				
-		}
-
-		// TODO: Check that the current scope is the global scope
-	
 		/****************************/
 		/* [1] Begin Function Scope */
 		/****************************/
-		SYMBOL_TABLE.getInstance().beginScope();
-
-		/***************************/
-		/* [2] Semant Input Params */
-		/***************************/
-		for (AST_TYPE_NAME_LIST it = params; it  != null; it = it.tail)
-		{
-			System.out.format("::enter for loop::\n");
-			t = SYMBOL_TABLE.getInstance().find(it.head.type);
-			if (t == null)
-			{
-				System.out.format(">> ERROR [%d:%d] non existing type %s\n",2,2,it.head.type);				
-			}
-			else
-			{
-				type_list = new TYPE_LIST(t,type_list);
-				SYMBOL_TABLE.getInstance().enter(it.head.name,t);
-			}
-			System.out.format("::end loop::\n");
-		}
+		SYMBOL_TABLE.getInstance().beginScope(new SYM_TABLE_SCOPE(FUNCTION, type_list), null);
 
 		/*******************/
 		/* [3] Semant Body */
@@ -170,11 +128,6 @@ public class AST_DEC_FUNC extends AST_DEC
 		/* [4] End Scope */
 		/*****************/
 		SYMBOL_TABLE.getInstance().endScope();
-
-		/***************************************************/
-		/* [5] Enter the Function Type to the Symbol Table */
-		/***************************************************/
-		SYMBOL_TABLE.getInstance().enter(name,new TYPE_FUNCTION(returnType,name,type_list));
 
 		/*********************************************************/
 		/* [6] Return value is irrelevant for class declarations */

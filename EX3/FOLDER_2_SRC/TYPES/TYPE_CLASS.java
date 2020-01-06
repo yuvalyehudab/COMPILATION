@@ -28,4 +28,13 @@ public class TYPE_CLASS extends TYPE
 		this.fatherClass = fatherClass;
 		this.data_members = data_members;
 	}
+
+	public void SemantMe () {
+		// Initialize pointer to symbol table
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+
+		// TODO: Check that scope is global
+
+		// TODO: Rest
+	}
 }

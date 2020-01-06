@@ -34,28 +34,34 @@ public class SYM_TABLE {
         return defaults.find(name);
     }
 
-    public void enter(String name, TYPE t) {
+    public void enter(TYPE t) {
         if (previous != null && t.isGlobal()) {
             // COMPILER BUG
         }
-        // Check that it was not already declared in current scope
         if (current.find(name) != null) {
-            // TODO: Code bug
+            // TODO: Code bug -- name already declared in current scope
         }
         // Check that there is no shadowing different types
         if (extending != null) {
             // Look if method/constant is already defined
             TYPE type_in_ancestors = extending.find(name);
-            if (type_in_ancestors != null && !t.equals(type_in_ancestors)) {
-                // TODO: Code bug
+            if (type_in_ancestors != null) {
+                // Is defined, now check if shadowing is legit
+                if (!t.equals(type_in_ancestors)) {
+                    // TODO: Code bug -- shadowing of different type
+                }
+                // Override case, no need to enter this symbol again
             }
+            // Is not already defined, business as usual
+            current.add(t);
         }
-        current = SYM_TABLE_SCOPE(TYPE_DEC(name, t), current.list);
+        current.add(t);
     }
 
-    public void open(SCOPE_KIND k, TYPE_CLASS ec) {
-        previous = SYM_TABLE_SCOPE_LIST(current, previous);
-        current = SYM_TABLE_SCOPE(k, null);
+    public void open(SYM_TABLE_SCOPE init, TYPE_CLASS ec) {
+        // init may holds parameters of function
+        // ec may hold father class
+        scopes = new SYM_TABLE_SCOPE_LIST(init, scopes);
         extending = ec;
     }
 
