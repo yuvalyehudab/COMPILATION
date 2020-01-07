@@ -64,9 +64,12 @@ public class AST_STMT_ASSIGN extends AST_STMT
 	}
 	public TYPE SemantMe()
 	{
-		TYPE t1 = null;
-		TYPE t2 = null;
-		System.out.format("\n\nenter AST_STMT\nassign var := exp\nline:%d\n", lineNumber);
+		// Initialize pointer to symbol table
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+
+		TYPE t1;
+		TYPE t2;
+
 		if (var != null) t1 = var.SemantMe();
 		if (exp != null) t2 = exp.SemantMe();
 		

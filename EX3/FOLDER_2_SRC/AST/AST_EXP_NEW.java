@@ -61,6 +61,26 @@ public class AST_EXP_NEW extends AST_EXP
 	}
 	public TYPE SemantMe()
 	{
+		// Initialize pointer to symbol table
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+
+		// Lookup name of type
+		TYPE t = sym_table.find(t);
+
+		if (e == null && t.isClass()) {
+			// Class case
+			return t;
+		} else if (e != null && t.isArray()) {
+			// Array case
+			TYPE eT = e.SemantMe();
+			if (eT != TYPE_INT.getInstance()) {
+				// TODO: Code bug -- length must be an integer
+			}
+			return t;
+		}
+
+		// TODO: Code bug -- must be class or array with length
+
 		TYPE t1 = null;
 		
 		if (exp  != null) t1 = exp.SemantMe();
