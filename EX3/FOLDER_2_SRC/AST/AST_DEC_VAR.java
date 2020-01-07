@@ -80,12 +80,17 @@ public class AST_DEC_VAR extends AST_DEC
 			TYPE t_init = this.initialValue.SemantMe();
 			// Check that they match, or initial is decendent or nil
 			if (!t.equals(t_init)) {
-				if (!(t.kind == CLASS)) {
-					// TODO: Code bug -- types does not strictly match (non-class case)
+				if (t_init.kind == NIL) {
+					if (t.kind != CLASS && t.kind != ARRAY) {
+						// TODO: Code bug -- nil is only allowed for class or array
+					}
 				}
-				if (t_init.kind != NIL && (t_init.kind != CLASS || !t_init.isAncestor(t))) {
-					// TODO: Code bug -- init is not decendent or nil
+				if (t_init.kind == CLASS) {
+					if (!t_init.isAncestor(t)) {
+						// TODO: Code bug -- init is not decendent not nill
+					}
 				}
+				// TODO: Code bug -- types do not strictly match and special cases all fail
 			}
 		}
 
