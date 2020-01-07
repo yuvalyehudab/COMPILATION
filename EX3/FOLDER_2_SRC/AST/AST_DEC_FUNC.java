@@ -123,7 +123,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		/****************************/
 		/* [1] Begin Function Scope */
 		/****************************/
-		SYMBOL_TABLE.getInstance().beginScope(new SYM_TABLE_SCOPE(FUNCTION, type_list), null);
+		sym_table.open(new SYM_TABLE_SCOPE(FUNCTION, type_list), null, returnType);
 
 		/*******************/
 		/* [3] Semant Body */
@@ -135,7 +135,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		/*****************/
 		/* [4] End Scope */
 		/*****************/
-		SYMBOL_TABLE.getInstance().endScope();
+		sym_table.close();
 
 		/*********************************************************/
 		/* [6] Return value is irrelevant for class declarations */

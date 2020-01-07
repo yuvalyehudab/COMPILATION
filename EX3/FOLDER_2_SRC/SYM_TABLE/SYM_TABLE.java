@@ -4,6 +4,7 @@ private TYPE_DEC_LIST defaults = null; // TODO: put int, string, lib-funcs
 
 public class SYM_TABLE {
     private TYPE_CLASS extending = null; // If currently defining a class that extends, this should point to father
+    private TYPE returnType = null; // If currently defining a function, this should hold its return type
     private SYM_TABLE_SCOPE_LIST scopes = SYM_TABLE_SCOPE_LIST(null, null); // never null
 
     public TYPE_LIST getConstructedTypeList () {
@@ -20,6 +21,8 @@ public class SYM_TABLE {
     public boolean isGlobal () {
         return (scopes.tail == null);
     }
+
+    public TYPE getReturnType () { return returnType; }
 
     public TYPE find(String name) {
         if (scopes.head != null) {
@@ -57,11 +60,13 @@ public class SYM_TABLE {
         current.add(t);
     }
 
-    public void open(SYM_TABLE_SCOPE init, TYPE_CLASS ec) {
+    public void open(SYM_TABLE_SCOPE init, TYPE_CLASS ec, TYPE rt) {
         // init may holds parameters of function
         // ec may hold father class
+        // rt may hold return type
         scopes = new SYM_TABLE_SCOPE_LIST(init, scopes);
         extending = ec;
+        returnType = rt;
     }
 
     public void close() {
@@ -71,6 +76,7 @@ public class SYM_TABLE {
         current = previous.head;
         previous = previous.tail;
         extending = null;
+        returnType = null;
     }
     
     public SYM_TABLE ()

@@ -61,26 +61,26 @@ public class AST_STMT_IF extends AST_STMT
 		/****************************/
 		if (cond.SemantMe() != TYPE_INT.getInstance())
 		{
-			System.out.format(">> ERROR [%d:%d] condition inside IF is not integral\n",2,2);
+			// TODO: Code bug -- condition must be an integer
 		}
 		
 		/*************************/
-		/* [1] Begin Class Scope */
+		/* [1] Begin Block Scope */
 		/*************************/
-		SYMBOL_TABLE.getInstance().beginScope();
+		sym_table.open(null,null,null);
 
 		/***************************/
-		/* [2] Semant Data Members */
+		/* [2] Semant Body Statmen */
 		/***************************/
 		body.SemantMe();
 
 		/*****************/
 		/* [3] End Scope */
 		/*****************/
-		SYMBOL_TABLE.getInstance().endScope();
+		sym_table.close();
 
 		/*********************************************************/
-		/* [4] Return value is irrelevant for class declarations */
+		/* [4] Return value is irrelevant for block declarations */
 		/*********************************************************/
 		return null;		
 	}	

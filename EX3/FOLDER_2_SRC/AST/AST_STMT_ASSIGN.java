@@ -67,15 +67,21 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		// Initialize pointer to symbol table
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
-		TYPE t1;
-		TYPE t2;
+		TYPE varT := sym_table.find(var);
+		TYPE expT := exp.SemantMe();
 
-		if (var != null) t1 = var.SemantMe();
-		if (exp != null) t2 = exp.SemantMe();
-		
-		if (t1 != t2)
+		if (expT == TYPE_NIL.getInstance()) {
+			if (varT.isClass() || varT.isArray()) {
+				// nil is an acceptable class / array
+				return null;
+			} else {
+				// TODO: Code bug -- nil inappropriate
+			}
+		}
+
+		if (varT.name != expT.name)
 		{
-			System.out.format(">> ERROR [%d:%d] type mismatch for var := exp\n",6,6);				
+			// TODO: Code bug -- types mismatch
 		}
 		return null;
 	}

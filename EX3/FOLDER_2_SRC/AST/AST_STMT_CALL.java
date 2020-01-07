@@ -37,4 +37,8 @@ public class AST_STMT_CALL extends AST_STMT
 		/****************************************/
 		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,callExp.SerialNumber);		
 	}
+
+	public TYPE SemantMe() {
+		return callExp.SemantMe();
+	}
 }
