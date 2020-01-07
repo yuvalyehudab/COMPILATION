@@ -138,7 +138,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		sym_table.close();
 
 		/*********************************************************/
-		/* [6] Return value is irrelevant for class declarations */
+		/* [6] Return value is irrelevant for funct declarations */
 		/*********************************************************/
 		System.out.println("out of ast_dec_fumc semant " + name);
 		return null;		
