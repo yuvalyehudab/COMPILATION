@@ -59,22 +59,44 @@ public class AST_EXP_CALL extends AST_EXP
 	/* SEMANTICS */
 	/***/
 	public TYPE SemantMe() {
-		// Find type of this function
-		TYPE funcType = SYMBOL_TABLE.getInstance().find(funcName);
-		if (funcType == null) {
-			return null; // TODO: Or crash in some other way?
+
+		// Initialize pointer to symbol table
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+
+		TYPE varType;
+		TYPE funcType;
+
+		// Set funcType
+		if (this.var != null) {
+			varType = this.var.SemantMe();
+			if (varType.getKind() != CLASS) {
+				// TODO: Code bug -- type of var is not a class so it does not have methods
+			}
+			funcType = varType.find(this.funcName);
+		} else {
+			funcType = sym_table.find(this.funcName);
+		}
+
+		// Make sure it is a function
+		if (funcType == null || funcType.getKind() != FUNCTION) {
+			// TODO: Code bug -- function name not in table or not a name of a function
 		}
 
 		// Compute types of the arguments that were fed
-		TYPE_LIST paramTypes = params.SemantMe();
+		TYPE_LIST paramTypes;
+		if (this.params != null) {
+			paramTypes = this.params.SemantMe();
+		} else {
+			paramTypes = new TYPE_LIST(null, null);
+		}
 
 		// Then check that they have the expected type
-		/*expectedTypes = funcType.params;
+		TYPE_LIST expectedTypes = funcType.params;
 		if (!expectedTypes.equals(paramTypes)) {
-			return null; // TODO: Or crash in some other way?
-		}*/
+			// TODO: Code bug -- incorrect argument types
+		}
 
 		/* Return expected type */
-		return funcType;
+		return funcType.returnType;
 	}
 }

@@ -24,7 +24,7 @@ public class TYPE_FUNCTION extends TYPE
 	}
 
 	public boolean equals(TYPE that) {
-		return (that.kind == FUNCTION
+		return (that != null && that.kind == FUNCTION
 				&& this.name.equals(that.name)
 				&& this.returnType.equals(that.returnType)
 				&& this.params.equals(that.params)
