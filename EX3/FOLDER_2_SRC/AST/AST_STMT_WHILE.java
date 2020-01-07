@@ -66,7 +66,7 @@ public class AST_STMT_WHILE extends AST_STMT
 		/*************************/
 		/* [1] Begin Block Scope */
 		/*************************/
-		sym_table.open(null,null,null);
+		sym_table.open(new SYM_TABLE_SCOPE(null,null),null,null);
 
 		/***************************/
 		/* [2] Semant Body Statmen */

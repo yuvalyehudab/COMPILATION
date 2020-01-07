@@ -117,13 +117,13 @@ public class AST_DEC_FUNC extends AST_DEC
 		// Type of the function
 		TYPE t = new TYPE_FUNCTION(name, returnType, type_list);
 
-		// Enter into symbol table
+		// Enter into symbol table now to support recursion
 		sym_table.enter(t);
 
 		/****************************/
 		/* [1] Begin Function Scope */
 		/****************************/
-		sym_table.open(new SYM_TABLE_SCOPE(FUNCTION, type_list), null, returnType);
+		sym_table.open(new SYM_TABLE_SCOPE(FUNCTION_SCOPE, type_list), null, returnType);
 
 		/*******************/
 		/* [3] Semant Body */

@@ -92,7 +92,7 @@ public class AST_DEC_CLASS extends AST_DEC
 		/*************************/
 		/* [1] Begin Class Scope */
 		/*************************/
-		sym_table.open(null, fatherClass, null);
+		sym_table.open(new SYM_TABLE_SCOPE(CLASS_SCOPE, null), fatherClass, null);
 
 		/***************************/
 		/* [2] Semant Data Members */

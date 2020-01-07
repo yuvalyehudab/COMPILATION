@@ -5,7 +5,8 @@ private TYPE_DEC_LIST defaults = null; // TODO: put int, string, lib-funcs
 public class SYM_TABLE {
     private TYPE_CLASS extending = null; // If currently defining a class that extends, this should point to father
     private TYPE returnType = null; // If currently defining a function, this should hold its return type
-    private SYM_TABLE_SCOPE_LIST scopes = SYM_TABLE_SCOPE_LIST(null, null); // never null
+    // Starting with an empty global scope:
+    private SYM_TABLE_SCOPE_LIST scopes = SYM_TABLE_SCOPE_LIST(new SYM_TABLE_SCOPE(null,null), null);
 
     public TYPE_LIST getConstructedTypeList () {
         return scopes.head.types;
@@ -54,7 +55,7 @@ public class SYM_TABLE {
                 // Override case, no need to enter this symbol again
             }
         } else {
-            current.add(t);
+            scopes.head.add(t);
         }
     }
 
