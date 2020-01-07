@@ -47,33 +47,25 @@ public class AST_DEC_ARRAY extends AST_DEC
 
 	public TYPE SemantMe()
 	{
-		TYPE t;
-		System.out.println("enter semant AST_DEC_ARRAY");
-		/****************************/
-		/* [1] Check If Type exists */
-		/****************************/
-		t = SYMBOL_TABLE.getInstance().find(type);
-		if (t == null)
-		{
-			System.out.format(">> ERROR [%d:%d] non existing type %s\n",2,2,type);
-			System.exit(0);
-		}
-		
-		/**************************************/
-		/* [2] Check That Name does NOT exist */
-		/**************************************/
-		if (SYMBOL_TABLE.getInstance().find(name) != null)
-		{
-			System.out.format(">> ERROR [%d:%d] variable %s already exists in scope\n",2,2,name);				
+		// Initialize pointer to symbol table
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+
+		// Check that name does not already exist in scope
+		if (sym_table.find(name) != null) {
+			// TODO: Code bug -- name not available
 		}
 
-		/***************************************************/
-		/* [3] Enter the Function Type to the Symbol Table */
-		/***************************************************/
-		SYMBOL_TABLE.getInstance().enter(name,t);
+		// The type of the array members
+		TYPE t = sym_table.find(type);
+		if (t == null || !t.isTypeName()) {
+			// TODO: Code bug -- type of members is not in table or just not a name of a type
+		}
+
+		// Enter the new type into the table
+		sym_table.enter(new TYPE_ARRAY(name, t));
 
 		/*********************************************************/
-		/* [4] Return value is irrelevant for class declarations */
+		/* [4] Return value is irrelevant for array declarations */
 		/*********************************************************/
 		return null;		
 	}
