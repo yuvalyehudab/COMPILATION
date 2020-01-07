@@ -53,43 +53,30 @@ public class AST_EXP_VAR_FIELD extends AST_EXP_VAR
 	}
 	public TYPE SemantMe()
 	{
-		TYPE t = null;
-		TYPE_CLASS tc = null;
+		TYPE t;
+		TYPE_CLASS tc;
 		
 		/******************************/
 		/* [1] Recursively semant var */
 		/******************************/
-		if (var != null) t = var.SemantMe();
+		if (var != null) tc = var.SemantMe();
 		
 		/*********************************/
 		/* [2] Make sure type is a class */
 		/*********************************/
-		if (t.isClass() == false)
+		if (!tc.isClass())
 		{
-			System.out.format(">> ERROR [%d:%d] access %s field of a non-class variable\n",6,6,fieldName);
-			System.exit(0);
-		}
-		else
-		{
-			tc = (TYPE_CLASS) t;
+			// TODO: Code bug -- not accessing a class
 		}
 		
 		/************************************/
 		/* [3] Look for fiedlName inside tc */
 		/************************************/
-		for (TYPE_LIST it=tc.data_members;it != null;it=it.tail)
-		{
-			if (it.head.name == fieldName)
-			{
-				return it.head;
-			}
+		t = tc.find(fieldName);
+		if (t == null) {
+			// TODO: Code bug -- field does not exist in the class
 		}
-		
-		/*********************************************/
-		/* [4] fieldName does not exist in class var */
-		/*********************************************/
-		System.out.format(">> ERROR [%d:%d] field %s does not exist in class\n",6,6,fieldName);							
-		System.exit(0);
-		return null;
+
+		return t;
 	}
 }

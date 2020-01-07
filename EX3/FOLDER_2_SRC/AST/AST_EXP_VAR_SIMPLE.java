@@ -44,6 +44,6 @@ public class AST_EXP_VAR_SIMPLE extends AST_EXP_VAR
 	}
 	public TYPE SemantMe()
 	{
-		return SYMBOL_TABLE.getInstance().find(name);
+		return SYM_TABLE.getInstance().find(name);
 	}
 }
