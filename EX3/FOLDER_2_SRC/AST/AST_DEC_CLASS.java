@@ -82,7 +82,7 @@ public class AST_DEC_CLASS extends AST_DEC
 			if (fatherClass == null) {
 				// TODO: Code bug -- class to be extended does not exist
 			}
-			if (fatherClass.getKind() != CLASS) {
+			if (fatherClass.kind != CLASS) {
 				// TODO: Code bug -- extending a non-class
 			}
 		}
@@ -92,7 +92,7 @@ public class AST_DEC_CLASS extends AST_DEC
 		/*************************/
 		/* [1] Begin Class Scope */
 		/*************************/
-		SYM_TABLE.getInstance().open(null, fatherClass);
+		sym_table.open(null, fatherClass, null);
 
 		/***************************/
 		/* [2] Semant Data Members */
@@ -106,12 +106,12 @@ public class AST_DEC_CLASS extends AST_DEC
 		/*****************/
 		/* [3] End Scope */
 		/*****************/
-		SYM_TABLE.getInstance().close();
+		sym_table.close();
 
 		/************************************************/
 		/* [4] Enter the Class Type to the Symbol Table */
 		/************************************************/
-		SYMBOL_TABLE.getInstance().enter(result);
+		sym_table.enter(result);
 
 		/*********************************************************/
 		/* [5] Return value is irrelevant for class declarations */
