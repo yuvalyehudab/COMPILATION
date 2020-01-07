@@ -8,10 +8,6 @@ public class SYM_TABLE_SCOPE {
         return kind;
     }
 
-    public void setKind(SCOPE_KIND kind) {
-        this.kind = kind;
-    }
-
     public TYPE find (String name) {
         return types.find(name);
     }

@@ -13,7 +13,7 @@ public class SYM_TABLE {
 
     public SCOPE_KIND getKind () {
         if (scopes.head == null) {
-            return GLOBAL;
+            return null;
         }
         return (scopes.head.getKind());
     }
@@ -42,9 +42,6 @@ public class SYM_TABLE {
     }
 
     public void enter(TYPE t) {
-        if (scopes.tail != null && t.isGlobal()) {
-            // COMPILER BUG
-        }
         // Check that there is no shadowing different types
         if (extending != null) {
             // Look if method/constant is already defined
@@ -56,12 +53,13 @@ public class SYM_TABLE {
                 }
                 // Override case, no need to enter this symbol again
             }
+        } else {
+            current.add(t);
         }
-        current.add(t);
     }
 
     public void open(SYM_TABLE_SCOPE init, TYPE_CLASS ec, TYPE rt) {
-        // init may holds parameters of function
+        // init may hold parameters of function
         // ec may hold father class
         // rt may hold return type
         scopes = new SYM_TABLE_SCOPE_LIST(init, scopes);
@@ -70,11 +68,7 @@ public class SYM_TABLE {
     }
 
     public void close() {
-        if (previous == null) {
-            // COMPILER BUG
-        }
-        current = previous.head;
-        previous = previous.tail;
+        scopes = scopes.tail;
         extending = null;
         returnType = null;
     }
