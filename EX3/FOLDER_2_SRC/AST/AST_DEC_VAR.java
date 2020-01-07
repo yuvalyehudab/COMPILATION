@@ -78,9 +78,14 @@ public class AST_DEC_VAR extends AST_DEC
 		// Check initial value type
 		if (this.initialValue != null) {
 			TYPE t_init = this.initialValue.SemantMe();
-			// Check that they match
+			// Check that they match, or initial is decendent or nil
 			if (!t.equals(t_init)) {
-				// TODO: Code bug -- type does not match
+				if (!(t.kind == CLASS)) {
+					// TODO: Code bug -- types does not strictly match (non-class case)
+				}
+				if (t_init.kind != NIL && (t_init.kind != CLASS || !t_init.isAncestor(t))) {
+					// TODO: Code bug -- init is not decendent or nil
+				}
 			}
 		}
 
