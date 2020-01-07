@@ -57,6 +57,10 @@ public class AST_EXP_LIST extends AST_Node
 	/* SEMANTICS */
 	/***/
 	public TYPE_LIST SemantMe() {
-		return new TYPE_LIST(head.SemantMe(),tail.SemantMe());
+		TYPE headS;
+		TYPE tailS;
+		if (head != null) { headS = head.SemantMe()}
+		if (tail != null) { tailS = head.SemantMe()}
+		return new TYPE_LIST(headS,tailS);
 	}
 }

@@ -75,21 +75,68 @@ public class AST_EXP_BINOP extends AST_EXP
 		if (left  != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,left.SerialNumber);
 		if (right != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,right.SerialNumber);
 	}
+
 	public TYPE SemantMe()
 	{
-		TYPE t1 = null;
-		TYPE t2 = null;
-		
-		if (left  != null) t1 = left.SemantMe();
-		if (right != null) t2 = right.SemantMe();
-		
-		if ((t1 == TYPE_INT.getInstance()) && (t2 == TYPE_INT.getInstance()))
-		{
-			return TYPE_INT.getInstance();
+		// Initialize pointers to symbol table and singletons
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+
+		TYPE_INT type_int = TYPE_INT.getInstance();
+		TYPE_STRING type_string = TYPE_STRING.getInstance();
+
+		if (left == null || right == null) {
+			// COMPILER BUG
 		}
-		// TODO: Handle strings too in case of + (ie op==0)
-		System.exit(0);
-		return null;
+
+		TYPE t1 = left.SemantMe();
+		TYPE t2 = right.SemantMe();
+
+		boolean areInt    = (t1 ==    type_int && t1 == t2);
+		boolean areString = (t1 == type_string && t1 == t2);
+
+		if (OP == 3) { // =
+			// Booleans are represented by integers, so return this if all is well
+			TYPE_INT ok = type_int;
+			// Handling the nil case
+			if (t1.kind == NIL || t2.kind == NIL) {
+				if (t1.kind == NIL && t2.kind == NIL) {
+					// Comparing nil with nil is ok
+					return ok;
+				}
+				if (!(t1.kind == CLASS || t2.kind == CLASS || t1.kind == ARRAY || t2.kind == ARRAY)) {
+					// TODO: Code bug -- comparing nil with something other than nil, class, array
+				}
+			}
+
+			// Handling the class case
+			if (t1.kind == CLASS || t2.kind == CLASS) {
+				if (t1.isAncestor(t2) || t2.isAncestor(t1)) {
+					return ok;
+				}
+				// TODO: Code bug -- one is a class and the other is not ancestor or decendent
+			}
+
+			// Any other case must have strictly equal types
+			if (t1.name.equals(t2.name)) {
+				return ok;
+			}
+			// TODO: Code bug -- mismatching types of some disallowed kind
+		}
+
+		if ((OP == 2 || OP == 6) && areInt) { // ><
+			return type_int;
+		}
+
+		if ((OP == 1 || OP == 4 || OP == 5) && areInt) { // *-/
+			return type_int;
+		}
+
+		if (OP == 0) { // +
+			if (areInt)		{ return type_int; 		}
+			if (areString) 	{ return type_string; 	}
+		}
+
+		// TODO: Code bug -- types do not match operation
 	}
 
 }

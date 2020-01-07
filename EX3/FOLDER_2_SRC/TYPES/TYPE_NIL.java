@@ -21,6 +21,7 @@ public class TYPE_NIL extends TYPE
 		{
 			instance = new TYPE_NIL();
 			instance.name = "nil";
+			instance.kind = NIL;
 		}
 		return instance;
 	}

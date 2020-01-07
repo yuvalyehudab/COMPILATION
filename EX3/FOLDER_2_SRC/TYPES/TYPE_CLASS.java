@@ -34,4 +34,10 @@ public class TYPE_CLASS extends TYPE
 			return this.fatherClass.find(name);
 		}
 	}
+
+	public boolean isAncestor (String candidate) {
+		if (this.name == candidate) { return true } // Found it!
+		if (this.fatherClass == null) { return false } // End of search.
+		return fatherClass.isAncestor(candidate);
+	}
 }

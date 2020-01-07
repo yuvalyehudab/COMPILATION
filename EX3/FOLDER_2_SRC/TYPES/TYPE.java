@@ -5,7 +5,7 @@ public abstract class TYPE
 	/***/
 	/* Kind */
 	/***/
-	private KIND kind;
+	public KIND kind;
 
 	/***/
 	/* Name */
