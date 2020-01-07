@@ -51,7 +51,7 @@ public class AST_DEC_ARRAY extends AST_DEC
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
 		// Check that name does not already exist in scope
-		if (sym_table.find(name) != null) {
+		if (sym_table.find(this.name) != null) {
 			// TODO: Code bug -- name not available
 		}
 
@@ -61,13 +61,13 @@ public class AST_DEC_ARRAY extends AST_DEC
 		}
 
 		// The type of the array members
-		TYPE t = sym_table.find(type);
+		TYPE t = sym_table.find(this.type);
 		if (t == null || !t.isTypeName()) {
 			// TODO: Code bug -- type of members is not in table or just not a name of a type
 		}
 
 		// Enter the new type into the table
-		sym_table.enter(new TYPE_ARRAY(name, t));
+		sym_table.enter(new TYPE_ARRAY(this.name, t));
 
 		/*********************************************************/
 		/* [4] Return value is irrelevant for array declarations */

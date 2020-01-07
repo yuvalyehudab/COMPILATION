@@ -66,7 +66,7 @@ public class AST_DEC_CLASS extends AST_DEC
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
 		// Check that name does not already exist in scope
-		if (sym_table.find(name) != null) {
+		if (sym_table.find(this.name) != null) {
 			// TODO: Code bug -- name not available
 		}
 
@@ -78,7 +78,7 @@ public class AST_DEC_CLASS extends AST_DEC
 		TYPE fatherClass;
 		// Find father if needed
 		if (this.father != null) {
-			fatherClass = SYM_TABLE.getInstance().find(fatherName);
+			fatherClass = sym_table.find(this.fatherName);
 			if (fatherClass == null) {
 				// TODO: Code bug -- class to be extended does not exist
 			}
@@ -101,7 +101,7 @@ public class AST_DEC_CLASS extends AST_DEC
 		data_members.SemantMe();
 
 		// Construct the class
-		TYPE_CLASS result = new TYPE_CLASS(name, sym_table.getConstructedTypeList(), fatherClass);
+		TYPE_CLASS result = new TYPE_CLASS(this.name, sym_table.getConstructedTypeList(), fatherClass);
 
 		/*****************/
 		/* [3] End Scope */

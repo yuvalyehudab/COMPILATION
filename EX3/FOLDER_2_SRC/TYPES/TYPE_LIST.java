@@ -44,4 +44,15 @@ public class TYPE_LIST
 			return this.head.type;
 		}
 	}
+
+	/***/
+	/* REVERSE */
+	/***/
+	public TYPE_LIST reversed() {
+		TYPE_LIST rev = null;
+		for (TYPE_LIST it = this ; it != null ; it = it.tail) {
+			rev = new TYPE_LIST(it.head, rev);
+		}
+		return rev;
+	}
 }

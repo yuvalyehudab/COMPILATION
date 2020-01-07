@@ -73,7 +73,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		TYPE_LIST type_list;
 
 		// Process parameter list
-		for (AST_TYPE_NAME_LIST it = params; it  != null; it = it.tail)
+		for (AST_TYPE_NAME_LIST it = this.params; it  != null; it = it.tail)
 		{
 			// Lookup the name given to the currently processed parameter
 			t = sym_table.find(it.head.type);
@@ -85,8 +85,8 @@ public class AST_DEC_FUNC extends AST_DEC
 			// Its fine so add to list
 			type_list = new TYPE_LIST(t,type_list);
 		}
-		// Done
-		return type_list;
+		// The list was reveresed in the process, so reverse before returning the product
+		return type_list.reversed();
 	}
 
 	public void SemantMe()
@@ -95,7 +95,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
 		// Check that name does not already exist in scope
-		if (sym_table.find(name) != null) {
+		if (sym_table.find(this.name) != null) {
 			// TODO: Code bug -- name not available
 		}
 
