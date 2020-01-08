@@ -2,10 +2,14 @@ package SYM_TABLE;
 
 import TYPES.*;
 
- // TODO: put int, string, lib-funcs
-
 public class SYM_TABLE {
-    private TYPE_LIST defaults = null; // TODO: int, string, lib-funcs
+    private TYPE_LIST defaults = new TYPE_LIST(
+					       TYPE_INT.getInstance(),
+					       TYPE_STRING.getInstance(),
+					       new TYPE_FUNCTION("PrintInt",null,new TYPE_LIST(TYPE_INT.getInstance(),null)),
+					       new TYPE_FUNCTION("PrintString",null,new TYPE_LIST(TYPE_STRING.getInstance(),null)),
+					       new TYPE_FUNCTION("PrintTrace",null,new TYPE_LIST(null,null))
+					       );
     private TYPE_CLASS extending = null; // If currently defining a class that extends, this should point to father
     private TYPE returnType = null; // If currently defining a function, this should hold its return type
     // Starting with an empty global scope:
