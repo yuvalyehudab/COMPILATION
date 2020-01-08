@@ -69,7 +69,8 @@ public class SYM_TABLE {
             if (type_in_ancestors != null) {
                 // Is defined, now check if shadowing is legit
                 if (!t.equals(type_in_ancestors)) {
-                    // TODO: Code bug -- shadowing of different type
+                    // Code bug -- shadowing of different type
+		    report_error();
                 }
                 // Override case, no need to enter this symbol again
             }
@@ -88,11 +89,16 @@ public class SYM_TABLE {
     }
 
     public void close() {
+	// Remove once closing CLASS
+	if (scopes.head.getKind() == CLASS) {
+	    extending = null;
+	}
+	// Remove once closing FUNCTION
+	if (scopes.head.getKind() == FUNCTION) {
+	    returnType = null;
+	}
+	// Get rid of scope
         scopes = scopes.tail;
-	// TODO: Only remove once closing CLASS
-        extending = null;
-	// TODO: Only remove once closing FUNCTION
-        returnType = null;
     }
 
 // TODO: Wrap into a singleton instance
