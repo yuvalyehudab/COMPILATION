@@ -41,11 +41,13 @@ public class AST_EXP_VAR_SUBSCRIPT extends AST_EXP_VAR
 		// Semant the var
 		TYPE arrayT = var.SemantMe();
 		if (!arrayT.isArray()) {
-			// TODO: Code bug -- accessing a non-array
+			// Code bug -- accessing a non-array
+		    report_error();
 		}
 		TYPE indexT = subscript.SemantMe();
 		if (indexT != TYPE_INT.getInstance()) {
-			// TODO: Code bug -- index is not an int
+			// Code bug -- index is not an int
+		    report_error();
 		}
 
 		return ((TYPE_ARRAY)arrayT).memberT;

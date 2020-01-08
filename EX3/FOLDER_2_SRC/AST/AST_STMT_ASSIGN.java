@@ -77,7 +77,8 @@ public class AST_STMT_ASSIGN extends AST_STMT
 				// nil is an acceptable class / array
 				return null;
 			} else {
-				// TODO: Code bug -- nil inappropriate
+				// Code bug -- nil inappropriate
+			    report_error();
 			}
 		}
 
@@ -85,7 +86,8 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		
 		if (varT.name != expT.name)
 		{
-			// TODO: Code bug -- types mismatch
+			// Code bug -- types mismatch
+		    report_error();
 		}
 		return null;
 	}

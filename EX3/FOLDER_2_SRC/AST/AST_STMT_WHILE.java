@@ -63,7 +63,8 @@ public class AST_STMT_WHILE extends AST_STMT
 		/****************************/
 		if (cond.SemantMe() != TYPE_INT.getInstance())
 		{
-			// TODO: Code bug -- condition must be an integer
+			// Code bug -- condition must be an integer
+		    report_error();
 		}
 
 		/*************************/

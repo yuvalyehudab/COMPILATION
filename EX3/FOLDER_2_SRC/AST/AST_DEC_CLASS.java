@@ -67,12 +67,14 @@ public class AST_DEC_CLASS extends AST_DEC
 
 		// Check that name does not already exist in scope
 		if (sym_table.find(this.name) != null) {
-			// TODO: Code bug -- name not available
+			// Code bug -- name not available
+		    report_error();
 		}
 
 		// Check that the current scope is the global scope
 		if (!sym_table.isGlobal()) {
-			// TODO: Code bug -- declaring class in non-global scope
+			// Code bug -- declaring class in non-global scope
+		    report_error();
 		}
 
 		TYPE fatherClass = null;
@@ -80,10 +82,12 @@ public class AST_DEC_CLASS extends AST_DEC
 		if (this.father != null) {
 			fatherClass = sym_table.find(this.father);
 			if (fatherClass == null) {
-				// TODO: Code bug -- class to be extended does not exist
+				// Code bug -- class to be extended does not exist
+			    report_error();
 			}
 			if (fatherClass.kind != KIND.CLASS) {
-				// TODO: Code bug -- extending a non-class
+				// Code bug -- extending a non-class
+			    report_error();
 			}
 		}
 		// At this point fatherClass is a class or null

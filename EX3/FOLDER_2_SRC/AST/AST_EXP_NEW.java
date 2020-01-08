@@ -75,12 +75,14 @@ public class AST_EXP_NEW extends AST_EXP
 			// Array case
 			TYPE eT = exp.SemantMe();
 			if (eT != TYPE_INT.getInstance()) {
-				// TODO: Code bug -- length must be an integer
+				// Code bug -- length must be an integer
+			    report_error();
 			}
 			return t;
 		}
 
-		// TODO: Code bug -- must be class or array with length
+		// Code bug -- must be class or array with length
+		report_error();
 		return null;
 	}
 

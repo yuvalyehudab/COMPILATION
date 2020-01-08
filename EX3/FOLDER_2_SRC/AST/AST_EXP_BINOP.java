@@ -104,7 +104,8 @@ public class AST_EXP_BINOP extends AST_EXP
     				        // Comparing nil with class or array is ok
 				        return ok;
 				}
-				// TODO: Code bug -- comparing nil with something other than nil, class, array
+				// Code bug -- comparing nil with something other than nil, class, array
+				report_error();
 			}
 
 			// Handling the class case
@@ -112,7 +113,8 @@ public class AST_EXP_BINOP extends AST_EXP
 				if (((TYPE_CLASS)t1).isAncestor(t2.name) || ((TYPE_CLASS)t2).isAncestor(t1.name)) {
 					return ok;
 				}
-				// TODO: Code bug -- one is a class and the other is not ancestor or decendent
+				// Code bug -- one is a class and the other is not ancestor or decendent
+				report_error();
 			}
 
 			// Any other case must have strictly equal types
@@ -120,7 +122,8 @@ public class AST_EXP_BINOP extends AST_EXP
 			if (t1.name.equals(t2.name)) {
 				return ok;
 			}
-			// TODO: Code bug -- mismatching types of some disallowed kind
+			// Code bug -- mismatching types of some disallowed kind
+			report_error();
 		}
 
 		if ((OP == 2 || OP == 6) && areInt) { // ><
@@ -135,7 +138,8 @@ public class AST_EXP_BINOP extends AST_EXP
 			if (areInt)		{ return type_int; 		}
 			if (areString) 	{ return type_string; 	}
 		}
-		// TODO: Code bug -- types do not match operation
+		// Code bug -- types do not match operation
+		report_error();
 		return null;
 	}
 

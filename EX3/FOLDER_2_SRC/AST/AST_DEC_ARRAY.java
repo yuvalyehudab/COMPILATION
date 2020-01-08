@@ -52,18 +52,21 @@ public class AST_DEC_ARRAY extends AST_DEC
 
 		// Check that name does not already exist in scope
 		if (sym_table.find(this.name) != null) {
-			// TODO: Code bug -- name not available
+			// Code bug -- name not available
+		    report_error();
 		}
 
 		// Check that the current scope is the global scope
 		if (!sym_table.isGlobal()) {
-			// TODO: Code bug -- declaring class in non-global scope
+			// Code bug -- declaring class in non-global scope
+		    report_error();
 		}
 
 		// The type of the array members
 		TYPE t = sym_table.find(this.type);
 		if (t == null || !t.isTypeName()) {
-			// TODO: Code bug -- type of members is not in table or just not a name of a type
+			// Code bug -- type of members is not in table or just not a name of a type
+		    report_error();
 		}
 
 		// Enter the new type into the table

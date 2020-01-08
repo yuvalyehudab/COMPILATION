@@ -68,7 +68,8 @@ public class AST_EXP_VAR_FIELD extends AST_EXP_VAR
 			/*********************************/
 			if (!tc.isClass())
 			{
-				// TODO: Code bug -- not accessing a class
+				// Code bug -- not accessing a class
+			    report_error();
 			}
 		}
 		
@@ -77,7 +78,8 @@ public class AST_EXP_VAR_FIELD extends AST_EXP_VAR
 		/************************************/
 		t = ((TYPE_CLASS)tc).find(fieldName);
 		if (t == null) {
-			// TODO: Code bug -- field does not exist in the class
+			// Code bug -- field does not exist in the class
+		    report_error();
 		}
 
 		return t;

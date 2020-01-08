@@ -62,14 +62,16 @@ public class AST_STMT_RETURN extends AST_STMT
 
 		if (exp == null) {
 			if (expected != null) {
-				// TODO: Code bug -- expected a return value
+				// Code bug -- expected a return value
+			    report_error();
 			} else {
 				// No return value for void function
 				return null;
 			}
 		} else {
 			if (expected == null) {
-				// TODO: Code bug -- void cannot return a value
+				// Code bug -- void cannot return a value
+			    report_error();
 			} else {
 				// Check that types match
 				TYPE expT = exp.SemantMe();

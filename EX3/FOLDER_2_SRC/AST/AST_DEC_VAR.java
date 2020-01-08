@@ -64,8 +64,7 @@ public class AST_DEC_VAR extends AST_DEC
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
 		// Check that name does not already exist in the innermost scope
-		// TODO: Handle case of empty type list (as ok)
-		if (sym_table.getConstructedTypeList().find(name) != null) {
+		if (sym_table.getConstructedTypeList() != null && sym_table.getConstructedTypeList().find(name) != null) {
 			// TODO: Code bug -- name not available
 		}
 
@@ -73,7 +72,8 @@ public class AST_DEC_VAR extends AST_DEC
 		TYPE t = sym_table.find(this.type);
 		if (t == null || !t.isTypeName())
 		{
-			// TODO: Code bug -- type of variable does not exist in table or just is not a name a of a type
+			// Code bug -- type of variable does not exist in table or just is not a name a of a type
+		    report_error();
 		}
 
 		// Check initial value type
@@ -84,20 +84,23 @@ public class AST_DEC_VAR extends AST_DEC
 			if (!t.equals(t_init)) {
 				if (t_init.kind == KIND.NIL) {
 					if (t.kind != KIND.CLASS && t.kind != KIND.ARRAY) {
-						// TODO: Code bug -- nil is only allowed for class or array
+						// Code bug -- nil is only allowed for class or array
+					    report_error();
 					}
 				}
 				if (t_init.kind == KIND.CLASS) {
 					if (!((TYPE_CLASS)t_init).isAncestor(t.name)) {
-						// TODO: Code bug -- init is not decendent not nill
+						// Code bug -- init is not decendent not nil
+					    report_error();
 					}
 				}
-				// TODO: Code bug -- types do not strictly match and special cases all fail
+				// Code bug -- types do not strictly match and special cases all fail
+				report_error();
 			}
 		}
 
 		// Enter into symbol table
-		sym_table.enter(t);
+		sym_table.enter(new TYPE_VAR_DEC(t,this.name));
 
 		return null;
 	}
