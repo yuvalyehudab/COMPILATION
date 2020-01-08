@@ -74,7 +74,6 @@ public class AST_DEC_FUNC extends AST_DEC
 		TYPE_LIST type_list = null;
 
 		// Process parameter list
-		// TODO MAYBE: Don't reverese twice stupidly
 		for (AST_TYPE_NAME_LIST it = this.params; it  != null; it = it.tail)
 		{
 			// Lookup the name given to the currently processed parameter
