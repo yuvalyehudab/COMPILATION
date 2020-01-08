@@ -42,4 +42,11 @@ public class TYPE_CLASS extends TYPE
 		if (this.fatherClass == null) { return false; } // End of search.
 		return fatherClass.isAncestor(candidate);
 	}
+
+	public boolean equals(TYPE that) {
+		return (that != null
+			&& that.kind == KIND.CLASS
+			&& this.name.equals(that.name)
+		);
+	}
 }
