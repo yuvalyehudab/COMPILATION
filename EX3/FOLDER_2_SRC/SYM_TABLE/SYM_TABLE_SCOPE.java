@@ -11,6 +11,10 @@ public class SYM_TABLE_SCOPE {
     }
 
     public TYPE find (String name) {
+        if (types == null)
+        {
+            return null;
+        }
         return types.find(name);
     }
 
