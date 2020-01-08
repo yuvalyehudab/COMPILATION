@@ -56,42 +56,60 @@ public class AST_STMT_RETURN extends AST_STMT
 		// Initialize pointer to symbol table
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
-		// TODO: Check that one of scopes is a function declaration
+		// Check that one of scopes is a function declaration
+		if (!sym_table.isFunctionScope()) {
+		    // Code bug -- return outside of a function scope
+		    report_error();
+		}
 
 		TYPE expected = sym_table.getReturnType();
 
 		if (exp == null) {
 			if (expected != null) {
-				// TODO: Code bug -- expected a return value
+				// Code bug -- expected a return value
+			    report_error();
 			} else {
 				// No return value for void function
 				return null;
 			}
 		} else {
 			if (expected == null) {
-				// TODO: Code bug -- void cannot return a value
+				// Code bug -- void cannot return a value
+			    report_error();
 			} else {
 				// Check that types match
 				TYPE expT = exp.SemantMe();
 				TYPE varT = expected;
 
 				// Copied from AST_STMT_ASSIGN
-				// TODO: Abstract this to a function
+				// TODO MAYBE: Abstract this to a function
 				if (expT == TYPE_NIL.getInstance()) {
-					if (varT.isClass() || varT.isArray()) {
-						// nil is an acceptable class / array
-						return null;
-					} else {
-						// TODO: Code bug -- nil inappropriate
-					}
+				    if (varT.isClass() || varT.isArray()) {
+					// nil is an acceptable class / array
+					return null;
+				    } else {
+					// Code bug -- nil inappropriate
+					report_error();
+				    }
 				}
 
-				// TODO: handle inheritence
-
+				// Class inheritance
+				if (expT.isClass()) {
+				    if (expT.isAncestor(varT.name)) {
+					// legal inheritance or equal
+					return null;
+				    } else {
+					// Code bug -- no inheritance or equality
+					report_error();
+				    }
+				}
+			
+		
 				if (varT.name != expT.name)
-				{
-					// TODO: Code bug -- types mismatch
-				}
+				    {
+					// Code bug -- types mismatch
+					report_error();
+				    }
 				return null;
 			}
 		}

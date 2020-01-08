@@ -2,10 +2,14 @@ package SYM_TABLE;
 
 import TYPES.*;
 
- // TODO: put int, string, lib-funcs
-
 public class SYM_TABLE {
-    private TYPE_LIST defaults = null; // TODO: int, string, lib-funcs
+    private TYPE_LIST defaults = new TYPE_LIST(
+					       TYPE_INT.getInstance(),
+					       TYPE_STRING.getInstance(),
+					       new TYPE_FUNCTION("PrintInt",null,new TYPE_LIST(TYPE_INT.getInstance(),null)),
+					       new TYPE_FUNCTION("PrintString",null,new TYPE_LIST(TYPE_STRING.getInstance(),null)),
+					       new TYPE_FUNCTION("PrintTrace",null,new TYPE_LIST(null,null))
+					       );
     private TYPE_CLASS extending = null; // If currently defining a class that extends, this should point to father
     private TYPE returnType = null; // If currently defining a function, this should hold its return type
     // Starting with an empty global scope:
@@ -24,6 +28,10 @@ public class SYM_TABLE {
 
     public boolean isGlobal () {
         return (scopes.tail == null);
+    }
+
+    public boolean isFunctionScope () {
+	return scopes.isFunction();
     }
 
     public TYPE getReturnType () { return returnType; }
@@ -65,7 +73,8 @@ public class SYM_TABLE {
             if (type_in_ancestors != null) {
                 // Is defined, now check if shadowing is legit
                 if (!t.equals(type_in_ancestors)) {
-                    // TODO: Code bug -- shadowing of different type
+                    // Code bug -- shadowing of different type
+		    report_error();
                 }
                 // Override case, no need to enter this symbol again
             }
@@ -84,11 +93,16 @@ public class SYM_TABLE {
     }
 
     public void close() {
+	// Remove once closing CLASS
+	if (scopes.head.getKind() == CLASS) {
+	    extending = null;
+	}
+	// Remove once closing FUNCTION
+	if (scopes.head.getKind() == FUNCTION) {
+	    returnType = null;
+	}
+	// Get rid of scope
         scopes = scopes.tail;
-	// TODO: Only remove once closing CLASS
-        extending = null;
-	// TODO: Only remove once closing FUNCTION
-        returnType = null;
     }
 
 // TODO: Wrap into a singleton instance

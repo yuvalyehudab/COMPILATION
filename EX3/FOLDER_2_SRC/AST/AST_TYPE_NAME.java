@@ -49,4 +49,20 @@ public class AST_TYPE_NAME extends AST_Node
 			SerialNumber,
 			String.format("NAME:TYPE\n%s:%s",name,type));
 	}
+
+    public TYPE SemantMe() {
+		// Initialize pointer to symbol table
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+		
+		// Lookup the name
+		TYPE t = sym_table.find(this.name);
+		// Check it
+		if (t == null || !t.isTypeName())
+		    {
+			// Code bug -- type given does not exist in table or just is not a name a of a type
+			report_error();
+		    }
+			// Its fine, declare it
+		return new TYPE_VAR_DEC(t,this.name);
+    }
 }

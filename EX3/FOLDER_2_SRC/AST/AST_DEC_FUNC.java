@@ -63,7 +63,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		if (params != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,params.SerialNumber);		
 		if (body   != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,body.SerialNumber);		
 	}
-
+    /* OLD BROKEN CODE -- NOW USING AST_TYPE_NAME_LIST like a good semaritan
 	// Returns a type list from the parameters
 	private TYPE_LIST params_processor() {
 		// Initialize pointer to symbol table
@@ -74,7 +74,6 @@ public class AST_DEC_FUNC extends AST_DEC
 		TYPE_LIST type_list = null;
 
 		// Process parameter list
-		// TODO: Don't reverese twice stupidly
 		for (AST_TYPE_NAME_LIST it = this.params; it  != null; it = it.tail)
 		{
 			// Lookup the name given to the currently processed parameter
@@ -82,7 +81,8 @@ public class AST_DEC_FUNC extends AST_DEC
 			// Check it
 			if (t == null || !t.isTypeName())
 			{
-				// TODO: Code bug -- type given to param does not exist in table or just is not a name a of a type
+				// Code bug -- type given to param does not exist in table or just is not a name a of a type
+			    report_error();
 			}
 			// Its fine so add to list
 			type_list = new TYPE_LIST(t,type_list);
@@ -90,35 +90,40 @@ public class AST_DEC_FUNC extends AST_DEC
 		// The list was reveresed in the process, so reverse before returning the product
 		return type_list.reversed();
 	}
-
+    */
 	public TYPE SemantMe()
 	{
 		// Initialize pointer to symbol table
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
 		// Check that name does not already exist in scope
-		// TODO: Find out if allowed to define method with
+		// TODO MAYBE: Find out if allowed to define method with
 		//   name of globally defined function - if so,
 		//   change search to only current scope
 		if (sym_table.find(this.name) != null) {
-			// TODO: Code bug -- name not available
+			// Code bug -- name not available
+		    report_error();
 		}
 
 		// Check that the current scope is the global scope
-		// TODO: Scope is allowed to be a CLASS
-		if (!sym_table.isGlobal()) {
-			// TODO: Code bug -- declaring class in non-global scope
+		if (!sym_table.isGlobal() || !sym_table.getKind() == CLASS_SCOPE) {
+			// Code bug -- declaring class in non-global scope
+		    report_error();
 		}
 
 		// Check return type
 		TYPE returnType = sym_table.find(returnTypeName);
 		if (returnType == null || (!returnType.isTypeName() && !returnType.isVoid()))
 		{
-			// TODO: Code bug -- type to return does not exist in table or just is not a name a of a type nor void
+			// Code bug -- type to return does not exist in table or just is not a name a of a type nor void
+		    report_error();
 		}
 
 		// Process parameters
-		TYPE_LIST type_list = this.params_processor();
+		TYPE_LIST type_list;
+		if (this.params != null) {
+		    type_list = this.params.SemantMe();
+		}
 
 		// Type of the function
 		TYPE t = new TYPE_FUNCTION(name, returnType, type_list);

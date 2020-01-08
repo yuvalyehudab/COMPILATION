@@ -23,4 +23,8 @@ public class SYM_TABLE_SCOPE {
         this.types.tail = this.types;
         this.types.head = t;
     }
+
+    public boolean isFunction() {
+	return (this.kind == FUNCTION_SCOPE);
+    }
 }

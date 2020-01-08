@@ -70,7 +70,8 @@ public class AST_EXP_CALL extends AST_EXP
 		if (this.var != null) {
 			varType = this.var.SemantMe();
 			if (varType.kind != KIND.CLASS) {
-				// TODO: Code bug -- type of var is not a class so it does not have methods
+				// Code bug -- type of var is not a class so it does not have methods
+			    report_error();
 			}
 			funcType = ((TYPE_CLASS)varType).find(this.funcName);
 		} else {
@@ -79,7 +80,8 @@ public class AST_EXP_CALL extends AST_EXP
 
 		// Make sure it is a function
 		if (funcType == null || funcType.kind != KIND.FUNCTION) {
-			// TODO: Code bug -- function name not in table or not a name of a function
+			// Code bug -- function name not in table or not a name of a function
+		    report_error();
 		}
 
 		// Compute types of the arguments that were fed
@@ -87,13 +89,22 @@ public class AST_EXP_CALL extends AST_EXP
 		if (this.params != null) {
 			paramTypes = this.params.SemantMe();
 		} else {
-			paramTypes = new TYPE_LIST(null, null);
+			paramTypes = null;
 		}
 
 		// Then check that they have the expected type
 		TYPE_LIST expectedTypes = ((TYPE_FUNCTION)funcType).params;
-		if (!paramTypes.equals(expectedTypes)) {
-			// TODO: Code bug -- incorrect argument types
+		if (paramTypes != null && expectedTypes != null && !paramTypes.equals(expectedTypes)) {
+			// Code bug -- incorrect argument types
+		    report_error();
+		}
+		if (paramTypes == null && expectedTypes != null) {
+		    // Code bug -- no arguments though expected
+		    report_error();
+		}
+		if (paramTypes != null && expectedTypes == null) {
+		    // Code bug -- arguments though unexpected
+		    report_error();
 		}
 
 		/* Return expected type */

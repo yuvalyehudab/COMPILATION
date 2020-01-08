@@ -24,10 +24,9 @@ public class TYPE_FUNCTION extends TYPE
 	}
 
 	public boolean equals(TYPE that) {
-		return (that != null && that.kind == KIND.FUNCTION
-				&& this.name.equals(that.name)
-				&& this.returnType.equals(((TYPE_FUNCTION)that).returnType)
-				&& this.params.equals(((TYPE_FUNCTION)that).params)
+		return (that != null
+			&& that.kind == KIND.FUNCTION
+			&& this.name.equals(that.name)
 		);
 	}
 }

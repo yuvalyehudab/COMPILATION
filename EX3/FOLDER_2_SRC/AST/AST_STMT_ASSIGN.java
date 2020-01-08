@@ -77,15 +77,27 @@ public class AST_STMT_ASSIGN extends AST_STMT
 				// nil is an acceptable class / array
 				return null;
 			} else {
-				// TODO: Code bug -- nil inappropriate
+				// Code bug -- nil inappropriate
+			    report_error();
 			}
 		}
 
-		// TODO: Class inheritance
+		// Class inheritance
+		if (expT.isClass()) {
+		    if (expT.isAncestor(varT.name)) {
+			// legal inheritance or equal
+			return null;
+		    } else {
+			// Code bug -- no inheritance or equality
+			report_error();
+		    }
+		}
+			
 		
 		if (varT.name != expT.name)
 		{
-			// TODO: Code bug -- types mismatch
+			// Code bug -- types mismatch
+		    report_error();
 		}
 		return null;
 	}
