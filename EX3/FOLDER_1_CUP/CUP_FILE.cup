@@ -174,7 +174,7 @@ stmtList	::=		stmt:s stmtList:l	{: RESULT = new AST_STMT_LIST(s, l, sleft);    :
 stmt		::=		varDec:v                                                    {: RESULT = new AST_STMT_DEC_VAR(v, vleft);		:}
 					| callExp:callExp SEMICOLON									{: RESULT = new AST_STMT_CALL(callExp, callExpleft);		:}
 					| RETURN exp:e	SEMICOLON									{: RESULT = new AST_STMT_RETURN(e, eleft);			:}
-					| RETURN:r		SEMICOLON									{: RESULT = new AST_STMT_RETURN(rleft);		:}
+					| RETURN:r		SEMICOLON									{: RESULT = new AST_STMT_RETURN(null, rleft);		:}
 					| varExp:v ASSIGN exp:e SEMICOLON							{: RESULT = new AST_STMT_ASSIGN(v, e, vleft);		:}
 					| varExp:v ASSIGN newExp:ne SEMICOLON						{: RESULT = new AST_STMT_ASSIGN(v, ne, vleft);		:}
 					| IF:i    LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_IF(   cond, body, ileft);	:}

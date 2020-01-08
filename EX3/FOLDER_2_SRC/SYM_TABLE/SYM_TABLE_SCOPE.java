@@ -25,6 +25,6 @@ public class SYM_TABLE_SCOPE {
     }
 
     public boolean isFunction() {
-	return (this.kind == FUNCTION_SCOPE);
+	return (this.kind == SCOPE_KIND.FUNCTION_SCOPE);
     }
 }

@@ -94,11 +94,11 @@ public class SYM_TABLE {
 
     public void close() {
 	// Remove once closing CLASS
-	if (scopes.head.getKind() == CLASS) {
+	if (scopes.head.getKind() == SCOPE_KIND.CLASS_SCOPE) {
 	    extending = null;
 	}
 	// Remove once closing FUNCTION
-	if (scopes.head.getKind() == FUNCTION) {
+	if (scopes.head.getKind() == SCOPE_KIND.FUNCTION_SCOPE) {
 	    returnType = null;
 	}
 	// Get rid of scope

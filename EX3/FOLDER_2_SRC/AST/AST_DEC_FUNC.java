@@ -106,7 +106,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		}
 
 		// Check that the current scope is the global scope
-		if (!sym_table.isGlobal() || !sym_table.getKind() == CLASS_SCOPE) {
+		if (!(sym_table.isGlobal()) || !(sym_table.getKind() == SCOPE_KIND.CLASS_SCOPE)) {
 			// Code bug -- declaring class in non-global scope
 		    report_error();
 		}
@@ -120,7 +120,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		}
 
 		// Process parameters
-		TYPE_LIST type_list;
+		TYPE_LIST type_list = null;
 		if (this.params != null) {
 		    type_list = this.params.SemantMe();
 		}

@@ -95,7 +95,7 @@ public class AST_STMT_RETURN extends AST_STMT
 
 				// Class inheritance
 				if (expT.isClass()) {
-				    if (expT.isAncestor(varT.name)) {
+				    if (((TYPE_CLASS)expT).isAncestor(varT.name)) {
 					// legal inheritance or equal
 					return null;
 				    } else {
