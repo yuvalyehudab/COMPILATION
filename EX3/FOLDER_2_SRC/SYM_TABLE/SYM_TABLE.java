@@ -25,6 +25,10 @@ public class SYM_TABLE {
         return (scopes.head.getKind());
     }
 
+    public TYPE_CLASS getExtending () {
+	return extending;
+    }
+
     public boolean isGlobal () {
         return (scopes.tail == null);
     }
@@ -65,21 +69,7 @@ public class SYM_TABLE {
     }
 
     public void enter(TYPE t) {
-        // Check that there is no shadowing different types
-        if (extending != null) {
-            // Look if method/constant is already defined
-            TYPE type_in_ancestors = extending.find(t.name);
-            if (type_in_ancestors != null) {
-                // Is defined, now check if shadowing is legit
-                if (!t.equals(type_in_ancestors)) {
-                    // Code bug -- shadowing of different type
-		    report_error();
-                }
-                // Override case, no need to enter this symbol again
-            }
-        } else {
-            scopes.head.add(t);
-        }
+	scopes.head.add(t);
     }
 
     public void open(SYM_TABLE_SCOPE init, TYPE_CLASS ec, TYPE rt) {

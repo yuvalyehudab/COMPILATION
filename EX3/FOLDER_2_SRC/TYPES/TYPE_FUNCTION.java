@@ -27,6 +27,8 @@ public class TYPE_FUNCTION extends TYPE
 		return (that != null
 			&& that.kind == KIND.FUNCTION
 			&& this.name.equals(that.name)
+			&& this.params.equals(that.params)
+			&& this.returnType.equals(that.returnType)
 		);
 	}
 }

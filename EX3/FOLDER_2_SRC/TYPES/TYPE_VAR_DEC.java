@@ -10,4 +10,12 @@ public class TYPE_VAR_DEC extends TYPE
 		this.t = t;
 		this.name = name;
 	}
+
+    public boolean equals(TYPE that) {
+		return (that != null
+			&& that.kind != KIND.FUNCTION
+			&& this.name.equals(that.name)
+			&& this.t.name.equals(that.t.name)
+		);
+    }
 }

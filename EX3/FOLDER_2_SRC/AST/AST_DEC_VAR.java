@@ -77,6 +77,21 @@ public class AST_DEC_VAR extends AST_DEC
 		    report_error();
 		}
 
+		// Check that there is no shadowing different types
+		TYPE_CLASS extending = sym_table.getExtending();
+		if (extending != null) {
+		    // Look if method/constant is already defined
+		    TYPE type_in_ancestors = extending.find(t.name);
+		    if (type_in_ancestors != null) {
+			// Is defined, now check if shadowing is legit
+			if (!t.equals(type_in_ancestors)) {
+			    // Code bug -- shadowing of different type
+			    report_error();
+			}
+			// Override case, no need to enter this symbol again
+		    }
+		}
+
 		// Check initial value type
 		if (this.initialValue != null) {
 		    // t_init cannot be null because grammar says it is an expression
