@@ -183,7 +183,7 @@ everything:
 	@echo "*                           *"
 	@echo "*                           *"
 	@echo "*****************************"
-	java -jar COMPILER ${INPUT} ${OUTPUT}
+	java -jar COMPILER ${INPUT} ${OUTPUT} > /dev/null 2>&1
 	@echo "\n"
 	@echo "***************************************"
 	@echo "*                                     *"
