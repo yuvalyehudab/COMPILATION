@@ -15,7 +15,7 @@ public class TYPE_VAR_DEC extends TYPE
 		return (that != null
 			&& that.kind != KIND.FUNCTION
 			&& this.name.equals(that.name)
-			&& this.t.name.equals(that.t.name)
+			&& this.t.name.equals(((TYPE_VAR_DEC)that).t.name)
 		);
     }
 }
