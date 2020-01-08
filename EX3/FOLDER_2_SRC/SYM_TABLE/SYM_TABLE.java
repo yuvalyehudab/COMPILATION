@@ -30,6 +30,10 @@ public class SYM_TABLE {
         return (scopes.tail == null);
     }
 
+    public boolean isFunctionScope () {
+	return scopes.isFunction();
+    }
+
     public TYPE getReturnType () { return returnType; }
 
     public TYPE find(String name) {
