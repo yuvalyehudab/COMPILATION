@@ -82,7 +82,17 @@ public class AST_STMT_ASSIGN extends AST_STMT
 			}
 		}
 
-		// TODO: Class inheritance
+		// Class inheritance
+		if (expT.isClass()) {
+		    if (expT.isAncestor(varT.name)) {
+			// legal inheritance or equal
+			return null;
+		    } else {
+			// Code bug -- no inheritance or equality
+			report_error();
+		    }
+		}
+			
 		
 		if (varT.name != expT.name)
 		{
