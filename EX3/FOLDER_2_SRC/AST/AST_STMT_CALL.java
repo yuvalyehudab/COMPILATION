@@ -1,5 +1,8 @@
 package AST;
 
+import TYPES.*;
+import SYM_TABLE.*;
+
 public class AST_STMT_CALL extends AST_STMT
 {
 	/****************/
@@ -36,5 +39,9 @@ public class AST_STMT_CALL extends AST_STMT
 		/* PRINT Edges to AST GRAPHVIZ DOT file */
 		/****************************************/
 		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,callExp.SerialNumber);		
+	}
+
+	public TYPE SemantMe() {
+		return callExp.SemantMe();
 	}
 }

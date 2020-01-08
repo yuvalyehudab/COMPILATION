@@ -1,6 +1,7 @@
 package AST;
 
 import TYPES.*;
+import SYM_TABLE.*;
 
 public class AST_EXP_NEW extends AST_EXP
 {
@@ -61,15 +62,25 @@ public class AST_EXP_NEW extends AST_EXP
 	}
 	public TYPE SemantMe()
 	{
-		TYPE t1 = null;
-		
-		if (exp  != null) t1 = exp.SemantMe();
-		
-		if (t1 == TYPE_INT.getInstance())
-		{
-			return TYPE_INT.getInstance();
+		// Initialize pointer to symbol table
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+
+		// Lookup name of type
+		TYPE t = sym_table.find(name);
+
+		if (exp == null && t != null && t.isClass()) {
+			// Class case
+			return t;
+		} else if (exp != null && t != null && t.isArray()) {
+			// Array case
+			TYPE eT = exp.SemantMe();
+			if (eT != TYPE_INT.getInstance()) {
+				// TODO: Code bug -- length must be an integer
+			}
+			return t;
 		}
-		System.exit(0);
+
+		// TODO: Code bug -- must be class or array with length
 		return null;
 	}
 

@@ -35,4 +35,32 @@ public class TYPE_LIST
 		// Check tail non-null case
 		return this.tail.equals(that.tail);
 	}
+
+	/***/
+	/* FIND */
+	/***/
+	public TYPE find(String name) 
+	{
+		TYPE_LIST tl = this;
+		while (tl.head != null)
+		{
+			if (tl.head.name.equals(name))
+			{
+				return tl.head;
+			}
+			tl = tl.tail;
+		}
+		return null;
+	}
+
+	/***/
+	/* REVERSE */
+	/***/
+	public TYPE_LIST reversed() {
+		TYPE_LIST rev = null;
+		for (TYPE_LIST it = this ; it != null ; it = it.tail) {
+			rev = new TYPE_LIST(it.head, rev);
+		}
+		return rev;
+	}
 }

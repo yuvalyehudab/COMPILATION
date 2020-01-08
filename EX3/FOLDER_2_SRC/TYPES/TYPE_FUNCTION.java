@@ -15,10 +15,19 @@ public class TYPE_FUNCTION extends TYPE
 	/****************/
 	/* CTROR(S) ... */
 	/****************/
-	public TYPE_FUNCTION(TYPE returnType,String name,TYPE_LIST params)
+	public TYPE_FUNCTION(String name,TYPE returnType,TYPE_LIST params)
 	{
+		this.kind = KIND.FUNCTION;
 		this.name = name;
 		this.returnType = returnType;
 		this.params = params;
+	}
+
+	public boolean equals(TYPE that) {
+		return (that != null && that.kind == KIND.FUNCTION
+				&& this.name.equals(that.name)
+				&& this.returnType.equals(((TYPE_FUNCTION)that).returnType)
+				&& this.params.equals(((TYPE_FUNCTION)that).params)
+		);
 	}
 }

@@ -207,7 +207,7 @@ callExp		::=		ID:funcName LPAREN expListComma:el	RPAREN	{: RESULT = new AST_EXP_
 					| varExp:v DOT ID:funcName LPAREN expListComma:el	RPAREN	{: RESULT = new AST_EXP_CALL(v,	funcName,el);:};
 					
 newExp		::=			NEW ID:name	LBRACK exp:e	RBRACK	{:	RESULT = new AST_EXP_NEW(name, e);	:}
-					|	NEW ID:name	LBRACK 			RBRACK	{:	RESULT = new AST_EXP_NEW(name, null);	:};
+					|	NEW ID:name	       			      	{:	RESULT = new AST_EXP_NEW(name, null);	:};
 					
 expListComma	::=		exp:e COMMA expListComma:el	{: RESULT = new AST_EXP_LIST(e,el);   :}
 						| exp:e						{: RESULT = new AST_EXP_LIST(e,null); :};

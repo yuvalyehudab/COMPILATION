@@ -17,4 +17,9 @@ public abstract class AST_Node
 	{
 		System.out.print("AST NODE UNKNOWN\n");
 	}
+
+	public void report_error()
+	{
+		System.out.format("line: %d\n", lineNumber);
+	}
 }

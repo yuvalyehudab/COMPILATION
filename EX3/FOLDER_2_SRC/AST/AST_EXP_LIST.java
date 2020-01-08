@@ -1,6 +1,7 @@
 package AST;
 
 import TYPES.*;
+import SYM_TABLE.*;
 
 public class AST_EXP_LIST extends AST_Node
 {
@@ -57,6 +58,10 @@ public class AST_EXP_LIST extends AST_Node
 	/* SEMANTICS */
 	/***/
 	public TYPE_LIST SemantMe() {
-		return new TYPE_LIST(head.SemantMe(),tail.SemantMe());
+		TYPE headS = null;
+		TYPE_LIST tailS = null;
+		if (head != null) { headS = head.SemantMe();}
+		if (tail != null) { tailS = tail.SemantMe();}
+		return new TYPE_LIST(headS,tailS);
 	}
 }

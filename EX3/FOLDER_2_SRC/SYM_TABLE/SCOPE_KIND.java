@@ -1,0 +1,5 @@
+package SYM_TABLE;
+
+public enum SCOPE_KIND {
+    CLASS_SCOPE, FUNCTION_SCOPE
+}

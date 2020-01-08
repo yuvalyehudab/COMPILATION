@@ -5,7 +5,7 @@ public class TYPE_CLASS extends TYPE
 	/*********************************************************************/
 	/* If this class does not extend a father class this should be null  */
 	/*********************************************************************/
-	public TYPE_CLASS father;
+	public TYPE_CLASS fatherClass;
 
 	/**************************************************/
 	/* Gather up all data members in one place        */
@@ -17,10 +17,29 @@ public class TYPE_CLASS extends TYPE
 	/****************/
 	/* CTROR(S) ... */
 	/****************/
-	public TYPE_CLASS(TYPE_CLASS father,String name,TYPE_LIST data_members)
+	public TYPE_CLASS(String name,TYPE_LIST data_members, TYPE_CLASS father)
 	{
+		this.kind = KIND.CLASS;
 		this.name = name;
-		this.father = father;
+		this.fatherClass = fatherClass;
 		this.data_members = data_members;
+	}
+
+	public TYPE find (String name) {
+	    // TODO: this.data_members may be empty
+		TYPE here = this.data_members.find(name);
+		if (here != null) {
+			return here;
+		}
+		if (this.fatherClass != null) {
+			return this.fatherClass.find(name);
+		}
+		return null;
+	}
+
+	public boolean isAncestor (String candidate) {
+		if (this.name == candidate) { return true; } // Found it!
+		if (this.fatherClass == null) { return false; } // End of search.
+		return fatherClass.isAncestor(candidate);
 	}
 }

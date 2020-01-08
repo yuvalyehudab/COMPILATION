@@ -1,6 +1,7 @@
 package AST;
 
 import TYPES.*;
+import SYM_TABLE.*;
 
 public class AST_TYPE_NAME_LIST extends AST_Node
 {
@@ -53,21 +54,5 @@ public class AST_TYPE_NAME_LIST extends AST_Node
 		/****************************************/
 		if (head != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,head.SerialNumber);
 		if (tail != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,tail.SerialNumber);
-	}
-
-	public TYPE_LIST SemantMe()
-	{
-		if (tail == null)
-		{
-			return new TYPE_LIST(
-				head.SemantMe(),
-				null);
-		}
-		else
-		{
-			return new TYPE_LIST(
-				head.SemantMe(),
-				tail.SemantMe());
-		}
 	}
 }

@@ -1,6 +1,7 @@
 package AST;
 
 import TYPES.*;
+import SYM_TABLE.*;
 
 public class AST_STMT_ASSIGN extends AST_STMT
 {
@@ -64,15 +65,27 @@ public class AST_STMT_ASSIGN extends AST_STMT
 	}
 	public TYPE SemantMe()
 	{
-		TYPE t1 = null;
-		TYPE t2 = null;
-		System.out.format("\n\nenter AST_STMT\nassign var := exp\nline:%d\n", lineNumber);
-		if (var != null) t1 = var.SemantMe();
-		if (exp != null) t2 = exp.SemantMe();
+		// Initialize pointer to symbol table
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+
+		//sym_table.find(var)
+		TYPE varT = var.SemantMe();
+		TYPE expT = exp.SemantMe();
+
+		if (expT == TYPE_NIL.getInstance()) {
+			if (varT.isClass() || varT.isArray()) {
+				// nil is an acceptable class / array
+				return null;
+			} else {
+				// TODO: Code bug -- nil inappropriate
+			}
+		}
+
+		// TODO: Class inheritance
 		
-		if (t1 != t2)
+		if (varT.name != expT.name)
 		{
-			System.out.format(">> ERROR [%d:%d] type mismatch for var := exp\n",6,6);				
+			// TODO: Code bug -- types mismatch
 		}
 		return null;
 	}

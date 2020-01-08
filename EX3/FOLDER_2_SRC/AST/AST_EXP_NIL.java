@@ -1,6 +1,7 @@
 package AST;
 
 import TYPES.*;
+import SYM_TABLE.*;
 
 public class AST_EXP_NIL extends AST_EXP
 {
@@ -36,6 +37,6 @@ public class AST_EXP_NIL extends AST_EXP
 	}
 	public TYPE SemantMe()
 	{
-		return TYPE_INT.getInstance();
+		return TYPE_NIL.getInstance();
 	}
 }

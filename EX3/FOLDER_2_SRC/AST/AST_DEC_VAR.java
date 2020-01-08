@@ -1,7 +1,7 @@
 package AST;
 
 import TYPES.*;
-import SYMBOL_TABLE.*;
+import SYM_TABLE.*;
 
 public class AST_DEC_VAR extends AST_DEC
 {
@@ -60,35 +60,46 @@ public class AST_DEC_VAR extends AST_DEC
 
 	public TYPE SemantMe()
 	{
-		TYPE t;
-	
-		/****************************/
-		/* [1] Check If Type exists */
-		/****************************/
-		t = SYMBOL_TABLE.getInstance().find(type);
-		if (t == null)
-		{
-			System.out.format(">> ERROR [%d:%d] non existing type %s\n",2,2,type);
-			System.exit(0);
-		}
-		
-		/**************************************/
-		/* [2] Check That Name does NOT exist */
-		/**************************************/
-		if (SYMBOL_TABLE.getInstance().find(name) != null)
-		{
-			System.out.format(">> ERROR [%d:%d] variable %s already exists in scope\n",2,2,name);				
+		// Initialize pointer to symbol table
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+
+		// Check that name does not already exist in the innermost scope
+		// TODO: Handle case of empty type list (as ok)
+		if (sym_table.getConstructedTypeList().find(name) != null) {
+			// TODO: Code bug -- name not available
 		}
 
-		/***************************************************/
-		/* [3] Enter the Function Type to the Symbol Table */
-		/***************************************************/
-		SYMBOL_TABLE.getInstance().enter(name,t);
+		// Check declared type
+		TYPE t = sym_table.find(this.type);
+		if (t == null || !t.isTypeName())
+		{
+			// TODO: Code bug -- type of variable does not exist in table or just is not a name a of a type
+		}
 
-		/*********************************************************/
-		/* [4] Return value is irrelevant for class declarations */
-		/*********************************************************/
-		return null;		
+		// Check initial value type
+		if (this.initialValue != null) {
+		    // t_init cannot be null because grammar says it is an expression
+			TYPE t_init = this.initialValue.SemantMe();
+			// Check that they match, or initial is decendent or nil
+			if (!t.equals(t_init)) {
+				if (t_init.kind == KIND.NIL) {
+					if (t.kind != KIND.CLASS && t.kind != KIND.ARRAY) {
+						// TODO: Code bug -- nil is only allowed for class or array
+					}
+				}
+				if (t_init.kind == KIND.CLASS) {
+					if (!((TYPE_CLASS)t_init).isAncestor(t.name)) {
+						// TODO: Code bug -- init is not decendent not nill
+					}
+				}
+				// TODO: Code bug -- types do not strictly match and special cases all fail
+			}
+		}
+
+		// Enter into symbol table
+		sym_table.enter(t);
+
+		return null;
 	}
-	
+
 }

@@ -1,7 +1,7 @@
 package AST;
 
 import TYPES.*;
-import SYMBOL_TABLE.*;
+import SYM_TABLE.*;
 
 public class AST_DEC_CLASS extends AST_DEC
 {
@@ -62,27 +62,56 @@ public class AST_DEC_CLASS extends AST_DEC
 	
 	public TYPE SemantMe()
 	{
-		// TODO: Check that the current scope is the global scope
+		// Point at the table
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+
+		// Check that name does not already exist in scope
+		if (sym_table.find(this.name) != null) {
+			// TODO: Code bug -- name not available
+		}
+
+		// Check that the current scope is the global scope
+		if (!sym_table.isGlobal()) {
+			// TODO: Code bug -- declaring class in non-global scope
+		}
+
+		TYPE fatherClass = null;
+		// Find father if needed
+		if (this.father != null) {
+			fatherClass = sym_table.find(this.father);
+			if (fatherClass == null) {
+				// TODO: Code bug -- class to be extended does not exist
+			}
+			if (fatherClass.kind != KIND.CLASS) {
+				// TODO: Code bug -- extending a non-class
+			}
+		}
+		// At this point fatherClass is a class or null
+
 		System.out.println("enter semant AST_DEC_CLASS");
 		/*************************/
 		/* [1] Begin Class Scope */
 		/*************************/
-		SYMBOL_TABLE.getInstance().beginScope();
+		sym_table.open(new SYM_TABLE_SCOPE(SCOPE_KIND.CLASS_SCOPE, null), (TYPE_CLASS)fatherClass, null);
 
 		/***************************/
 		/* [2] Semant Data Members */
 		/***************************/
-		TYPE_CLASS t = new TYPE_CLASS(null,name,data_members.SemantMe());
+		// Semant the data members
+		data_members.SemantMe();
+
+		// Construct the class
+		TYPE_CLASS result = new TYPE_CLASS(this.name, sym_table.getConstructedTypeList(), (TYPE_CLASS)fatherClass);
 
 		/*****************/
 		/* [3] End Scope */
 		/*****************/
-		SYMBOL_TABLE.getInstance().endScope();
+		sym_table.close();
 
 		/************************************************/
 		/* [4] Enter the Class Type to the Symbol Table */
 		/************************************************/
-		SYMBOL_TABLE.getInstance().enter(name,t);
+		sym_table.enter(result);
 
 		/*********************************************************/
 		/* [5] Return value is irrelevant for class declarations */
