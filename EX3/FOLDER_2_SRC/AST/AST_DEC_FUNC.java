@@ -128,6 +128,21 @@ public class AST_DEC_FUNC extends AST_DEC
 		// Type of the function
 		TYPE t = new TYPE_FUNCTION(name, returnType, type_list);
 
+		// Check that there is no shadowing different types
+		TYPE_CLASS extending = sym_table.getExtending();
+		if (extending != null) {
+		    // Look if method/constant is already defined
+		    TYPE type_in_ancestors = extending.find(t.name);
+		    if (type_in_ancestors != null) {
+			// Is defined, now check if shadowing is legit
+			if (!t.equals(type_in_ancestors)) {
+			    // Code bug -- shadowing of different type
+			    report_error();
+			}
+			// Override case, no need to enter this symbol again
+		    }
+		}
+
 		// Enter into symbol table now to support recursion
 		sym_table.enter(t);
 
