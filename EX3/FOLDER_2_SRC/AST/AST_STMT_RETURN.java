@@ -82,22 +82,34 @@ public class AST_STMT_RETURN extends AST_STMT
 				TYPE varT = expected;
 
 				// Copied from AST_STMT_ASSIGN
-				// TODO: Abstract this to a function
+				// TODO MAYBE: Abstract this to a function
 				if (expT == TYPE_NIL.getInstance()) {
-					if (varT.isClass() || varT.isArray()) {
-						// nil is an acceptable class / array
-						return null;
-					} else {
-						// TODO: Code bug -- nil inappropriate
-					}
+				    if (varT.isClass() || varT.isArray()) {
+					// nil is an acceptable class / array
+					return null;
+				    } else {
+					// Code bug -- nil inappropriate
+					report_error();
+				    }
 				}
 
-				// TODO: handle inheritence
-
+				// Class inheritance
+				if (expT.isClass()) {
+				    if (expT.isAncestor(varT.name)) {
+					// legal inheritance or equal
+					return null;
+				    } else {
+					// Code bug -- no inheritance or equality
+					report_error();
+				    }
+				}
+			
+		
 				if (varT.name != expT.name)
-				{
-					// TODO: Code bug -- types mismatch
-				}
+				    {
+					// Code bug -- types mismatch
+					report_error();
+				    }
 				return null;
 			}
 		}
