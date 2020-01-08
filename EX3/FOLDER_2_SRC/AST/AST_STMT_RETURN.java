@@ -56,6 +56,8 @@ public class AST_STMT_RETURN extends AST_STMT
 		// Initialize pointer to symbol table
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
+		// TODO: Check that one of scopes is a function declaration
+
 		TYPE expected = sym_table.getReturnType();
 
 		if (exp == null) {
@@ -83,6 +85,8 @@ public class AST_STMT_RETURN extends AST_STMT
 						// TODO: Code bug -- nil inappropriate
 					}
 				}
+
+				// TODO: handle inheritence
 
 				if (varT.name != expT.name)
 				{

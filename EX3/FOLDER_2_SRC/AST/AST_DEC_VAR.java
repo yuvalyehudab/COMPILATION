@@ -64,11 +64,12 @@ public class AST_DEC_VAR extends AST_DEC
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
 		// Check that name does not already exist in the innermost scope
+		// TODO: Handle case of empty type list (as ok)
 		if (sym_table.getConstructedTypeList().find(name) != null) {
 			// TODO: Code bug -- name not available
 		}
 
-		// Check return type
+		// Check declared type
 		TYPE t = sym_table.find(this.type);
 		if (t == null || !t.isTypeName())
 		{
@@ -77,6 +78,7 @@ public class AST_DEC_VAR extends AST_DEC
 
 		// Check initial value type
 		if (this.initialValue != null) {
+		    // t_init cannot be null because grammar says it is an expression
 			TYPE t_init = this.initialValue.SemantMe();
 			// Check that they match, or initial is decendent or nil
 			if (!t.equals(t_init)) {

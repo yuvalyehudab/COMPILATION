@@ -85,10 +85,6 @@ public class AST_EXP_BINOP extends AST_EXP
 		TYPE_INT type_int = TYPE_INT.getInstance();
 		TYPE_STRING type_string = TYPE_STRING.getInstance();
 
-		if (left == null || right == null) {
-			// COMPILER BUG
-		}
-
 		TYPE t1 = left.SemantMe();
 		TYPE t2 = right.SemantMe();
 
@@ -104,9 +100,11 @@ public class AST_EXP_BINOP extends AST_EXP
 					// Comparing nil with nil is ok
 					return ok;
 				}
-				if (!(t1.kind == KIND.CLASS || t2.kind == KIND.CLASS || t1.kind == KIND.ARRAY || t2.kind == KIND.ARRAY)) {
-					// TODO: Code bug -- comparing nil with something other than nil, class, array
+				if (t1.kind == KIND.CLASS || t2.kind == KIND.CLASS || t1.kind == KIND.ARRAY || t2.kind == KIND.ARRAY) {
+    				        // Comparing nil with class or array is ok
+				        return ok;
 				}
+				// TODO: Code bug -- comparing nil with something other than nil, class, array
 			}
 
 			// Handling the class case
@@ -118,6 +116,7 @@ public class AST_EXP_BINOP extends AST_EXP
 			}
 
 			// Any other case must have strictly equal types
+			// No need to check t.isTypeName() because these are expression
 			if (t1.name.equals(t2.name)) {
 				return ok;
 			}
@@ -136,8 +135,8 @@ public class AST_EXP_BINOP extends AST_EXP
 			if (areInt)		{ return type_int; 		}
 			if (areString) 	{ return type_string; 	}
 		}
-		return null;
 		// TODO: Code bug -- types do not match operation
+		return null;
 	}
 
 }

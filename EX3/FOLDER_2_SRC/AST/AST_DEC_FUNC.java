@@ -70,9 +70,11 @@ public class AST_DEC_FUNC extends AST_DEC
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
 		// Initialize gathering list
+		// TOOD: Must not be null
 		TYPE_LIST type_list = null;
 
 		// Process parameter list
+		// TODO: Don't reverese twice stupidly
 		for (AST_TYPE_NAME_LIST it = this.params; it  != null; it = it.tail)
 		{
 			// Lookup the name given to the currently processed parameter
@@ -95,11 +97,15 @@ public class AST_DEC_FUNC extends AST_DEC
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
 		// Check that name does not already exist in scope
+		// TODO: Find out if allowed to define method with
+		//   name of globally defined function - if so,
+		//   change search to only current scope
 		if (sym_table.find(this.name) != null) {
 			// TODO: Code bug -- name not available
 		}
 
 		// Check that the current scope is the global scope
+		// TODO: Scope is allowed to be a CLASS
 		if (!sym_table.isGlobal()) {
 			// TODO: Code bug -- declaring class in non-global scope
 		}

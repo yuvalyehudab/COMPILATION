@@ -68,10 +68,10 @@ public class AST_EXP_NEW extends AST_EXP
 		// Lookup name of type
 		TYPE t = sym_table.find(name);
 
-		if (exp == null && t.isClass()) {
+		if (exp == null && t != null && t.isClass()) {
 			// Class case
 			return t;
-		} else if (exp != null && t.isArray()) {
+		} else if (exp != null && t != null && t.isArray()) {
 			// Array case
 			TYPE eT = exp.SemantMe();
 			if (eT != TYPE_INT.getInstance()) {
@@ -81,16 +81,6 @@ public class AST_EXP_NEW extends AST_EXP
 		}
 
 		// TODO: Code bug -- must be class or array with length
-
-		TYPE t1 = null;
-		
-		if (exp  != null) t1 = exp.SemantMe();
-		
-		if (t1 == TYPE_INT.getInstance())
-		{
-			return TYPE_INT.getInstance();
-		}
-		System.exit(0);
 		return null;
 	}
 

@@ -41,7 +41,7 @@ public class TYPE_LIST
 	/***/
 	public TYPE find(String name) 
 	{
-		/*TYPE_LIST tl = this;
+		TYPE_LIST tl = this;
 		while (tl.head != null)
 		{
 			if (tl.head.name.equals(name))
@@ -49,10 +49,6 @@ public class TYPE_LIST
 				return tl.head;
 			}
 			tl = tl.tail;
-		}
-		*/
-		if (this.head.name.equals(name)) {
-			return this.head;
 		}
 		return null;
 	}

@@ -69,7 +69,7 @@ public class AST_EXP_CALL extends AST_EXP
 		// Set funcType
 		if (this.var != null) {
 			varType = this.var.SemantMe();
-			if (varType.getKind() != KIND.CLASS) {
+			if (varType.kind != KIND.CLASS) {
 				// TODO: Code bug -- type of var is not a class so it does not have methods
 			}
 			funcType = ((TYPE_CLASS)varType).find(this.funcName);
@@ -78,7 +78,7 @@ public class AST_EXP_CALL extends AST_EXP
 		}
 
 		// Make sure it is a function
-		if (funcType == null || funcType.getKind() != KIND.FUNCTION) {
+		if (funcType == null || funcType.kind != KIND.FUNCTION) {
 			// TODO: Code bug -- function name not in table or not a name of a function
 		}
 
@@ -92,7 +92,7 @@ public class AST_EXP_CALL extends AST_EXP
 
 		// Then check that they have the expected type
 		TYPE_LIST expectedTypes = ((TYPE_FUNCTION)funcType).params;
-		if (!expectedTypes.equals(paramTypes)) {
+		if (!paramTypes.equals(expectedTypes)) {
 			// TODO: Code bug -- incorrect argument types
 		}
 

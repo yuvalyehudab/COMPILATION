@@ -5,7 +5,7 @@ import TYPES.*;
  // TODO: put int, string, lib-funcs
 
 public class SYM_TABLE {
-    private TYPE_LIST defaults = null;
+    private TYPE_LIST defaults = null; // TODO: int, string, lib-funcs
     private TYPE_CLASS extending = null; // If currently defining a class that extends, this should point to father
     private TYPE returnType = null; // If currently defining a function, this should hold its return type
     // Starting with an empty global scope:
@@ -85,7 +85,9 @@ public class SYM_TABLE {
 
     public void close() {
         scopes = scopes.tail;
+	// TODO: Only remove once closing CLASS
         extending = null;
+	// TODO: Only remove once closing FUNCTION
         returnType = null;
     }
 

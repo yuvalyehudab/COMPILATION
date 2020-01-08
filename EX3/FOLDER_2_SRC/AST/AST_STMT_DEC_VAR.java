@@ -24,12 +24,6 @@ public class AST_STMT_DEC_VAR extends AST_STMT
 		this.var = var;
 	}
 	
-	public TYPE SemantMe()
-	{
-		System.out.format("\nenter stmt dec var\nline:%d\n\n", lineNumber);
-		return var.SemantMe();
-	}
-	
 	public void PrintMe()
 	{
 		var.PrintMe();
@@ -45,5 +39,11 @@ public class AST_STMT_DEC_VAR extends AST_STMT
 		/* PRINT Edges to AST GRAPHVIZ DOT file */
 		/****************************************/
 		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,var.SerialNumber);		
+	}
+	
+	public TYPE SemantMe()
+	{
+		System.out.format("\nenter stmt dec var\nline:%d\n\n", lineNumber);
+		return var.SemantMe();
 	}
 }

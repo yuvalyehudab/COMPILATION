@@ -26,6 +26,7 @@ public class TYPE_CLASS extends TYPE
 	}
 
 	public TYPE find (String name) {
+	    // TODO: this.data_members may be empty
 		TYPE here = this.data_members.find(name);
 		if (here != null) {
 			return here;

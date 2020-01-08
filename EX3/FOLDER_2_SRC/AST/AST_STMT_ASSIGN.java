@@ -81,6 +81,8 @@ public class AST_STMT_ASSIGN extends AST_STMT
 			}
 		}
 
+		// TODO: Class inheritance
+		
 		if (varT.name != expT.name)
 		{
 			// TODO: Code bug -- types mismatch
