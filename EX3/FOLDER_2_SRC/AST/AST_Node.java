@@ -1,5 +1,7 @@
 package AST;
 
+import java.io.*;
+
 public abstract class AST_Node
 {
 	/*******************************************/
@@ -20,6 +22,6 @@ public abstract class AST_Node
 
 	public void report_error()
 	{
-		System.out.format("line: %d\n", lineNumber);
+		AST_Node_Serial_Number.exit_on_error(lineNumber);
 	}
 }
