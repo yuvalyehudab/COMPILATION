@@ -12,7 +12,7 @@ public class TYPE_ARRAY extends TYPE
     /****************/
     public TYPE_ARRAY(String name, TYPE memberT)
     {
-        this.kind = ARRAY;
+        this.kind = KIND.ARRAY;
         this.name = name;
         this.memberT = memberT;
     }

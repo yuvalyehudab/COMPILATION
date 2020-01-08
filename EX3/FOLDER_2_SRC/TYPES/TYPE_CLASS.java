@@ -19,7 +19,7 @@ public class TYPE_CLASS extends TYPE
 	/****************/
 	public TYPE_CLASS(String name,TYPE_LIST data_members, TYPE_CLASS father)
 	{
-		this.kind = CLASS;
+		this.kind = KIND.CLASS;
 		this.name = name;
 		this.fatherClass = fatherClass;
 		this.data_members = data_members;
@@ -33,11 +33,12 @@ public class TYPE_CLASS extends TYPE
 		if (this.fatherClass != null) {
 			return this.fatherClass.find(name);
 		}
+		return null;
 	}
 
 	public boolean isAncestor (String candidate) {
-		if (this.name == candidate) { return true } // Found it!
-		if (this.fatherClass == null) { return false } // End of search.
+		if (this.name == candidate) { return true; } // Found it!
+		if (this.fatherClass == null) { return false; } // End of search.
 		return fatherClass.isAncestor(candidate);
 	}
 }

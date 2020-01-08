@@ -1,6 +1,7 @@
 package AST;
 
 import TYPES.*;
+import SYM_TABLE.*;
 
 public class AST_EXP_NEW extends AST_EXP
 {
@@ -65,14 +66,14 @@ public class AST_EXP_NEW extends AST_EXP
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
 		// Lookup name of type
-		TYPE t = sym_table.find(t);
+		TYPE t = sym_table.find(name);
 
-		if (e == null && t.isClass()) {
+		if (exp == null && t.isClass()) {
 			// Class case
 			return t;
-		} else if (e != null && t.isArray()) {
+		} else if (exp != null && t.isArray()) {
 			// Array case
-			TYPE eT = e.SemantMe();
+			TYPE eT = exp.SemantMe();
 			if (eT != TYPE_INT.getInstance()) {
 				// TODO: Code bug -- length must be an integer
 			}

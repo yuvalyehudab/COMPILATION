@@ -1,7 +1,7 @@
 package AST;
 
 import TYPES.*;
-import SYMBOL_TABLE.*;
+import SYM_TABLE.*;
 
 public class AST_DEC_FUNC extends AST_DEC
 {
@@ -70,13 +70,13 @@ public class AST_DEC_FUNC extends AST_DEC
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
 		// Initialize gathering list
-		TYPE_LIST type_list;
+		TYPE_LIST type_list = null;
 
 		// Process parameter list
 		for (AST_TYPE_NAME_LIST it = this.params; it  != null; it = it.tail)
 		{
 			// Lookup the name given to the currently processed parameter
-			t = sym_table.find(it.head.type);
+			TYPE t = sym_table.find(it.head.name);
 			// Check it
 			if (t == null || !t.isTypeName())
 			{
@@ -89,7 +89,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		return type_list.reversed();
 	}
 
-	public void SemantMe()
+	public TYPE SemantMe()
 	{
 		// Initialize pointer to symbol table
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
@@ -106,7 +106,7 @@ public class AST_DEC_FUNC extends AST_DEC
 
 		// Check return type
 		TYPE returnType = sym_table.find(returnTypeName);
-		if (t == null || (!t.isTypeName() && !t.isVoid()))
+		if (returnType == null || (!returnType.isTypeName() && !returnType.isVoid()))
 		{
 			// TODO: Code bug -- type to return does not exist in table or just is not a name a of a type nor void
 		}
@@ -123,7 +123,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		/****************************/
 		/* [1] Begin Function Scope */
 		/****************************/
-		sym_table.open(new SYM_TABLE_SCOPE(FUNCTION_SCOPE, type_list), null, returnType);
+		sym_table.open(new SYM_TABLE_SCOPE(SCOPE_KIND.FUNCTION_SCOPE, type_list), null, returnType);
 
 		/*******************/
 		/* [3] Semant Body */

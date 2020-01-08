@@ -1,6 +1,7 @@
 package AST;
 
 import TYPES.*;
+import SYM_TABLE.*;
 
 public class AST_STMT_ASSIGN extends AST_STMT
 {
@@ -67,8 +68,9 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		// Initialize pointer to symbol table
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
-		TYPE varT := sym_table.find(var);
-		TYPE expT := exp.SemantMe();
+		//sym_table.find(var)
+		TYPE varT = var.SemantMe();
+		TYPE expT = exp.SemantMe();
 
 		if (expT == TYPE_NIL.getInstance()) {
 			if (varT.isClass() || varT.isArray()) {

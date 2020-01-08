@@ -1,12 +1,15 @@
 package SYM_TABLE;
 
-private TYPE_DEC_LIST defaults = null; // TODO: put int, string, lib-funcs
+import TYPES.*;
+
+ // TODO: put int, string, lib-funcs
 
 public class SYM_TABLE {
+    private TYPE_LIST defaults = null;
     private TYPE_CLASS extending = null; // If currently defining a class that extends, this should point to father
     private TYPE returnType = null; // If currently defining a function, this should hold its return type
     // Starting with an empty global scope:
-    private SYM_TABLE_SCOPE_LIST scopes = SYM_TABLE_SCOPE_LIST(new SYM_TABLE_SCOPE(null,null), null);
+    private SYM_TABLE_SCOPE_LIST scopes = new SYM_TABLE_SCOPE_LIST(new SYM_TABLE_SCOPE(null,null));
 
     public TYPE_LIST getConstructedTypeList () {
         return scopes.head.types;
@@ -26,6 +29,17 @@ public class SYM_TABLE {
     public TYPE getReturnType () { return returnType; }
 
     public TYPE find(String name) {
+        SYM_TABLE_SCOPE_LIST search = scopes;
+        while (search.head != null)
+        {
+            TYPE requstedType = search.head.find(name);
+            if (requstedType != null)
+            {
+                return requstedType;
+            }
+            search = search.tail;
+        }
+        /*
         if (scopes.head != null) {
             // Look here in the current scope
             TYPE here = scopes.head.find(name);
@@ -38,6 +52,7 @@ public class SYM_TABLE {
             // Look recursively in previous scopes
             return scopes.tail.find(name);
         }
+        */
         // Look in the defaults, if not there then nowhere
         return defaults.find(name);
     }
@@ -46,7 +61,7 @@ public class SYM_TABLE {
         // Check that there is no shadowing different types
         if (extending != null) {
             // Look if method/constant is already defined
-            TYPE type_in_ancestors = extending.find(name);
+            TYPE type_in_ancestors = extending.find(t.name);
             if (type_in_ancestors != null) {
                 // Is defined, now check if shadowing is legit
                 if (!t.equals(type_in_ancestors)) {
@@ -73,33 +88,31 @@ public class SYM_TABLE {
         extending = null;
         returnType = null;
     }
-    
-    public SYM_TABLE ()
 
 // TODO: Wrap into a singleton instance
 
     /**************************************/
     /* USUAL SINGLETON IMPLEMENTATION ... */
     /**************************************/
-/*    private static SYMBOL_TABLE instance = null;
+    private static SYM_TABLE instance = null;
 
     /*****************************/
     /* PREVENT INSTANTIATION ... */
     /*****************************/
-/*    protected SYMBOL_TABLE() {}
+    protected SYM_TABLE() {}
 
     /******************************/
     /* GET SINGLETON INSTANCE ... */
     /******************************/
-/*    public static SYMBOL_TABLE getInstance()
+    public static SYM_TABLE getInstance()
     {
         if (instance == null)
         {
-            instance = new SYMBOL_TABLE();
+            instance = new SYM_TABLE();
 
         }
-    }
 		return instance;
+    }
 
- */
+ 
 }

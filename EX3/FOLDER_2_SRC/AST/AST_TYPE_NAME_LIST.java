@@ -1,6 +1,7 @@
 package AST;
 
 import TYPES.*;
+import SYM_TABLE.*;
 
 public class AST_TYPE_NAME_LIST extends AST_Node
 {

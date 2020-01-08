@@ -1,7 +1,7 @@
 package AST;
 
 import TYPES.*;
-import SYMBOL_TABLE.*;
+import SYM_TABLE.*;
 
 public class AST_STMT_WHILE extends AST_STMT
 {
@@ -54,6 +54,9 @@ public class AST_STMT_WHILE extends AST_STMT
 
 	public TYPE SemantMe()
 	{
+		// Initialize pointer to symbol table
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+		
 		System.out.format("\n in ast stmt if in line %d\n", lineNumber);
 		/****************************/
 		/* [0] Semant the Condition */

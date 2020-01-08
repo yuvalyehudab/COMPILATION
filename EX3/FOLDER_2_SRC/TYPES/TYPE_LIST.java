@@ -39,10 +39,22 @@ public class TYPE_LIST
 	/***/
 	/* FIND */
 	/***/
-	public TYPE find(String name) {
-		if (this.head.name.equals(name)) {
-			return this.head.type;
+	public TYPE find(String name) 
+	{
+		/*TYPE_LIST tl = this;
+		while (tl.head != null)
+		{
+			if (tl.head.name.equals(name))
+			{
+				return tl.head;
+			}
+			tl = tl.tail;
 		}
+		*/
+		if (this.head.name.equals(name)) {
+			return this.head;
+		}
+		return null;
 	}
 
 	/***/

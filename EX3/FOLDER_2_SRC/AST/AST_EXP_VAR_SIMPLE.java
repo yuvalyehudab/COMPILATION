@@ -1,7 +1,7 @@
 package AST;
 
 import TYPES.*;
-import SYMBOL_TABLE.*;
+import SYM_TABLE.*;
 
 public class AST_EXP_VAR_SIMPLE extends AST_EXP_VAR
 {

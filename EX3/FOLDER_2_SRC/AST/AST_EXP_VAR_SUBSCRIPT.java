@@ -1,5 +1,8 @@
 package AST;
 
+import TYPES.*;
+import SYM_TABLE.*;
+
 public class AST_EXP_VAR_SUBSCRIPT extends AST_EXP_VAR
 {
 	public AST_EXP_VAR var;
@@ -45,6 +48,6 @@ public class AST_EXP_VAR_SUBSCRIPT extends AST_EXP_VAR
 			// TODO: Code bug -- index is not an int
 		}
 
-		return arrayT.memberT;
+		return ((TYPE_ARRAY)arrayT).memberT;
 	}
 }

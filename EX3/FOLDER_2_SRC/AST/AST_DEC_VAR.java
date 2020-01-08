@@ -1,7 +1,7 @@
 package AST;
 
 import TYPES.*;
-import SYMBOL_TABLE.*;
+import SYM_TABLE.*;
 
 public class AST_DEC_VAR extends AST_DEC
 {
@@ -64,7 +64,7 @@ public class AST_DEC_VAR extends AST_DEC
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
 		// Check that name does not already exist in the innermost scope
-		if (sym_table.getConstructedTypeList.find(name) != null) {
+		if (sym_table.getConstructedTypeList().find(name) != null) {
 			// TODO: Code bug -- name not available
 		}
 
@@ -80,13 +80,13 @@ public class AST_DEC_VAR extends AST_DEC
 			TYPE t_init = this.initialValue.SemantMe();
 			// Check that they match, or initial is decendent or nil
 			if (!t.equals(t_init)) {
-				if (t_init.kind == NIL) {
-					if (t.kind != CLASS && t.kind != ARRAY) {
+				if (t_init.kind == KIND.NIL) {
+					if (t.kind != KIND.CLASS && t.kind != KIND.ARRAY) {
 						// TODO: Code bug -- nil is only allowed for class or array
 					}
 				}
-				if (t_init.kind == CLASS) {
-					if (!t_init.isAncestor(t)) {
+				if (t_init.kind == KIND.CLASS) {
+					if (!((TYPE_CLASS)t_init).isAncestor(t.name)) {
 						// TODO: Code bug -- init is not decendent not nill
 					}
 				}

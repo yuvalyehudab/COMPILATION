@@ -21,7 +21,7 @@ public class TYPE_VOID extends TYPE
 		{
 			instance = new TYPE_VOID();
 			instance.name = "void";
-			instance.kind = VOID;
+			instance.kind = KIND.VOID;
 		}
 		return instance;
 	}

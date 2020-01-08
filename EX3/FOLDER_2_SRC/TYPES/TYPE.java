@@ -11,6 +11,10 @@ public abstract class TYPE
 	/* Name */
 	/***/
 	public String name;
+	public KIND getKind()
+	{
+		return this.kind;
+	}
 
 	public boolean isClass() {
 		switch (kind) {

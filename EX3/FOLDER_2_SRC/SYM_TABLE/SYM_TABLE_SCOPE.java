@@ -1,8 +1,10 @@
 package SYM_TABLE;
 
+import TYPES.*;
+
 public class SYM_TABLE_SCOPE {
     private SCOPE_KIND kind;
-    private TYPE_LIST types;
+    public TYPE_LIST types;
 
     public SCOPE_KIND getKind() {
         return kind;
@@ -15,5 +17,10 @@ public class SYM_TABLE_SCOPE {
     public SYM_TABLE_SCOPE(SCOPE_KIND kind, TYPE_LIST types) {
         this.kind = kind;
         this.types = types;
+    }
+    public void add (TYPE t)
+    {
+        this.types.tail = this.types;
+        this.types.head = t;
     }
 }

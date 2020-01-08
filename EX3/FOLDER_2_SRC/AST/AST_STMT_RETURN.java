@@ -1,5 +1,8 @@
 package AST;
 
+import TYPES.*;
+import SYM_TABLE.*;
+
 public class AST_STMT_RETURN extends AST_STMT
 {
 	/****************/
@@ -88,5 +91,6 @@ public class AST_STMT_RETURN extends AST_STMT
 				return null;
 			}
 		}
+		return null;
 	}
 }

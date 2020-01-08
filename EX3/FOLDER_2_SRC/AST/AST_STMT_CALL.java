@@ -1,5 +1,8 @@
 package AST;
 
+import TYPES.*;
+import SYM_TABLE.*;
+
 public class AST_STMT_CALL extends AST_STMT
 {
 	/****************/

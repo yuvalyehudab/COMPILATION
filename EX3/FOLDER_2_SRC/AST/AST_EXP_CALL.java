@@ -1,7 +1,7 @@
 package AST;
 
 import TYPES.*;
-import SYMBOL_TABLE.*;
+import SYM_TABLE.*;
 
 public class AST_EXP_CALL extends AST_EXP
 {
@@ -69,16 +69,16 @@ public class AST_EXP_CALL extends AST_EXP
 		// Set funcType
 		if (this.var != null) {
 			varType = this.var.SemantMe();
-			if (varType.getKind() != CLASS) {
+			if (varType.getKind() != KIND.CLASS) {
 				// TODO: Code bug -- type of var is not a class so it does not have methods
 			}
-			funcType = varType.find(this.funcName);
+			funcType = ((TYPE_CLASS)varType).find(this.funcName);
 		} else {
 			funcType = sym_table.find(this.funcName);
 		}
 
 		// Make sure it is a function
-		if (funcType == null || funcType.getKind() != FUNCTION) {
+		if (funcType == null || funcType.getKind() != KIND.FUNCTION) {
 			// TODO: Code bug -- function name not in table or not a name of a function
 		}
 
@@ -91,12 +91,12 @@ public class AST_EXP_CALL extends AST_EXP
 		}
 
 		// Then check that they have the expected type
-		TYPE_LIST expectedTypes = funcType.params;
+		TYPE_LIST expectedTypes = ((TYPE_FUNCTION)funcType).params;
 		if (!expectedTypes.equals(paramTypes)) {
 			// TODO: Code bug -- incorrect argument types
 		}
 
 		/* Return expected type */
-		return funcType.returnType;
+		return ((TYPE_FUNCTION)funcType).returnType;
 	}
 }

@@ -1,7 +1,7 @@
 package AST;
 
 import TYPES.*;
-import SYMBOL_TABLE.*;
+import SYM_TABLE.*;
 
 public class AST_DEC_CLASS extends AST_DEC
 {
@@ -75,14 +75,14 @@ public class AST_DEC_CLASS extends AST_DEC
 			// TODO: Code bug -- declaring class in non-global scope
 		}
 
-		TYPE fatherClass;
+		TYPE fatherClass = null;
 		// Find father if needed
 		if (this.father != null) {
-			fatherClass = sym_table.find(this.fatherName);
+			fatherClass = sym_table.find(this.father);
 			if (fatherClass == null) {
 				// TODO: Code bug -- class to be extended does not exist
 			}
-			if (fatherClass.kind != CLASS) {
+			if (fatherClass.kind != KIND.CLASS) {
 				// TODO: Code bug -- extending a non-class
 			}
 		}
@@ -92,7 +92,7 @@ public class AST_DEC_CLASS extends AST_DEC
 		/*************************/
 		/* [1] Begin Class Scope */
 		/*************************/
-		sym_table.open(new SYM_TABLE_SCOPE(CLASS_SCOPE, null), fatherClass, null);
+		sym_table.open(new SYM_TABLE_SCOPE(SCOPE_KIND.CLASS_SCOPE, null), (TYPE_CLASS)fatherClass, null);
 
 		/***************************/
 		/* [2] Semant Data Members */
@@ -101,7 +101,7 @@ public class AST_DEC_CLASS extends AST_DEC
 		data_members.SemantMe();
 
 		// Construct the class
-		TYPE_CLASS result = new TYPE_CLASS(this.name, sym_table.getConstructedTypeList(), fatherClass);
+		TYPE_CLASS result = new TYPE_CLASS(this.name, sym_table.getConstructedTypeList(), (TYPE_CLASS)fatherClass);
 
 		/*****************/
 		/* [3] End Scope */

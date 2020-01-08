@@ -17,17 +17,17 @@ public class TYPE_FUNCTION extends TYPE
 	/****************/
 	public TYPE_FUNCTION(String name,TYPE returnType,TYPE_LIST params)
 	{
-		this.kind = FUNCTION;
+		this.kind = KIND.FUNCTION;
 		this.name = name;
 		this.returnType = returnType;
 		this.params = params;
 	}
 
 	public boolean equals(TYPE that) {
-		return (that != null && that.kind == FUNCTION
+		return (that != null && that.kind == KIND.FUNCTION
 				&& this.name.equals(that.name)
-				&& this.returnType.equals(that.returnType)
-				&& this.params.equals(that.params)
+				&& this.returnType.equals(((TYPE_FUNCTION)that).returnType)
+				&& this.params.equals(((TYPE_FUNCTION)that).params)
 		);
 	}
 }

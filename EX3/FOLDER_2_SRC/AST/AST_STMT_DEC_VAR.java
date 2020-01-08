@@ -1,6 +1,7 @@
 package AST;
 
 import TYPES.*;
+import SYM_TABLE.*;
 
 public class AST_STMT_DEC_VAR extends AST_STMT
 {

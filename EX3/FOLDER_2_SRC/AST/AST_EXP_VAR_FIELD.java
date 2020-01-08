@@ -1,7 +1,7 @@
 package AST;
 
 import TYPES.*;
-import SYMBOL_TABLE.*;
+import SYM_TABLE.*;
 
 public class AST_EXP_VAR_FIELD extends AST_EXP_VAR
 {
@@ -53,26 +53,29 @@ public class AST_EXP_VAR_FIELD extends AST_EXP_VAR
 	}
 	public TYPE SemantMe()
 	{
-		TYPE t;
-		TYPE_CLASS tc;
+		TYPE t = null;
+		TYPE tc = null;
 		
 		/******************************/
 		/* [1] Recursively semant var */
 		/******************************/
-		if (var != null) tc = var.SemantMe();
-		
-		/*********************************/
-		/* [2] Make sure type is a class */
-		/*********************************/
-		if (!tc.isClass())
+		if (var != null)
 		{
-			// TODO: Code bug -- not accessing a class
+			tc = var.SemantMe();
+			
+			/*********************************/
+			/* [2] Make sure type is a class */
+			/*********************************/
+			if (!tc.isClass())
+			{
+				// TODO: Code bug -- not accessing a class
+			}
 		}
 		
 		/************************************/
 		/* [3] Look for fiedlName inside tc */
 		/************************************/
-		t = tc.find(fieldName);
+		t = ((TYPE_CLASS)tc).find(fieldName);
 		if (t == null) {
 			// TODO: Code bug -- field does not exist in the class
 		}

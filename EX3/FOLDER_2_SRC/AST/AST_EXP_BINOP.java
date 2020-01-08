@@ -1,6 +1,7 @@
 package AST;
 
 import TYPES.*;
+import SYM_TABLE.*;
 
 public class AST_EXP_BINOP extends AST_EXP
 {
@@ -98,19 +99,19 @@ public class AST_EXP_BINOP extends AST_EXP
 			// Booleans are represented by integers, so return this if all is well
 			TYPE_INT ok = type_int;
 			// Handling the nil case
-			if (t1.kind == NIL || t2.kind == NIL) {
-				if (t1.kind == NIL && t2.kind == NIL) {
+			if (t1.kind == KIND.NIL || t2.kind == KIND.NIL) {
+				if (t1.kind == KIND.NIL && t2.kind == KIND.NIL) {
 					// Comparing nil with nil is ok
 					return ok;
 				}
-				if (!(t1.kind == CLASS || t2.kind == CLASS || t1.kind == ARRAY || t2.kind == ARRAY)) {
+				if (!(t1.kind == KIND.CLASS || t2.kind == KIND.CLASS || t1.kind == KIND.ARRAY || t2.kind == KIND.ARRAY)) {
 					// TODO: Code bug -- comparing nil with something other than nil, class, array
 				}
 			}
 
 			// Handling the class case
-			if (t1.kind == CLASS || t2.kind == CLASS) {
-				if (t1.isAncestor(t2) || t2.isAncestor(t1)) {
+			if (t1.kind == KIND.CLASS || t2.kind == KIND.CLASS) {
+				if (((TYPE_CLASS)t1).isAncestor(t2.name) || ((TYPE_CLASS)t2).isAncestor(t1.name)) {
 					return ok;
 				}
 				// TODO: Code bug -- one is a class and the other is not ancestor or decendent
@@ -135,7 +136,7 @@ public class AST_EXP_BINOP extends AST_EXP
 			if (areInt)		{ return type_int; 		}
 			if (areString) 	{ return type_string; 	}
 		}
-
+		return null;
 		// TODO: Code bug -- types do not match operation
 	}
 

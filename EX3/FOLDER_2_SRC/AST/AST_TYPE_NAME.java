@@ -7,7 +7,7 @@ package AST;
 /* PROJECT IMPORTS */
 /*******************/
 import TYPES.*;
-import SYMBOL_TABLE.*;
+import SYM_TABLE.*;
 
 public class AST_TYPE_NAME extends AST_Node
 {
