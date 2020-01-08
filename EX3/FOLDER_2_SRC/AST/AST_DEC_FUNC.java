@@ -107,8 +107,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		}
 
 		// Check that the current scope is the global scope
-		// TODO: Scope is allowed to be a CLASS
-		if (!sym_table.isGlobal()) {
+		if (!sym_table.isGlobal() || !sym_table.getKind() == CLASS_SCOPE) {
 			// Code bug -- declaring class in non-global scope
 		    report_error();
 		}
