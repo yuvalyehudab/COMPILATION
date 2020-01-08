@@ -41,7 +41,7 @@ public class SYM_TABLE {
 
     public TYPE find(String name) {
         SYM_TABLE_SCOPE_LIST search = scopes;
-        while (search.head != null)
+        while (search != null && search.head != null)
         {
             TYPE requstedType = search.head.find(name);
             if (requstedType != null)
@@ -50,6 +50,7 @@ public class SYM_TABLE {
             }
             search = search.tail;
         }
+
         /*
         if (scopes.head != null) {
             // Look here in the current scope

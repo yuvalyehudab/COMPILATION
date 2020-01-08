@@ -42,7 +42,7 @@ public class TYPE_LIST
 	public TYPE find(String name) 
 	{
 		TYPE_LIST tl = this;
-		while (tl.head != null)
+		while (tl != null && tl.head != null)
 		{
 			if (tl.head.name.equals(name))
 			{
