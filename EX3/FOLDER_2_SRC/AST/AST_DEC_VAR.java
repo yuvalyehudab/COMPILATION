@@ -65,7 +65,8 @@ public class AST_DEC_VAR extends AST_DEC
 
 		// Check that name does not already exist in the innermost scope
 		if (sym_table.getConstructedTypeList() != null && sym_table.getConstructedTypeList().find(name) != null) {
-			// TODO: Code bug -- name not available
+			// Code bug -- name not available
+		    report_error();
 		}
 
 		// Check declared type

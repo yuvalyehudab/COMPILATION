@@ -56,7 +56,7 @@ public class AST_STMT_RETURN extends AST_STMT
 		// Initialize pointer to symbol table
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
-		// TODO: Check that one of scopes is a function declaration
+		// Check that one of scopes is a function declaration
 		if (!sym_table.isFunctionScope()) {
 		    // Code bug -- return outside of a function scope
 		    report_error();
