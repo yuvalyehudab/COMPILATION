@@ -13,13 +13,13 @@ public class AST_STMT_RETURN extends AST_STMT
 	/*******************/
 	/*  CONSTRUCTOR(S) */
 	/*******************/
-	public AST_STMT_RETURN(AST_EXP exp)
+	public AST_STMT_RETURN(AST_EXP exp, int line)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		lineNumber = AST_Node_Serial_Number.getLine();
+		lineNumber = line;
 
 		this.exp = exp;
 	}

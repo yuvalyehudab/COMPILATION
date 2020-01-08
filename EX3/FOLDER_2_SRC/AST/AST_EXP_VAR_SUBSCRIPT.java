@@ -11,10 +11,10 @@ public class AST_EXP_VAR_SUBSCRIPT extends AST_EXP_VAR
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_VAR_SUBSCRIPT(AST_EXP_VAR var,AST_EXP subscript)
+	public AST_EXP_VAR_SUBSCRIPT(AST_EXP_VAR var,AST_EXP subscript, int line)
 	{
 		System.out.print("====================== var -> var [ exp ]\n");
-		lineNumber = AST_Node_Serial_Number.getLine();
+		lineNumber = line;
 		
 		this.var = var;
 		this.subscript = subscript;

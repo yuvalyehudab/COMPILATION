@@ -11,13 +11,13 @@ public class AST_EXP_VAR_FIELD extends AST_EXP_VAR
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_VAR_FIELD(AST_EXP_VAR var,String fieldName)
+	public AST_EXP_VAR_FIELD(AST_EXP_VAR var,String fieldName, int line)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		lineNumber = AST_Node_Serial_Number.getLine();
+		lineNumber = line;
 
 		/*System.out.format("====================== var -> var DOT ID( %s )\n",fieldName);*/
 		this.var = var;

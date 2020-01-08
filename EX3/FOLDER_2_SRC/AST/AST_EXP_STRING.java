@@ -10,13 +10,13 @@ public class AST_EXP_STRING extends AST_EXP
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_STRING(String value)
+	public AST_EXP_STRING(String value, int line)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		lineNumber = AST_Node_Serial_Number.getLine();
+		lineNumber = line;
 
 		/*System.out.format("====================== exp -> STRING( %s )\n", value);*/
 		this.value = value;

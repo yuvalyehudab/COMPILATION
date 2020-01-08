@@ -13,13 +13,13 @@ public class AST_EXP_VAR_SIMPLE extends AST_EXP_VAR
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_VAR_SIMPLE(String name)
+	public AST_EXP_VAR_SIMPLE(String name, int line)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		lineNumber = AST_Node_Serial_Number.getLine();
+		lineNumber = line;
 
 		/*System.out.format("====================== var -> ID( %s )\n",name);*/
 		this.name = name;

@@ -14,13 +14,13 @@ public class AST_EXP_LIST extends AST_Node
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_LIST(AST_EXP head,AST_EXP_LIST tail)
+	public AST_EXP_LIST(AST_EXP head,AST_EXP_LIST tail, int line)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		lineNumber = AST_Node_Serial_Number.getLine();
+		lineNumber = line;
 
 		this.head = head;
 		this.tail = tail;

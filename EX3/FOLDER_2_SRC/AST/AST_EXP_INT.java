@@ -10,13 +10,13 @@ public class AST_EXP_INT extends AST_EXP
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_INT(int value)
+	public AST_EXP_INT(int value, int line)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		lineNumber = AST_Node_Serial_Number.getLine();
+		lineNumber = line;
 
 		/*System.out.format("====================== exp -> INT( %d )\n", value);*/
 		this.value = value;

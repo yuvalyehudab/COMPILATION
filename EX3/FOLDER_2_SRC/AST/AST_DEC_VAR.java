@@ -15,13 +15,13 @@ public class AST_DEC_VAR extends AST_DEC
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_DEC_VAR(String type,String name,AST_EXP initialValue)
+	public AST_DEC_VAR(String type,String name,AST_EXP initialValue, int line)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		lineNumber = AST_Node_Serial_Number.getLine();
+		lineNumber = line;
 
 		this.type = type;
 		this.name = name;

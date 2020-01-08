@@ -11,13 +11,13 @@ public class AST_STMT_IF extends AST_STMT
 	/*******************/
 	/*  CONSTRUCTOR(S) */
 	/*******************/
-	public AST_STMT_IF(AST_EXP cond,AST_STMT_LIST body)
+	public AST_STMT_IF(AST_EXP cond,AST_STMT_LIST body, int line)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		lineNumber = AST_Node_Serial_Number.getLine();
+		lineNumber = line;
 
 		this.cond = cond;
 		this.body = body;

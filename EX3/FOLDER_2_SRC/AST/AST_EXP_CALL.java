@@ -15,13 +15,13 @@ public class AST_EXP_CALL extends AST_EXP
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_CALL(AST_EXP_VAR var, String funcName,AST_EXP_LIST params)
+	public AST_EXP_CALL(AST_EXP_VAR var, String funcName,AST_EXP_LIST params, int line)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		lineNumber = AST_Node_Serial_Number.getLine();
+		lineNumber = line;
 
 		this.var = var;
 		this.funcName = funcName;

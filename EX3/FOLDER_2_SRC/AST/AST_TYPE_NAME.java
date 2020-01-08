@@ -20,13 +20,13 @@ public class AST_TYPE_NAME extends AST_Node
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_TYPE_NAME(String type,String name)
+	public AST_TYPE_NAME(String type,String name, int line)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		lineNumber = AST_Node_Serial_Number.getLine();
+		lineNumber = line;
 
 		this.type = type;
 		this.name = name;

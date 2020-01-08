@@ -23,13 +23,13 @@ public class AST_DEC_CLASS extends AST_DEC
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_DEC_CLASS(String name, AST_DEC_LIST data_members, String father)
+	public AST_DEC_CLASS(String name, AST_DEC_LIST data_members, String father, int line)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		lineNumber = AST_Node_Serial_Number.getLine();
+		lineNumber = line;
 	
 		this.name = name;
 		this.data_members = data_members;

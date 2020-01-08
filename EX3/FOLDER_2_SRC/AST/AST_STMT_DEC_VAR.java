@@ -13,13 +13,13 @@ public class AST_STMT_DEC_VAR extends AST_STMT
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_STMT_DEC_VAR(AST_DEC_VAR var)
+	public AST_STMT_DEC_VAR(AST_DEC_VAR var, int line)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		lineNumber = AST_Node_Serial_Number.getLine();
+		lineNumber = line;
 
 		this.var = var;
 	}

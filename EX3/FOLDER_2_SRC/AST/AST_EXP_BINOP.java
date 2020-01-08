@@ -12,13 +12,13 @@ public class AST_EXP_BINOP extends AST_EXP
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_BINOP(AST_EXP left,AST_EXP right,int OP)
+	public AST_EXP_BINOP(AST_EXP left,AST_EXP right,int OP, int line)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		lineNumber = AST_Node_Serial_Number.getLine();
+		lineNumber = line;
 
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */

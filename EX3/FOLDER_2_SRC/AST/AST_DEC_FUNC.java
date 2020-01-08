@@ -20,13 +20,13 @@ public class AST_DEC_FUNC extends AST_DEC
 		String returnTypeName,
 		String name,
 		AST_TYPE_NAME_LIST params,
-		AST_STMT_LIST body)
+		AST_STMT_LIST body, int line)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		lineNumber = AST_Node_Serial_Number.getLine();
+		lineNumber = line;
 
 		this.returnTypeName = returnTypeName;
 		this.name = name;

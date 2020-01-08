@@ -12,13 +12,13 @@ public class AST_EXP_NEW extends AST_EXP
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_NEW(String name, AST_EXP exp)
+	public AST_EXP_NEW(String name, AST_EXP exp, int line)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
-		lineNumber = AST_Node_Serial_Number.getLine();
+		lineNumber = line;
 		
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
