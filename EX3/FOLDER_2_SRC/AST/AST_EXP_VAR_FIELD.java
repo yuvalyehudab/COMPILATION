@@ -53,6 +53,9 @@ public class AST_EXP_VAR_FIELD extends AST_EXP_VAR
 	}
 	public TYPE SemantMe()
 	{
+		// Initialize pointer to symbol table
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+		
 		TYPE t = null;
 		TYPE tc = null;
 		
