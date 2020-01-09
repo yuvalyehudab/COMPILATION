@@ -48,8 +48,7 @@ public class AST_EXP_VAR_SIMPLE extends AST_EXP_VAR
 		TYPE t = SYM_TABLE.getInstance().find(name);
 		debug_print("t: " + t);
 		if (t == null) {
-		    // Code bug -- not found
-		    report_error();
+		    report_error("// Code bug -- not found");
 		}
 		return t;
 	}
