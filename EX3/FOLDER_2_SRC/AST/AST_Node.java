@@ -40,5 +40,5 @@ public abstract class AST_Node
     public static final String ANSI_CYAN = "\u001B[36m";
     public static final String ANSI_WHITE = "\u001B[37m";
 
-    public void debug_print(String str) { System.out.println(ANSI_RED + str); }
+    public void debug_print(String str) { System.out.println(ANSI_RED + str + ANSI_RESET); }
 }
