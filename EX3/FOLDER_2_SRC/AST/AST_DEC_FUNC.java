@@ -114,7 +114,7 @@ public class AST_DEC_FUNC extends AST_DEC
 
 		// Check return type
 		TYPE returnType = null;
-		if (returnTypeName == "void") {
+		if (returnTypeName.equals("void")) {
 		    returnType = TYPE_VOID.getInstance();
 		    debug_print("if: " + returnType);
 		} else {
