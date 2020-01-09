@@ -52,7 +52,7 @@ CUP_FLAGS =                                \
 #########################
 # DEFINITIONS :: PARSER #
 #########################
-INPUT    = ${INPUT_DIR}/*03*
+INPUT    = ${INPUT_DIR}/*04*
 OUTPUT   = ${OUTPUT_DIR}/SemanticStatus.txt
 
 ##########
