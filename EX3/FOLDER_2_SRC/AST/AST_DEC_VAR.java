@@ -83,12 +83,10 @@ public class AST_DEC_VAR extends AST_DEC
 		    if (t_ancestor != null) {
 			// Is defined, now check if shadowing is legit
 			if (t_ancestor.isFunction()) {
-			    // Code bug -- shadowing a function
-			    report_error();
+			    report_error("// Code bug -- shadowing a function");
 			}
 			if (!t.equals(t_ancestor)) {
-			    // Code bug -- shadowing of different type
-			    report_error();
+			    report_error("// Code bug -- shadowing of different type");
 			}
 			// Override case, no need to enter this symbol again
 		    }
