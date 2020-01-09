@@ -75,7 +75,7 @@ public class AST_Node_Serial_Number
 	this.debug_string = this.debug_string + "\\n" + debug_add;
     }
     
-    public static void exit_on_error(int line, String error_string)
+    public void exit_on_error(int line, String error_string)
 	{
 	    // Debuging on:
 		writer.format("ERROR(%d)" + ": " + error_string + this.debug_string, line);
