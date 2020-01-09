@@ -78,8 +78,12 @@ public class SYM_TABLE {
         // ec may hold father class
         // rt may hold return type
         scopes = new SYM_TABLE_SCOPE_LIST(init, scopes);
-        extending = ec;
-        returnType = rt;
+	if (ec != null) {
+	    extending = ec;
+	}
+	if (rt != null) {
+	    returnType = rt;
+	}
     }
 
     public void close() {
