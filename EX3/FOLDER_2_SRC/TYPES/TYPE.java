@@ -36,9 +36,29 @@ public abstract class TYPE
 		}
 	}
 
+	public boolean isFunction() {
+		switch (kind) {
+			case FUNCTION:
+				return true;
+
+			default:
+				return false;
+		}
+	}
+
 	public boolean isVoid() {
 		switch (kind) {
 			case VOID:
+				return true;
+
+			default:
+				return false;
+		}
+	}
+
+	public boolean isNIL() {
+		switch (kind) {
+			case NIL:
 				return true;
 
 			default:
@@ -58,22 +78,17 @@ public abstract class TYPE
 		}
 	}
 
-	public boolean isGlobal() {
-		switch (kind) {
-			case CLASS:
-			case ARRAY:
-			case FUNCTION:
-				return true;
-
-			default:
-				return false;
-		}
-	}
-
 	/***/
 	/* EQUALITY */
 	/***/
 	public boolean equals(TYPE that) {
-		return false;
+	    return this.name.equals(that.name);
 	}
+    
+    public boolean isAsExcpected (TYPE that) {
+	boolean equal = this.equals(that);
+	boolean nil_legit = that.isNil() && (this.isArray() || this.isClass());
+	boolean inheritance = that.isClass() && this.isClass() && ((TYPE_CLASS)t_init).isAncestor(this.name);
+	return (equal || nil_legit || inheritance);
+    }
 }

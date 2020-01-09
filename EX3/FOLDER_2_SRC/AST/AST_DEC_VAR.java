@@ -81,10 +81,14 @@ public class AST_DEC_VAR extends AST_DEC
 		TYPE_CLASS extending = sym_table.getExtending();
 		if (extending != null) {
 		    // Look if method/constant is already defined
-		    TYPE type_in_ancestors = extending.find(t.name);
-		    if (type_in_ancestors != null) {
+		    TYPE t_ancestor = extending.find(this.name);
+		    if (t_ancestor != null) {
 			// Is defined, now check if shadowing is legit
-			if (!t.equals(type_in_ancestors)) {
+			if (t_ancestor.isFunction()) {
+			    // Code bug -- shadowing a function
+			    report_error();
+			}
+			if (!t.equals(t_ancestor)) {
 			    // Code bug -- shadowing of different type
 			    report_error();
 			}
@@ -96,21 +100,9 @@ public class AST_DEC_VAR extends AST_DEC
 		if (this.initialValue != null) {
 		    // t_init cannot be null because grammar says it is an expression
 			TYPE t_init = this.initialValue.SemantMe();
-			// Check that they match, or initial is decendent or nil
-			if (!t.equals(t_init)) {
-				if (t_init.kind == KIND.NIL) {
-					if (t.kind != KIND.CLASS && t.kind != KIND.ARRAY) {
-						// Code bug -- nil is only allowed for class or array
-					    report_error();
-					}
-				}
-				if (t_init.kind == KIND.CLASS) {
-					if (!((TYPE_CLASS)t_init).isAncestor(t.name)) {
-						// Code bug -- init is not decendent not nil
-					    report_error();
-					}
-				}
-				// Code bug -- types do not strictly match and special cases all fail
+			// Check that it is an expected type
+			if (!t.isAsExpected(t_init)) {
+				// Code bug -- type not as expected
 				report_error();
 			}
 		}

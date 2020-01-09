@@ -16,11 +16,4 @@ public class TYPE_ARRAY extends TYPE
         this.name = name;
         this.memberT = memberT;
     }
-
-    public boolean equals(TYPE that) {
-	return (that != null
-		&& that.kind == KIND.ARRAY
-		&& this.name.equals(that.name)
-		);
-    }
 }

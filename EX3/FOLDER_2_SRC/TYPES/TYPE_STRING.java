@@ -21,6 +21,7 @@ public class TYPE_STRING extends TYPE
 		{
 			instance = new TYPE_STRING();
 			instance.name = "string";
+			instance.kind = KIND.BASIC;
 		}
 		return instance;
 	}

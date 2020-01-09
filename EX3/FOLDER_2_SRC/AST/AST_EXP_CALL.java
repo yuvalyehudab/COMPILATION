@@ -79,7 +79,7 @@ public class AST_EXP_CALL extends AST_EXP
 		}
 
 		// Make sure it is a function
-		if (funcType == null || funcType.kind != KIND.FUNCTION) {
+		if (funcType == null || funcType.isFunction()) {
 			// Code bug -- function name not in table or not a name of a function
 		    report_error();
 		}
@@ -92,18 +92,18 @@ public class AST_EXP_CALL extends AST_EXP
 			paramTypes = null;
 		}
 
-		// Then check that they have the expected type
+		// Then check that they have expected types
 		TYPE_LIST expectedTypes = ((TYPE_FUNCTION)funcType).params;
-		if (paramTypes != null && expectedTypes != null && !paramTypes.equals(expectedTypes)) {
-			// Code bug -- incorrect argument types
-		    report_error();
-		}
 		if (paramTypes == null && expectedTypes != null) {
 		    // Code bug -- no arguments though expected
 		    report_error();
 		}
 		if (paramTypes != null && expectedTypes == null) {
 		    // Code bug -- arguments though unexpected
+		    report_error();
+		}
+		if (paramTypes != null && expectedTypes != null && !expectedTypes.isAsExpected(paramTypes)) {
+			// Code bug -- incorrect argument types
 		    report_error();
 		}
 

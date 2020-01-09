@@ -132,10 +132,17 @@ public class AST_DEC_FUNC extends AST_DEC
 		TYPE_CLASS extending = sym_table.getExtending();
 		if (extending != null) {
 		    // Look if method/constant is already defined
-		    TYPE type_in_ancestors = extending.find(t.name);
-		    if (type_in_ancestors != null) {
+		    TYPE t_ancestor = extending.find(t.name);
+		    if (t_ancestor != null) {
 			// Is defined, now check if shadowing is legit
-			if (!t.equals(type_in_ancestors)) {
+			if (!t_ancestor.isFunction()) {
+			    // Code bug -- shadowing not a function
+			    report_error();
+			}
+			TYPE_FUNCTION t_ancestor = (TYPE_FUNCTION)t_ancestor;
+			TYPE t_return = t_ancestor.returnType;
+			TYPE_LIST ts_params = t_ancestor.params;
+			if (!returnType.equals(t_return) || !type_list.equals(ts_params)) {
 			    // Code bug -- shadowing of different type
 			    report_error();
 			}

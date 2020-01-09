@@ -119,7 +119,7 @@ public class AST_EXP_BINOP extends AST_EXP
 
 			// Any other case must have strictly equal types
 			// No need to check t.isTypeName() because these are expression
-			if (t1.name.equals(t2.name)) {
+			if (t1.equals(t2)) {
 				return ok;
 			}
 			// Code bug -- mismatching types of some disallowed kind

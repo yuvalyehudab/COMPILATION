@@ -21,6 +21,7 @@ public class TYPE_INT extends TYPE
 		{
 			instance = new TYPE_INT();
 			instance.name = "int";
+			instance.kind = KIND.BASIC;
 		}
 		return instance;
 	}
