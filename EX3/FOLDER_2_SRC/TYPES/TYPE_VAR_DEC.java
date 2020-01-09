@@ -2,12 +2,12 @@ package TYPES;
 
 public class TYPE_VAR_DEC extends TYPE
 {
-	public TYPE t;
+	public String typeName;
 	public String name;
 	
-	public TYPE_VAR_DEC(TYPE t,String name)
+	public TYPE_VAR_DEC(String typeName,String name)
 	{
-		this.t = t;
+		this.typeName = typeName;
 		this.name = name;
 	}
 	public String getName()
@@ -15,7 +15,7 @@ public class TYPE_VAR_DEC extends TYPE
         return this.name;
     }
 
-    public TYPE getType() {
-	return this.t;
+    public TYPE getTypeName() {
+	return this.typeName;
     }
 }

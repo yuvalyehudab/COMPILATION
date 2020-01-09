@@ -44,11 +44,14 @@ public class AST_EXP_VAR_SIMPLE extends AST_EXP_VAR
 	}
 	public TYPE SemantMe()
 	{
-		TYPE t = SYM_TABLE.getInstance().find(name);
+		// Initialize pointer to symbol table
+		SYM_TABLE sym_table = SYM_TABLE.getInstance();
+		TYPE t = sym_table.find(name);
 		if (t == null) {
 		    report_error("// Code bug -- not found");
 		}
-		return ((TYPE_VAR_DEC)t).getType();
+		// The name has been declared, so return its type
+		return sym_table.find(((TYPE_VAR_DEC)t).getTypeName());
 	}
 }
 

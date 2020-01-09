@@ -81,7 +81,8 @@ public class AST_EXP_VAR_FIELD extends AST_EXP_VAR
 			// Code bug -- field does not exist in the class
 		    report_error();
 		}
+		// The name has been declared, so return its type
+		return sym_table.find(((TYPE_VAR_DEC)t).getTypeName());
 
-		return t;
 	}
 }
