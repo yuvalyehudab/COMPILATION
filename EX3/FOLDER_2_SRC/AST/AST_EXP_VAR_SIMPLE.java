@@ -48,7 +48,7 @@ public class AST_EXP_VAR_SIMPLE extends AST_EXP_VAR
 		if (t == null) {
 		    report_error("// Code bug -- not found");
 		}
-		return t.getType();
+		return ((TYPE_VAR_DEC)t).getType();
 	}
 }
 
