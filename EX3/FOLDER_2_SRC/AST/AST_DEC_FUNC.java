@@ -101,8 +101,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		//   name of globally defined function - if so,
 		//   change search to only current scope
 		if (sym_table.find(this.name) != null) {
-			// Code bug -- name not available
-		    report_error();
+		    report_error("// Code bug -- name not available");
 		}
 		System.out.println("debug: AST_DEC_FUNC.semant_me *********** enter");
 		System.out.println("this, retType, name, params, body");
@@ -110,16 +109,14 @@ public class AST_DEC_FUNC extends AST_DEC
 		System.out.println(sym_table.getKind() == SCOPE_KIND.CLASS_SCOPE);
 		// Check that the current scope is the global scope
 		if (!(sym_table.isGlobal()) && !(sym_table.getKind() == SCOPE_KIND.CLASS_SCOPE)) {
-			// Code bug -- declaring class in non-global scope
-		    report_error();
+		    report_error("// Code bug -- declaring class in non-global scope");
 		}
 
 		// Check return type
 		TYPE returnType = sym_table.find(returnTypeName);
 		if (returnType == null || (!returnType.isTypeName() && !returnType.isVoid()))
 		{
-			// Code bug -- type to return does not exist in table or just is not a name a of a type nor void
-		    report_error();
+		    report_error("// Code bug -- type to return does not exist in table or just is not a name a of a type nor void");
 		}
 
 		// Process parameters
@@ -139,15 +136,13 @@ public class AST_DEC_FUNC extends AST_DEC
 		    if (t_ancestor != null) {
 			// Is defined, now check if shadowing is legit
 			if (!t_ancestor.isFunction()) {
-			    // Code bug -- shadowing not a function
-			    report_error();
+			    report_error("// Code bug -- shadowing not a function");
 			}
 			TYPE_FUNCTION t_ancestor_f = (TYPE_FUNCTION)t_ancestor;
 			TYPE t_return = t_ancestor_f.returnType;
 			TYPE_LIST ts_params = t_ancestor_f.params;
 			if (!returnType.equals(t_return) || !type_list.equals(ts_params)) {
-			    // Code bug -- shadowing of different type
-			    report_error();
+			    report_error("// Code bug -- shadowing of different type");
 			}
 			// Override case, no need to enter this symbol again
 		    }
