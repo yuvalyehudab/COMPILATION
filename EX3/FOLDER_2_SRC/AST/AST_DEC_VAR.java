@@ -65,16 +65,14 @@ public class AST_DEC_VAR extends AST_DEC
 
 		// Check that name does not already exist in the innermost scope
 		if (sym_table.getConstructedTypeList() != null && sym_table.getConstructedTypeList().find(name) != null) {
-			// Code bug -- name not available
-		    report_error();
+		    report_error("// Code bug -- name not available");
 		}
 
 		// Check declared type
 		TYPE t = sym_table.find(this.type);
 		if (t == null || !t.isTypeName())
 		{
-			// Code bug -- type of variable does not exist in table or just is not a name a of a type
-		    report_error();
+		    report_error("// Code bug -- type of variable does not exist in table or just is not a name a of a type");
 		}
 
 		// Check that there is no shadowing different types
