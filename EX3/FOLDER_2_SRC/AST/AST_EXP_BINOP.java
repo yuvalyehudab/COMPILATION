@@ -84,7 +84,7 @@ public class AST_EXP_BINOP extends AST_EXP
 
 		TYPE_INT type_int = TYPE_INT.getInstance();
 		TYPE_STRING type_string = TYPE_STRING.getInstance();
-		debug_print("left: " + left.name);
+		debug_print("left: " + left);
 
 		TYPE t1 = left.SemantMe();
 		TYPE t2 = right.SemantMe();
