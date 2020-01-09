@@ -78,8 +78,7 @@ public class AST_EXP_CALL extends AST_EXP
 		}
 
 		// Make sure it is a function
-		if (funcType == null || funcType.isFunction()) {
-		    debug_print("ft: " + funcType + " | " + funcType.isFunction());
+		if (funcType == null || !funcType.isFunction()) {
 		    report_error("// Code bug -- function name not in table or not a name of a function");
 		}
 
