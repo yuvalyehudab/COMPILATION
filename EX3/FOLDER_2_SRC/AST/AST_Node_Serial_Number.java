@@ -12,6 +12,9 @@ public class AST_Node_Serial_Number
 	public int SerialNumber;
 	private static int line;
 	private static PrintWriter writer;
+
+    // Debug info accu
+    public String debug_string = "";
 	
 	/**************************************/
 	/* USUAL SINGLETON IMPLEMENTATION ... */
@@ -67,10 +70,15 @@ public class AST_Node_Serial_Number
 	{
 		return AST_Node_Serial_Number.line;
 	}
+
+    public void addDebugInfo(String debug_add) {
+	this.debug_string = this.debug_string + "\n" + debug_add;
+    }
+    
     public static void exit_on_error(int line, String error_string)
 	{
 	    // Debuging on:
-		writer.format("ERROR(%d)" + ": " + error_string, line);
+		writer.format("ERROR(%d)" + ": " + error_string + debug_string, line);
 	    // Debuging off:
 		// writer.format("ERROR(%d)", line);
 		
