@@ -98,8 +98,7 @@ public class AST_DEC_VAR extends AST_DEC
 			TYPE t_init = this.initialValue.SemantMe();
 			// Check that it is an expected type
 			if (!t.isAsExpected(t_init)) {
-				// Code bug -- type not as expected
-				report_error();
+				report_error("// Code bug -- type not as expected");
 			}
 		}
 
