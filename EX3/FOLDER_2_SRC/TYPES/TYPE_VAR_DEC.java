@@ -14,4 +14,8 @@ public class TYPE_VAR_DEC extends TYPE
     {
         return this.name;
     }
+
+    public TYPE getType() {
+	return this.t;
+    }
 }
