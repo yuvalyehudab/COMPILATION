@@ -58,24 +58,21 @@ public class AST_STMT_RETURN extends AST_STMT
 
 		// Check that one of scopes is a function declaration
 		if (!sym_table.isFunctionScope()) {
-		    // Code bug -- return outside of a function scope
-		    report_error();
+		    report_error("// Code bug -- return outside of a function scope");
 		}
 
 		TYPE expected = sym_table.getReturnType();
 
 		if (exp == null) {
 			if (expected != null) {
-				// Code bug -- expected a return value
-			    report_error();
+			    report_error("// Code bug -- expected a return value");
 			} else {
-				// No return value for void function
+			    report_error("// No return value for void function");
 				return null;
 			}
 		} else {
 			if (expected == null) {
-				// Code bug -- void cannot return a value
-			    report_error();
+			    report_error("// Code bug -- void cannot return a value");
 			} else {
 				// Check that types match
 				TYPE expT = exp.SemantMe();
@@ -88,8 +85,7 @@ public class AST_STMT_RETURN extends AST_STMT
 					// nil is an acceptable class / array
 					return null;
 				    } else {
-					// Code bug -- nil inappropriate
-					report_error();
+					report_error("// Code bug -- nil inappropriate");
 				    }
 				}
 
@@ -99,16 +95,14 @@ public class AST_STMT_RETURN extends AST_STMT
 					// legal inheritance or equal
 					return null;
 				    } else {
-					// Code bug -- no inheritance or equality
-					report_error();
+					report_error("// Code bug -- no inheritance or equality");
 				    }
 				}
 			
 		
 				if (varT.name != expT.name)
 				    {
-					// Code bug -- types mismatch
-					report_error();
+					report_error("// Code bug -- types mismatch");
 				    }
 				return null;
 			}
