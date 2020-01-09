@@ -66,6 +66,6 @@ public class AST_TYPE_NAME extends AST_Node
 			report_error();
 		    }
 			// Its fine, declare it
-		return new TYPE_VAR_DEC(t,this.name);
+		return new TYPE_VAR_DEC(t.name,this.name);
     }
 }
