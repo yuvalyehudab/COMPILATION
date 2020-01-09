@@ -89,7 +89,7 @@ public class AST_EXP_BINOP extends AST_EXP
 		TYPE t2 = right.SemantMe();
 
 		boolean areInt    = (t1 ==    type_int && t1 == t2);
-		debug_print("t1 ==    type_int" + String.valueOf(t1 ==    type_int));
+		debug_print("t1: " + t1.name);
 		boolean areString = (t1 == type_string && t1 == t2);
 
 		if (OP == 3) { // =
