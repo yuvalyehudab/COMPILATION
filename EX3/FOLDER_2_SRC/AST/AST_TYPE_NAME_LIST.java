@@ -55,9 +55,13 @@ public class AST_TYPE_NAME_LIST extends AST_Node
 		if (head != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,head.SerialNumber);
 		if (tail != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,tail.SerialNumber);
 	}
-	public TYPE_LIST SemantMe() {
+	public TYPE_LIST SemantMe() 
+	{
 		TYPE headS = null;
 		TYPE_LIST tailS = null;
+		System.out.println("debug: AST_TYPE_NAME_LIST.semant_me --------------------- before");
+		System.out.println("head");
+		System.out.println(head);
 		if (head != null) { headS = head.SemantMe();}
 		if (tail != null) { tailS = tail.SemantMe();}
 		return new TYPE_LIST(headS,tailS);

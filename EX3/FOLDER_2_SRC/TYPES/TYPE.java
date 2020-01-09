@@ -56,7 +56,7 @@ public abstract class TYPE
 		}
 	}
 
-	public boolean isNIL() {
+	public boolean isNil() {
 		switch (kind) {
 			case NIL:
 				return true;
@@ -85,10 +85,16 @@ public abstract class TYPE
 	    return this.name.equals(that.name);
 	}
     
-    public boolean isAsExcpected (TYPE that) {
-	boolean equal = this.equals(that);
-	boolean nil_legit = that.isNil() && (this.isArray() || this.isClass());
-	boolean inheritance = that.isClass() && this.isClass() && ((TYPE_CLASS)t_init).isAncestor(this.name);
-	return (equal || nil_legit || inheritance);
+    public boolean isAsExpected (TYPE that) 
+    {
+		boolean equal = this.equals(that);
+		boolean nil_legit = that.isNil() && (this.isArray() || this.isClass());
+		boolean inheritance = that.isClass() && this.isClass() && ((TYPE_CLASS)that).isAncestor(this.name);
+		return (equal || nil_legit || inheritance);
+	}
+
+    public String getName()
+    {
+        return this.name;
     }
 }

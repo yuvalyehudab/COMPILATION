@@ -52,7 +52,7 @@ CUP_FLAGS =                                \
 #########################
 # DEFINITIONS :: PARSER #
 #########################
-INPUT    = ${INPUT_DIR}/*02*
+INPUT    = ${INPUT_DIR}/*01*
 OUTPUT   = ${OUTPUT_DIR}/SemanticStatus.txt
 
 ##########
@@ -183,7 +183,7 @@ everything:
 	@echo "*                           *"
 	@echo "*                           *"
 	@echo "*****************************"
-	java -jar COMPILER ${INPUT} ${OUTPUT} > /dev/null 2>&1
+	java -jar COMPILER ${INPUT} ${OUTPUT}
 	@echo "\n"
 	@echo "***************************************"
 	@echo "*                                     *"

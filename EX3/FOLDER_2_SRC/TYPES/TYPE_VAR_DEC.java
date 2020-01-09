@@ -10,4 +10,8 @@ public class TYPE_VAR_DEC extends TYPE
 		this.t = t;
 		this.name = name;
 	}
+	public String getName()
+    {
+        return this.name;
+    }
 }

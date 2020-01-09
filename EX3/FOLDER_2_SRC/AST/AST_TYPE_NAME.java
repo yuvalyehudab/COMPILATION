@@ -55,8 +55,11 @@ public class AST_TYPE_NAME extends AST_Node
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 		
 		// Lookup the name
-		TYPE t = sym_table.find(this.name);
+		TYPE t = sym_table.find(this.type);
 		// Check it
+    	System.out.println("debug: AST_TYPE_NAME.semant_me 54 54545454545454545454 before");
+    	System.out.println("t, t.isTypeName");
+    	System.out.println(this.name);
 		if (t == null || !t.isTypeName())
 		    {
 			// Code bug -- type given does not exist in table or just is not a name a of a type

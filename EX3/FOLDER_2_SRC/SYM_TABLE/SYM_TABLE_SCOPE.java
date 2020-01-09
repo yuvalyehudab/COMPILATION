@@ -24,8 +24,35 @@ public class SYM_TABLE_SCOPE {
     }
     public void add (TYPE t)
     {
-        this.types.tail = this.types;
-        this.types.head = t;
+        if (this.types == null)
+        {
+            System.out.println(":::::::::::::::::::debug start:::::::::::::");
+            System.out.println("==================SYM_TABLE_SCOPE.add==================");
+            System.out.println("this.types before");
+            System.out.println(this.types);
+            this.types = new TYPE_LIST(t, null);
+            System.out.println("this.types after");
+            System.out.println(this.types);
+            System.out.println("==================SYM_TABLE_SCOPE.add==================");
+            System.out.println(":::::::::::::::::::debug end:::::::::::::");
+        }
+        else
+        {
+            System.out.println(":::::::::::::::::::debug start - else:::::::::::::");
+            System.out.println("==================SYM_TABLE_SCOPE.add==================");
+            System.out.println("this.types before");
+            System.out.println(this.types);
+                        System.out.println("this.types.tail before");
+            System.out.println(this.types.tail);
+
+            this.types = new TYPE_LIST(t, this.types);
+            System.out.println("this.types after");
+            System.out.println(this.types);
+            System.out.println("this.types.tail after");
+            System.out.println(this.types.tail);
+            System.out.println("==================SYM_TABLE_SCOPE.add==================");
+            System.out.println(":::::::::::::::::::debug end:::::::::::::");
+        }
     }
 
     public boolean isFunction() {

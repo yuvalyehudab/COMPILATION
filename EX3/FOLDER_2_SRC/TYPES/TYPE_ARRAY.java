@@ -16,4 +16,10 @@ public class TYPE_ARRAY extends TYPE
         this.name = name;
         this.memberT = memberT;
     }
+    public String getName()
+    {
+        System.out.println("hi");
+        return this.name;
+    }
+
 }

@@ -41,18 +41,29 @@ public class TYPE_LIST
 	public TYPE find(String name) 
 	{
 		TYPE_LIST tl = this;
+		System.out.println("debug: ////////////////////");
+		System.out.println ("TYPE_LIST.find:::::this");
+		System.out.println(this);System.out.println(this.tail);
 		while (tl != null && tl.head != null)
 		{
-			if (tl.head.name.equals(name))
+			System.out.println ("TYPE_LIST.find:::::head.name, head.getName()");
+			System.out.println(head);
+			System.out.println(head.getName());
+			if (tl.head.getName().equals(name))
 			{
 				return tl.head;
+			}
+			if (tl == tl.tail)
+			{
+				System.out.println("errrororororororo");
+				System.exit(0);
 			}
 			tl = tl.tail;
 		}
 		return null;
 	}
     
-    public boolean isAsExcpected (TYPE_LIST that) {
+    public boolean isAsExpected (TYPE_LIST that) {
 	boolean result = true;
 		TYPE_LIST this_tl = this;
 		TYPE_LIST that_tl = that;
@@ -60,10 +71,15 @@ public class TYPE_LIST
 		{
 			if (!this_tl.head.isAsExpected(that_tl.head))
 			{
-				result = false;
+				return false;
 			}
-			tl = tl.tail;
+			this_tl = this_tl.tail;
+			that_tl = that_tl.tail;
 		}
-		return result;
+		if (this_tl == null && that_tl == null)
+		{
+			return true;
+		}
+		return false;
     }
 }

@@ -61,15 +61,18 @@ public class AST_DEC_LIST extends AST_Node
 		/*************************************/
 		/* RECURSIVELY PRINT HEAD + TAIL ... */
 		/*************************************/
+		System.out.println("debug: AST_DEC_LIST.semant me::::::enter");
 		if (tail == null)
 		{
 			return new TYPE_LIST(
 				head.SemantMe(),
 				null);
 		}
+		System.out.println("debug: AST_DEC_LIST.semant me::::::exit");
+		System.out.println("head");
+		System.out.println(head);
 		return new TYPE_LIST(
 			head.SemantMe(),
 			tail.SemantMe());
-
 	}
 }

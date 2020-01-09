@@ -104,9 +104,12 @@ public class AST_DEC_FUNC extends AST_DEC
 			// Code bug -- name not available
 		    report_error();
 		}
-
+		System.out.println("debug: AST_DEC_FUNC.semant_me *********** enter");
+		System.out.println("this, retType, name, params, body");
+		System.out.println(this);System.out.println(returnTypeName);System.out.println(name);System.out.println(params);System.out.println(body);
+		System.out.println(sym_table.getKind() == SCOPE_KIND.CLASS_SCOPE);
 		// Check that the current scope is the global scope
-		if (!(sym_table.isGlobal()) || !(sym_table.getKind() == SCOPE_KIND.CLASS_SCOPE)) {
+		if (!(sym_table.isGlobal()) && !(sym_table.getKind() == SCOPE_KIND.CLASS_SCOPE)) {
 			// Code bug -- declaring class in non-global scope
 		    report_error();
 		}
@@ -139,9 +142,9 @@ public class AST_DEC_FUNC extends AST_DEC
 			    // Code bug -- shadowing not a function
 			    report_error();
 			}
-			TYPE_FUNCTION t_ancestor = (TYPE_FUNCTION)t_ancestor;
-			TYPE t_return = t_ancestor.returnType;
-			TYPE_LIST ts_params = t_ancestor.params;
+			TYPE_FUNCTION t_ancestor_f = (TYPE_FUNCTION)t_ancestor;
+			TYPE t_return = t_ancestor_f.returnType;
+			TYPE_LIST ts_params = t_ancestor_f.params;
 			if (!returnType.equals(t_return) || !type_list.equals(ts_params)) {
 			    // Code bug -- shadowing of different type
 			    report_error();
@@ -162,6 +165,12 @@ public class AST_DEC_FUNC extends AST_DEC
 		/* [3] Semant Body */
 		/*******************/
 		System.out.format("enter body semant:\n");
+		System.out.println("****************************************************");
+		System.out.println();System.out.println();System.out.println();
+		System.out.println("****************************************************");
+		System.out.println("debug: AST_DEC_FUNC.semant_me *********** moving");
+		System.out.println();System.out.println();System.out.println();
+		System.out.println("****************************************************");
 		body.SemantMe();
 		System.out.format("leave body semant:\n");
 

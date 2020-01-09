@@ -53,6 +53,7 @@ public class Main
 			/* [7] Semant the AST ... */
 			/**************************/
 			AST.SemantMe();
+			System.out.println("**************************************************");
 			
 			/*************************/
 			/* [8] Close output file */
@@ -62,7 +63,9 @@ public class Main
 			/*************************************/
 			/* [9] Finalize AST GRAPHIZ DOT file */
 			/*************************************/
-			AST_GRAPHVIZ.getInstance().finalizeFile();			
+			AST_GRAPHVIZ.getInstance().finalizeFile();
+			System.out.println("Done!");
+			System.out.println("**************************************************");
     	}
 			     
 		catch (Exception e)
