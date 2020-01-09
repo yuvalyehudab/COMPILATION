@@ -2,7 +2,7 @@ package AST;
 
 import java.io.*;
 
-public class AST_Node
+public abstract class AST_Node
 {
 	/*******************************************/
 	/* The serial number is for debug purposes */

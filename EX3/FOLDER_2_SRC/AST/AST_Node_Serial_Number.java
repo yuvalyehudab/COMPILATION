@@ -29,7 +29,7 @@ public class AST_Node_Serial_Number
 	/******************************/
 	/* GET SINGLETON INSTANCE ... */
 	/******************************/
-	private static AST_Node_Serial_Number getInstance()
+	private AST_Node_Serial_Number getInstance()
 	{
 		if (instance == null)
 		{
