@@ -72,7 +72,7 @@ public class AST_Node_Serial_Number
 	}
 
     public void addDebugInfo(String debug_add) {
-	this.debug_string = this.debug_string + "\n" + debug_add;
+	this.debug_string = this.debug_string + "\\n" + debug_add;
     }
     
     public static void exit_on_error(int line, String error_string)
