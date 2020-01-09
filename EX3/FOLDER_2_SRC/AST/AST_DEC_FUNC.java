@@ -116,10 +116,8 @@ public class AST_DEC_FUNC extends AST_DEC
 		TYPE returnType = null;
 		if (returnTypeName.equals("void")) {
 		    returnType = TYPE_VOID.getInstance();
-		    debug_print("if: " + returnType);
 		} else {
 		    returnType = sym_table.find(returnTypeName);
-		    debug_print("else: " + returnType);
 		}
 		if (returnType == null || (!returnType.isTypeName() && !returnType.isVoid()))
 		{
