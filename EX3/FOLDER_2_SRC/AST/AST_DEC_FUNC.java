@@ -114,6 +114,7 @@ public class AST_DEC_FUNC extends AST_DEC
 
 		// Check return type
 		TYPE returnType = sym_table.find(returnTypeName);
+		debug_string("rt: " + returnType.getKind() + " | " + returnType.isVoid());
 		if (returnType == null || (!returnType.isTypeName() && !returnType.isVoid()))
 		{
 		    report_error("// Code bug -- type to return does not exist in table or just is not a name a of a type nor void");
