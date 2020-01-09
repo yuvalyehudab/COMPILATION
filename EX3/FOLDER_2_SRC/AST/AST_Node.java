@@ -20,8 +20,8 @@ public abstract class AST_Node
 		System.out.print("AST NODE UNKNOWN\n");
 	}
 
-	public void report_error()
+	public void report_error(String error_string)
 	{
-		AST_Node_Serial_Number.exit_on_error(lineNumber);
+	    AST_Node_Serial_Number.exit_on_error(lineNumber,error_string);
 	}
 }

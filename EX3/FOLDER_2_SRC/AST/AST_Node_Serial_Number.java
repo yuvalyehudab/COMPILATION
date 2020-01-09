@@ -67,9 +67,9 @@ public class AST_Node_Serial_Number
 	{
 		return AST_Node_Serial_Number.line;
 	}
-	public static void exit_on_error(int line)
+    public static void exit_on_error(int line, String error_string)
 	{
-		writer.format("ERROR(%d)", line);
+		writer.format("ERROR(%d)" + ": " + error_string, line);
 		writer.close();
 		System.exit(0);
 	}
