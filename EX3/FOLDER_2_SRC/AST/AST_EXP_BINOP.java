@@ -86,6 +86,7 @@ public class AST_EXP_BINOP extends AST_EXP
 		TYPE_STRING type_string = TYPE_STRING.getInstance();
 
 		TYPE t1 = left.SemantMe();
+		debug_print("t1: " + t1);
 		TYPE t2 = right.SemantMe();
 
 		boolean areInt    = (t1 ==    type_int && t1 == t2);

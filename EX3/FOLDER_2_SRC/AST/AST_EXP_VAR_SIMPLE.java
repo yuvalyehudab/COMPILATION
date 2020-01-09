@@ -44,9 +44,7 @@ public class AST_EXP_VAR_SIMPLE extends AST_EXP_VAR
 	}
 	public TYPE SemantMe()
 	{
-		debug_print("name: " + name);
 		TYPE t = SYM_TABLE.getInstance().find(name);
-		debug_print("t: " + t);
 		if (t == null) {
 		    report_error("// Code bug -- not found");
 		}
