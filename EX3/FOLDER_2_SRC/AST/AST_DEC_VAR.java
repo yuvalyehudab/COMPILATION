@@ -106,6 +106,7 @@ public class AST_DEC_VAR extends AST_DEC
 		TYPE_VAR_DEC var_dec = new TYPE_VAR_DEC(t.name,this.name);
 		debug_print("adding var dec to sym table: " + var_dec.name);
 		sym_table.enter(var_dec);
+		debug_print("added var dec to sym table: " + var_dec.name);
 
 		return null;
 	}
