@@ -85,6 +85,15 @@ public class SYM_TABLE {
 
     public void enter(TYPE t) {
 	debug_print("adding type: " + t.name);
+	if (t.isClass()) {
+	    debug_print(".. a class that extends: ..");
+	    TYPE fatherC = ((TYPE_CLASS)t).fatherClass;
+	    if (fatherC != null) {
+		debug_print(".. " + fatherC.name);
+	    } else {
+		debug_print(".. nothing");
+	    }
+	}
 	
 	scopes.head.add(t);
     }
