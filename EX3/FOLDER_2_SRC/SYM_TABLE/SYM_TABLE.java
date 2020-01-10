@@ -108,15 +108,21 @@ public class SYM_TABLE {
 
     public void close() {
 	// Remove once closing CLASS
-	if (scopes.head.getKind() == SCOPE_KIND.CLASS_SCOPE) {
+	boolean isClassS = scopes.head.getKind() == SCOPE_KIND.CLASS_SCOPE;
+	boolean isFuncS  = scopes.head.getKind() == SCOPE_KIND.FUNCTION_SCOPE
+	if (isClassS) {
 	    extending = null;
 	}
 	// Remove once closing FUNCTION
-	if (scopes.head.getKind() == SCOPE_KIND.FUNCTION_SCOPE) {
+	if (isFuncS) {
 	    returnType = null;
 	}
 	// Get rid of scope
         scopes = scopes.tail;
+	// If was defining class, remove dummy class type
+	if (isClassS) {
+	    scopes.head.pop();
+	}
 	
 	debug_print("CLOSE SCOPE");
     }

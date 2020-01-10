@@ -26,6 +26,11 @@ public class SYM_TABLE_SCOPE {
     {
         this.types = new TYPE_LIST(t, this.types);
     }
+    public TYPE pop () {
+	TYPE h = this.types.head;
+	this.types = this.types.tail;
+	return h;
+    }
 
     public boolean isFunction() {
 	return (this.kind == SCOPE_KIND.FUNCTION_SCOPE);
