@@ -109,7 +109,7 @@ public class SYM_TABLE {
     public void close() {
 	// Remove once closing CLASS
 	boolean isClassS = scopes.head.getKind() == SCOPE_KIND.CLASS_SCOPE;
-	boolean isFuncS  = scopes.head.getKind() == SCOPE_KIND.FUNCTION_SCOPE
+	boolean isFuncS  = scopes.head.getKind() == SCOPE_KIND.FUNCTION_SCOPE;
 	if (isClassS) {
 	    extending = null;
 	}
@@ -121,7 +121,8 @@ public class SYM_TABLE {
         scopes = scopes.tail;
 	// If was defining class, remove dummy class type
 	if (isClassS) {
-	    scopes.head.pop();
+	    TYPE h = scopes.head.pop();
+	    debug_print("popped off: " + h.name);
 	}
 	
 	debug_print("CLOSE SCOPE");
