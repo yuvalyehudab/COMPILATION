@@ -53,7 +53,7 @@ public class AST_EXP_CALL extends AST_EXP
 		/****************************************/
 		/* PRINT Edges to AST GRAPHVIZ DOT file */
 		/****************************************/
-		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,params.SerialNumber);		
+		if (params != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,params.SerialNumber);		
 	}
 	/***/
 	/* SEMANTICS */
