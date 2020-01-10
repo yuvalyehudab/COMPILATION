@@ -85,7 +85,7 @@ public class SYM_TABLE {
 
     public void enter(TYPE t) {
 	debug_print("adding type: " + t.name);
-	if (t.isClass()) {
+	if (t.kind != null && t.isClass()) {
 	    debug_print(".. a class that extends: ..");
 	    TYPE fatherC = ((TYPE_CLASS)t).fatherClass;
 	    if (fatherC != null) {
