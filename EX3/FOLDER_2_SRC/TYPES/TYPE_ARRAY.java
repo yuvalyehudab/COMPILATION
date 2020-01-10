@@ -18,7 +18,6 @@ public class TYPE_ARRAY extends TYPE
     }
     public String getName()
     {
-        System.out.println("hi");
         return this.name;
     }
 

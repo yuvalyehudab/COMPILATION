@@ -59,9 +59,6 @@ public class AST_TYPE_NAME_LIST extends AST_Node
 	{
 		TYPE headS = null;
 		TYPE_LIST tailS = null;
-		System.out.println("debug: AST_TYPE_NAME_LIST.semant_me --------------------- before");
-		System.out.println("head");
-		System.out.println(head);
 		if (head != null) { headS = head.SemantMe();}
 		if (tail != null) { tailS = tail.SemantMe();}
 		return new TYPE_LIST(headS,tailS);

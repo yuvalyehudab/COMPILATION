@@ -103,10 +103,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		if (sym_table.find(this.name) != null) {
 		    report_error("// Code bug -- name not available");
 		}
-		System.out.println("debug: AST_DEC_FUNC.semant_me *********** enter");
-		System.out.println("this, retType, name, params, body");
-		System.out.println(this);System.out.println(returnTypeName);System.out.println(name);System.out.println(params);System.out.println(body);
-		System.out.println(sym_table.getKind() == SCOPE_KIND.CLASS_SCOPE);
+		
 		// Check that the current scope is the global scope
 		if (!(sym_table.isGlobal()) && !(sym_table.getKind() == SCOPE_KIND.CLASS_SCOPE)) {
 		    report_error("// Code bug -- declaring class in non-global scope");
@@ -164,15 +161,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		/*******************/
 		/* [3] Semant Body */
 		/*******************/
-		System.out.format("enter body semant:\n");
-		System.out.println("****************************************************");
-		System.out.println();System.out.println();System.out.println();
-		System.out.println("****************************************************");
-		System.out.println("debug: AST_DEC_FUNC.semant_me *********** moving");
-		System.out.println();System.out.println();System.out.println();
-		System.out.println("****************************************************");
 		body.SemantMe();
-		System.out.format("leave body semant:\n");
 
 		/*****************/
 		/* [4] End Scope */
@@ -182,7 +171,6 @@ public class AST_DEC_FUNC extends AST_DEC
 		/*********************************************************/
 		/* [6] Return value is irrelevant for funct declarations */
 		/*********************************************************/
-		System.out.println("out of ast_dec_fumc semant " + name);
 		return null;		
 	}
 	

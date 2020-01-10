@@ -41,22 +41,11 @@ public class TYPE_LIST
 	public TYPE find(String name) 
 	{
 		TYPE_LIST tl = this;
-		System.out.println("debug: ////////////////////");
-		System.out.println ("TYPE_LIST.find:::::this");
-		System.out.println(this);System.out.println(this.tail);
 		while (tl != null && tl.head != null)
 		{
-			System.out.println ("TYPE_LIST.find:::::head.name, head.getName()");
-			System.out.println(head);
-			System.out.println(head.getName());
 			if (tl.head.getName().equals(name))
 			{
 				return tl.head;
-			}
-			if (tl == tl.tail)
-			{
-				System.out.println("errrororororororo");
-				System.exit(0);
 			}
 			tl = tl.tail;
 		}
