@@ -143,6 +143,8 @@ public class AST_DEC_FUNC extends AST_DEC
 			TYPE_FUNCTION t_ancestor_f = (TYPE_FUNCTION)t_ancestor;
 			TYPE t_return = t_ancestor_f.returnType;
 			TYPE_LIST ts_params = t_ancestor_f.params;
+			debug_print("rt: " + returnType);
+			debug_print("rtn: " + returnType.name);
 			if (!returnType.equals(t_return) || !type_list.equals(ts_params)) {
 			    report_error("// Code bug -- shadowing of different type");
 			}
