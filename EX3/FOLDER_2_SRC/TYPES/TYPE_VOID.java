@@ -25,8 +25,4 @@ public class TYPE_VOID extends TYPE
 		}
 		return instance;
 	}
-
-    public boolean equals (TYPE that) {
-	return that.kind == KIND.VOID;
-    }
 }
