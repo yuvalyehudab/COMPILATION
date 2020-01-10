@@ -53,7 +53,7 @@ public class SYM_TABLE {
 
     public TYPE getReturnType () { return returnType; }
 
-    public TYPE find(String name) {
+    private TYPE find__(String name, boolean incl) {
         SYM_TABLE_SCOPE_LIST search = scopes;
         while (search != null && search.head != null)
         {
@@ -62,7 +62,7 @@ public class SYM_TABLE {
             if (requestedType != null) {
                 return requestedType;
             }
-	    if (currentScope.getKind() == SCOPE_KIND.CLASS_SCOPE && extending != null) {
+	    if (incl && currentScope.getKind() == SCOPE_KIND.CLASS_SCOPE && extending != null) {
 		// Now must look in ancestors
 		requestedType = extending.find(name);
 		if (requestedType != null) {
@@ -74,6 +74,14 @@ public class SYM_TABLE {
 
         // Look in the defaults, if not there then nowhere
         return defaults.find(name);
+    }
+
+    public TYPE find(String name) {
+	find__(name, true);
+    }
+
+    public boolean is_available(String name) {
+	return (find__(name, false) == null);
     }
 
     public void enter(TYPE t) {

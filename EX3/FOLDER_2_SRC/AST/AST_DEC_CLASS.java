@@ -66,9 +66,8 @@ public class AST_DEC_CLASS extends AST_DEC
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
 
 		// Check that name does not already exist in scope
-		if (sym_table.find(this.name) != null) {
-			// Code bug -- name not available
-		    report_error();
+		if (!sym_table.is_available(this.name)) {
+		    report_error("// Code bug -- name not available");
 		}
 
 		// Check that the current scope is the global scope

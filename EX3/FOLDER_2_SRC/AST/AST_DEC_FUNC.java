@@ -100,7 +100,7 @@ public class AST_DEC_FUNC extends AST_DEC
 		// TODO MAYBE: Find out if allowed to define method with
 		//   name of globally defined function - if so,
 		//   change search to only current scope
-		if (sym_table.find(this.name) != null) {
+		if (!sym_table.is_available(this.name)) {
 		    report_error("// Code bug -- name not available");
 		}
 		
