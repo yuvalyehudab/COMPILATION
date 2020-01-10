@@ -85,7 +85,9 @@ public class AST_EXP_VAR_FIELD extends AST_EXP_VAR
 		    report_error();
 		}
 		// The name has been declared, so return its type
-		return sym_table.find(((TYPE_VAR_DEC)t).getTypeName());
+		String type_name = ((TYPE_VAR_DEC)t).getTypeName();
+		debug_print("found decl for simpl var: " + t.name + " of type " + type_name);
+		return sym_table.find(type_name);
 
 	}
 }
