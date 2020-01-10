@@ -74,36 +74,14 @@ public class AST_STMT_RETURN extends AST_STMT
 			if (expected == null) {
 			    report_error("// Code bug -- void cannot return a value");
 			} else {
+			    debug_print("expected: " + expected.name);
 				// Check that types match
 				TYPE expT = exp.SemantMe();
-				TYPE varT = expected;
 
-				// Copied from AST_STMT_ASSIGN
-				// TODO MAYBE: Abstract this to a function
-				if (expT == TYPE_NIL.getInstance()) {
-				    if (varT.isClass() || varT.isArray()) {
-					// nil is an acceptable class / array
-					return null;
-				    } else {
-					report_error("// Code bug -- nil inappropriate");
-				    }
+				// Check type is as expected
+				if (!expected.isAsExpected(expT)) {
+				    report_error("// Code bug -- type in return statement not as expected");
 				}
-
-				// Class inheritance
-				if (expT.isClass()) {
-				    if (((TYPE_CLASS)expT).isAncestor(varT.name)) {
-					// legal inheritance or equal
-					return null;
-				    } else {
-					report_error("// Code bug -- no inheritance or equality");
-				    }
-				}
-			
-		
-				if (varT.name != expT.name)
-				    {
-					report_error("// Code bug -- types mismatch");
-				    }
 				return null;
 			}
 		}
