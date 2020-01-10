@@ -43,7 +43,7 @@ public class AST_STMT_DEC_VAR extends AST_STMT
 	
 	public TYPE SemantMe()
 	{
-		System.out.format("\nenter stmt dec var\nline:%d\n\n", lineNumber);
+	    debug_print("starting variable decl");
 		return var.SemantMe();
 	}
 }
