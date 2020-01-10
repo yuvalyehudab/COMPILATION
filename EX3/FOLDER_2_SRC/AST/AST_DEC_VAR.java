@@ -103,6 +103,7 @@ public class AST_DEC_VAR extends AST_DEC
 		}
 
 		// Enter into symbol table
+		debug_print("adding var dec to sym table: " + t.name + " | " + this.name);
 		sym_table.enter(new TYPE_VAR_DEC(t.name,this.name));
 
 		return null;
