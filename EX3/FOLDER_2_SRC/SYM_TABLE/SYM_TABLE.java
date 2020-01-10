@@ -103,7 +103,6 @@ public class SYM_TABLE {
 	}
 	if (rt != null) {
 	    returnType = rt;
-	    
 	    debug_print(".. return type: " + rt.name);
 	}
     }
