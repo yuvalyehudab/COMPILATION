@@ -86,6 +86,8 @@ public class SYM_TABLE {
     }
 
     public void enter(TYPE t) {
+	debug_print("adding type: " + t.name);
+	
 	scopes.head.add(t);
 	
 	debug_print("added type: " + t.name);
