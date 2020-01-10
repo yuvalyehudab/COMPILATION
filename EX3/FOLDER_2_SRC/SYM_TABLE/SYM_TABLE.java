@@ -3,6 +3,22 @@ package SYM_TABLE;
 import TYPES.*;
 
 public class SYM_TABLE {
+    
+
+    public static final String ANSI_RESET = "\u001B[0m";
+    public static final String ANSI_BLACK = "\u001B[30m";
+    public static final String ANSI_RED = "\u001B[31m";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static final String ANSI_BLUE = "\u001B[34m";
+    public static final String ANSI_PURPLE = "\u001B[35m";
+    public static final String ANSI_CYAN = "\u001B[36m";
+    public static final String ANSI_WHITE = "\u001B[37m";
+
+    public void debug_print(String str) { System.out.println(ANSI_GREEN + str + ANSI_RESET); }
+
+
+    
     private TYPE_LIST defaults = new TYPE_LIST(TYPE_INT.getInstance(),
 					       new TYPE_LIST(TYPE_STRING.getInstance(),
 							     new TYPE_LIST(new TYPE_FUNCTION("PrintInt",null,new TYPE_LIST(TYPE_INT.getInstance(),null)),
@@ -71,6 +87,8 @@ public class SYM_TABLE {
 
     public void enter(TYPE t) {
 	scopes.head.add(t);
+	
+	debug_print("added type: " + t.name);
     }
 
     public void open(SYM_TABLE_SCOPE init, TYPE_CLASS ec, TYPE rt) {
@@ -84,6 +102,8 @@ public class SYM_TABLE {
 	if (rt != null) {
 	    returnType = rt;
 	}
+	
+	debug_print("OPEN SCOPE");
     }
 
     public void close() {
@@ -97,6 +117,8 @@ public class SYM_TABLE {
 	}
 	// Get rid of scope
         scopes = scopes.tail;
+	
+	debug_print("CLOSE SCOPE");
     }
 
 // TODO: Wrap into a singleton instance
