@@ -17,11 +17,8 @@ public class SYM_TABLE {
 
     public void debug_print(String str) { System.out.println(ANSI_GREEN + str + ANSI_RESET); }
 
-    
-    private type_int    =    TYPE_INT.getInstance();
-    private type_string = TYPE_STRING.getInstance();
-    private TYPE_LIST defaults = new TYPE_LIST(type_int,
-					       new TYPE_LIST(type_string,
+    private TYPE_LIST defaults = new TYPE_LIST(TYPE_INT.getInstance(),
+					       new TYPE_LIST(TYPE_STRING.getInstance(),
 							     new TYPE_LIST(new TYPE_FUNCTION("PrintInt",null,new TYPE_LIST(new TYPE_VAR_DEC("int",""),null)),
 									   new TYPE_LIST(new TYPE_FUNCTION("PrintString",null,new TYPE_LIST(new TYPE_VAR_DEC("string",""),null)),
 											 new TYPE_LIST(new TYPE_FUNCTION("PrintTrace",null,null), null)
