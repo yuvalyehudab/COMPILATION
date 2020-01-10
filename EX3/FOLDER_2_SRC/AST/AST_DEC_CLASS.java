@@ -91,6 +91,12 @@ public class AST_DEC_CLASS extends AST_DEC
 			}
 		}
 		// At this point fatherClass is a class or null
+		debug_print("declaring class that extends: ..");
+		if (fatherClass != null) {
+		    debug_print(".. " + fatherClass.name);
+		} else {
+		    debug_print(".. nothing");
+		}
 
 		// Add this as an empty class, just so the type exists for recursive classes
 		sym_table.enter(new TYPE_CLASS(this.name, null, (TYPE_CLASS)fatherClass));
