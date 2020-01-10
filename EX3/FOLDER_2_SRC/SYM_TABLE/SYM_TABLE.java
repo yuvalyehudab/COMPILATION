@@ -57,28 +57,21 @@ public class SYM_TABLE {
         SYM_TABLE_SCOPE_LIST search = scopes;
         while (search != null && search.head != null)
         {
-            TYPE requstedType = search.head.find(name);
-            if (requstedType != null)
-            {
+	    SYM_TABLE_SCOPE currentScope = search.head;
+            TYPE requstedType = currentScope.find(name);
+            if (requstedType != null) {
                 return requstedType;
             }
+	    if (currentScope.getKind() == SCOPE_KIND.CLASS_SCOPE && extending != null) {
+		// Now must look in ancestors
+		requestedType = extending.find(name);
+		if (requstedType != null) {
+			return requstedType;
+		    }
+	    }
             search = search.tail;
         }
 
-        /*
-        if (scopes.head != null) {
-            // Look here in the current scope
-            TYPE here = scopes.head.find(name);
-            if (here != null) {
-                // Found here in the current scope
-                return here;
-            }
-        }
-        if (scopes.tail != null) {
-            // Look recursively in previous scopes
-            return scopes.tail.find(name);
-        }
-        */
         // Look in the defaults, if not there then nowhere
         return defaults.find(name);
     }
