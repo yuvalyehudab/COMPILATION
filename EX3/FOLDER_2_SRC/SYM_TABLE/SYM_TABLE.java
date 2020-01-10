@@ -77,7 +77,7 @@ public class SYM_TABLE {
     }
 
     public TYPE find(String name) {
-	find__(name, true);
+	return find__(name, true);
     }
 
     public boolean is_available(String name) {
