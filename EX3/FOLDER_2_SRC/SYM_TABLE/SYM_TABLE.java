@@ -58,8 +58,8 @@ public class SYM_TABLE {
         while (search != null && search.head != null)
         {
 	    SYM_TABLE_SCOPE currentScope = search.head;
-            TYPE requstedType = currentScope.find(name);
-            if (requstedType != null) {
+            TYPE requestedType = currentScope.find(name);
+            if (requestedType != null) {
                 return requstedType;
             }
 	    if (currentScope.getKind() == SCOPE_KIND.CLASS_SCOPE && extending != null) {
