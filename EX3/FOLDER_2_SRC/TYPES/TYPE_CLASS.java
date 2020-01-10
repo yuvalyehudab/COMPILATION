@@ -32,6 +32,7 @@ public class TYPE_CLASS extends TYPE
 			return here;
 		}
 	    }
+	    debug_print("did not find here, is there an ancestor?: " + this.fatherClass);
 		if (this.fatherClass != null) {
 			return this.fatherClass.find(name);
 		}
