@@ -91,7 +91,7 @@ public class AST_EXP_CALL extends AST_EXP
 		}
 
 		// Then check that they have expected types
-		TYPE_LIST expectedTypes = decls_find(((TYPE_FUNCTION)funcType).params);
+		TYPE_LIST expectedTypes = decls_replacer(((TYPE_FUNCTION)funcType).params);
 		
 		if (paramTypes == null && expectedTypes != null) {
 		    report_error("// Code bug -- no arguments though expected");
@@ -107,7 +107,7 @@ public class AST_EXP_CALL extends AST_EXP
 		return ((TYPE_FUNCTION)funcType).returnType;
 	}
 
-    private TYPE_LIST decls_find (TYPE_LIST decl_list) {
+    private TYPE_LIST decls_replacer (TYPE_LIST decl_list) {
 	// Go from decl of types to the types declared
 	// Initialize pointer to symbol table
 	SYM_TABLE sym_table = SYM_TABLE.getInstance();
