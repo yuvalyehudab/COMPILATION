@@ -59,7 +59,7 @@ public class Main
 			/* [8] Close output file */
 			/*************************/
 			// No errors so OK
-			file_writer("OK");
+			file_writer.format("OK");
 			file_writer.close();
 
 			/*************************************/
