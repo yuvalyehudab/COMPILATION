@@ -60,13 +60,13 @@ public class SYM_TABLE {
 	    SYM_TABLE_SCOPE currentScope = search.head;
             TYPE requestedType = currentScope.find(name);
             if (requestedType != null) {
-                return requstedType;
+                return requestedType;
             }
 	    if (currentScope.getKind() == SCOPE_KIND.CLASS_SCOPE && extending != null) {
 		// Now must look in ancestors
 		requestedType = extending.find(name);
 		if (requstedType != null) {
-			return requstedType;
+			return requestedType;
 		    }
 	    }
             search = search.tail;
