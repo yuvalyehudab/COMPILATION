@@ -24,14 +24,7 @@ public class SYM_TABLE_SCOPE {
     }
     public void add (TYPE t)
     {
-        if (this.types == null)
-        {
-            this.types = new TYPE_LIST(t, null);
-        }
-        else
-        {
-            this.types = new TYPE_LIST(t, this.types);
-        }
+        this.types = new TYPE_LIST(t, this.types);
     }
 
     public boolean isFunction() {
