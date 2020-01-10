@@ -46,12 +46,14 @@ public class AST_EXP_VAR_SIMPLE extends AST_EXP_VAR
 	{
 		// Initialize pointer to symbol table
 		SYM_TABLE sym_table = SYM_TABLE.getInstance();
-		TYPE t = sym_table.find(name);
+		TYPE t = sym_table.find(this.name);
 		if (t == null) {
 		    report_error("// Code bug -- not found");
 		}
 		// The name has been declared, so return its type
-		return sym_table.find(((TYPE_VAR_DEC)t).getTypeName());
+		String type_name = ((TYPE_VAR_DEC)t).getTypeName();
+		debug_print("found decl for simpl var: " + t.name + " of type " + type_name);
+		return sym_table.find(type_name);
 	}
 }
 
