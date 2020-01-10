@@ -90,18 +90,22 @@ public class SYM_TABLE {
     }
 
     public void open(SYM_TABLE_SCOPE init, TYPE_CLASS ec, TYPE rt) {
+	
+	debug_print("OPEN SCOPE");
+	
         // init may hold parameters of function
         // ec may hold father class
         // rt may hold return type
         scopes = new SYM_TABLE_SCOPE_LIST(init, scopes);
 	if (ec != null) {
 	    extending = ec;
+	    debug_print(".. extending: " + ec.name);
 	}
 	if (rt != null) {
 	    returnType = rt;
+	    
+	    debug_print(".. return type: " + ec.name);
 	}
-	
-	debug_print("OPEN SCOPE");
     }
 
     public void close() {
