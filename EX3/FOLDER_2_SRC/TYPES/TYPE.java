@@ -87,6 +87,8 @@ public abstract class TYPE
     
     public boolean isAsExpected (TYPE that) 
     {
+	debug_print("expected type: " + this.name);
+	debug_print("argument type: " + that.name);
 		boolean equal = this.equals(that);
 		boolean nil_legit = that.isNil() && (this.isArray() || this.isClass());
 		boolean inheritance = that.isClass() && this.isClass() && ((TYPE_CLASS)that).isAncestor(this.name);
