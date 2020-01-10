@@ -65,7 +65,7 @@ public class SYM_TABLE {
 	    if (currentScope.getKind() == SCOPE_KIND.CLASS_SCOPE && extending != null) {
 		// Now must look in ancestors
 		requestedType = extending.find(name);
-		if (requstedType != null) {
+		if (requestedType != null) {
 			return requestedType;
 		    }
 	    }
