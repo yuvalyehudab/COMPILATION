@@ -115,7 +115,7 @@ public class AST_EXP_CALL extends AST_EXP
 	if (decl_list != null) {
 	    TYPE_VAR_DEC casted_head = (TYPE_VAR_DEC)(decl_list.head);
 	    TYPE the_type = sym_table.find(casted_head.getTypeName());
-	    return new TYPE_LIST(the_type, decls_find(decl_list.tail));
+	    return new TYPE_LIST(the_type, decls_replacer(decl_list.tail));
 	}
 	return null;
     }
