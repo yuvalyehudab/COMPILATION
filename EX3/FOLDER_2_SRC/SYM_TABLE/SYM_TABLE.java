@@ -123,7 +123,7 @@ public class SYM_TABLE {
 	if (isClassS) {
 	    TYPE h = scopes.head.pop();
 	    debug_print("popped off: " + h.name);
-	    debug_print("no members (should say null): " + h.data_members);
+	    debug_print("no members (should say null): " + ((TYPE_CLASS)h).data_members);
 	}
 	
 	debug_print("CLOSE SCOPE");
