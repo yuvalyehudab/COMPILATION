@@ -17,7 +17,7 @@ public class TYPE_CLASS extends TYPE
 	/****************/
 	/* CTROR(S) ... */
 	/****************/
-	public TYPE_CLASS(String name,TYPE_LIST data_members, TYPE_CLASS father)
+	public TYPE_CLASS(String name,TYPE_LIST data_members, TYPE_CLASS fatherClass)
 	{
 		this.kind = KIND.CLASS;
 		this.name = name;
