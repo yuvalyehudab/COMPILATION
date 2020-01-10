@@ -72,32 +72,9 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		TYPE varT = var.SemantMe();
 		TYPE expT = exp.SemantMe();
 
-		if (expT == TYPE_NIL.getInstance()) {
-			if (varT.isClass() || varT.isArray()) {
-				// nil is an acceptable class / array
-				return null;
-			} else {
-				// Code bug -- nil inappropriate
-			    report_error();
-			}
-		}
-
-		// Class inheritance
-		if (expT.isClass()) {
-		    if (((TYPE_CLASS)expT).isAncestor(varT.name)) {
-			// legal inheritance or equal
-			return null;
-		    } else {
-			// Code bug -- no inheritance or equality
-			report_error();
-		    }
-		}
-			
-		
-		if (varT.name != expT.name)
-		{
-			// Code bug -- types mismatch
-		    report_error();
+		// Check type is as expected
+		if (!varT.isAsExpected(expT)) {
+		    report_error("// Code bug -- type in assign statement not as expected");
 		}
 		return null;
 	}

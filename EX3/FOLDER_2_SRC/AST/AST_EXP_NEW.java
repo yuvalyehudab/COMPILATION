@@ -71,18 +71,17 @@ public class AST_EXP_NEW extends AST_EXP
 		if (exp == null && t != null && t.isClass()) {
 			// Class case
 			return t;
-		} else if (exp != null && t != null && t.isArray()) {
+		} else if (exp != null && t != null && t.isTypeName()) {
 			// Array case
 			TYPE eT = exp.SemantMe();
 			if (eT != TYPE_INT.getInstance()) {
-				// Code bug -- length must be an integer
-			    report_error();
+			    report_error("// Code bug -- length must be an integer");
 			}
-			return t;
+			// New array created
+			return new TYPE_NEW_ARRAY(t);
 		}
 
-		// Code bug -- must be class or array with length
-		report_error();
+		report_error("// Code bug -- must be class or array with length");
 		return null;
 	}
 

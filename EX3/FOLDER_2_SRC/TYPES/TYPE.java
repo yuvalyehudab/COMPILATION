@@ -90,7 +90,8 @@ public abstract class TYPE
 		boolean equal = this.equals(that);
 		boolean nil_legit = that.isNil() && (this.isArray() || this.isClass());
 		boolean inheritance = that.isClass() && this.isClass() && ((TYPE_CLASS)that).isAncestor(this.name);
-		return (equal || nil_legit || inheritance);
+		boolean new_array = this.isArray() && that.isArray() && that.name.equals("new") && ((TYPE_ARRAY)this).memberT.name.equals(that.memberT.name);
+		return (equal || nil_legit || inheritance || new_array);
 	}
 
     public String getName()
